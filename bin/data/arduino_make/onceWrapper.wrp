@@ -1,0 +1,15 @@
+$blocks.global()
+bool thru=false;
+
+void setup(){
+	$blocks.setup()
+}
+
+void loop(){
+  $blocks.start()
+  if(!thru){
+    $blocks.loop()
+  }
+  $blocks.end()
+  thru=true;
+}

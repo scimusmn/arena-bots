@@ -1,0 +1,20 @@
+global(){
+  ~#include <AFMotor.h>
+	~#include "arenaRobot.h"
+}
+
+setup(){
+	~robot.setup();
+}
+
+start(){
+}
+
+loop(){
+	robot.leftTurn(1);
+}
+
+end(){
+}
+
+~ath
