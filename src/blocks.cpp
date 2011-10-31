@@ -27,7 +27,7 @@
 
 int pixPerInch=25;
 
-string defaultFont="ArialNarrow.ttf";
+string defaultFont="fonts/DinC.ttf";
 
 /*****************************************************************
  * block(ofTag & cur,ofColor col, int _y):ofInterObj(-200,-200,150,45) :: constructor for block, a subclass of ofInterObj
@@ -162,7 +162,7 @@ block::block(ofTag & cur,ofColor col, int _y):ofInterObj(-200,-200,150,45) {
 	
 	//-------- assign a default value to the xdis of each dd
 	for (unsigned int i=0; i<ddGroup.size(); i++) {
-		ddGroup[i].xdis=0;
+		ddGroup[i].relPos.x=0;
 	}
 	
 	//-------- change the font size if it is a statement block
@@ -181,12 +181,12 @@ block::block(ofTag & cur,ofColor col, int _y):ofInterObj(-200,-200,150,45) {
 		if(!titleSplit[i].compare("%d")){
 			if(ddNum<ddGroup.size()){
 				//-------- augment the orginal positon with the current total width
-				ddGroup[ddNum].xdis+=totalwidth+spSize*1.5;
+				ddGroup[ddNum].relPos.x+=totalwidth;
 				//-------- update total width
 				totalwidth+=ddGroup[ddNum].w+spSize*2;
 				//-------- if you have two dropdowns in a row, make sure they don't overlap
 				if(i==titleSplit.size()-1||(i==titleSplit.size()-2&&!titleSplit[i+1].compare("%d"))){
-					ddGroup[ddNum].xdis+=spSize;
+					ddGroup[ddNum].relPos.x+=spSize;
 				}
 				ddNum++;
 			}
@@ -205,6 +205,7 @@ block::block(ofTag & cur,ofColor col, int _y):ofInterObj(-200,-200,150,45) {
 		}
 		else {
 			totalwidth+=arialHeader.stringWidth(titleSplit[i]);
+      if(i<titleSplit.size()-1) totalwidth+=spSize;
 		}
 	}
 	
@@ -215,7 +216,7 @@ block::block(ofTag & cur,ofColor col, int _y):ofInterObj(-200,-200,150,45) {
 			if(ddNum<ddGroup.size()){
 				sp=0;
 				int origWid = arialHeader.stringWidth(title);
-				while (arialHeader.stringWidth(title)+spSize*sp-origWid<ddGroup[ddNum].w) {
+				while (arialHeader.stringWidth(title)+spSize*(sp+1)-origWid<ddGroup[ddNum].w) {
 					sp++;
 					title.append(" ");
 				}
@@ -225,7 +226,7 @@ block::block(ofTag & cur,ofColor col, int _y):ofInterObj(-200,-200,150,45) {
 		else if(!titleSplit[i].compare("%b")){
 			sp=0;
 			int origWid = arialHeader.stringWidth(title);
-			while (arialHeader.stringWidth(title)+spSize*sp-origWid<50) {
+			while (arialHeader.stringWidth(title)+spSize*(sp+1)-origWid<50) {
 				sp++;
 				title.append(" ");
 			}

@@ -36,7 +36,7 @@
 		E45BE9840E8CC7DD009D7055 /* QuickTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */; };
 		E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1D0A3A1BDC003C02F2 /* main.cpp */; };
 		E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */; };
-		E4C2422B10CC554B004149E2 /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C2421E10CC549C004149E2 /* openFrameworksDebug.a */; };
+		E4C2422B10CC554B004149E2 /* openFrameworks.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C2421E10CC549C004149E2 /* openFrameworks.a */; };
 		E4C2424710CC5A17004149E2 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C2424410CC5A17004149E2 /* AppKit.framework */; };
 		E4C2424810CC5A17004149E2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C2424510CC5A17004149E2 /* Cocoa.framework */; };
 		E4C2424910CC5A17004149E2 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C2424610CC5A17004149E2 /* IOKit.framework */; };
@@ -105,99 +105,6 @@
 /* Begin PBXFileReference section */
 		AA02125213C3B452008E0DDE /* newClickDownFunctions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = newClickDownFunctions.cpp; sourceTree = "<group>"; };
 		AA02168113C63D5D008E0DDE /* newSizeAndPositionFunctions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = newSizeAndPositionFunctions.cpp; sourceTree = "<group>"; };
-		AA16D51D13B92275009A0843 /* anim.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = anim.xml; sourceTree = "<group>"; };
-		AA16D51E13B92275009A0843 /* blocks.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = blocks.xml; sourceTree = "<group>"; };
-		AA16D51F13B92275009A0843 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		AA16D52113B92275009A0843 /* anim.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = anim.xml; sourceTree = "<group>"; };
-		AA16D52213B92275009A0843 /* blocks.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = blocks.xml; sourceTree = "<group>"; };
-		AA16D52313B92275009A0843 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		AA16D52513B92275009A0843 /* anim.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = anim.xml; sourceTree = "<group>"; };
-		AA16D52613B92275009A0843 /* blocks.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = blocks.xml; sourceTree = "<group>"; };
-		AA16D52713B92275009A0843 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		AA16D52913B92275009A0843 /* autoColors.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = autoColors.blk; sourceTree = "<group>"; };
-		AA16D52A13B92275009A0843 /* autoLeftClaw.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = autoLeftClaw.blk; sourceTree = "<group>"; };
-		AA16D52B13B92275009A0843 /* autoRightClaw.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = autoRightClaw.blk; sourceTree = "<group>"; };
-		AA16D52C13B92275009A0843 /* autoTail.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = autoTail.blk; sourceTree = "<group>"; };
-		AA16D52D13B92275009A0843 /* blocks.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = blocks.xml; sourceTree = "<group>"; };
-		AA16D52E13B92275009A0843 /* button.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = button.blk; sourceTree = "<group>"; };
-		AA16D52F13B92275009A0843 /* delay.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = delay.blk; sourceTree = "<group>"; };
-		AA16D53013B92275009A0843 /* eyes.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = eyes.blk; sourceTree = "<group>"; };
-		AA16D53113B92275009A0843 /* flip.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = flip.blk; sourceTree = "<group>"; };
-		AA16D53213B92275009A0843 /* forever.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = forever.blk; sourceTree = "<group>"; };
-		AA16D53313B92275009A0843 /* forSeconds.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = forSeconds.blk; sourceTree = "<group>"; };
-		AA16D53413B92275009A0843 /* if.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = if.blk; sourceTree = "<group>"; };
-		AA16D53513B92275009A0843 /* ifBP.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ifBP.blk; sourceTree = "<group>"; };
-		AA16D53613B92275009A0843 /* ifLOpen.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ifLOpen.blk; sourceTree = "<group>"; };
-		AA16D53713B92275009A0843 /* ifROpen.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ifROpen.blk; sourceTree = "<group>"; };
-		AA16D53813B92275009A0843 /* lclaw.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lclaw.blk; sourceTree = "<group>"; };
-		AA16D53913B92275009A0843 /* led.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = led.blk; sourceTree = "<group>"; };
-		AA16D53A13B92275009A0843 /* once.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = once.blk; sourceTree = "<group>"; };
-		AA16D53B13B92275009A0843 /* playSound.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = playSound.blk; sourceTree = "<group>"; };
-		AA16D53C13B92275009A0843 /* rclaw.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rclaw.blk; sourceTree = "<group>"; };
-		AA16D53D13B92275009A0843 /* repeat.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = repeat.blk; sourceTree = "<group>"; };
-		AA16D53E13B92275009A0843 /* sequence.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sequence.blk; sourceTree = "<group>"; };
-		AA16D53F13B92275009A0843 /* shake.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = shake.blk; sourceTree = "<group>"; };
-		AA16D54013B92275009A0843 /* stopSound.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stopSound.blk; sourceTree = "<group>"; };
-		AA16D54113B92275009A0843 /* tail.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tail.blk; sourceTree = "<group>"; };
-		AA16D54213B92275009A0843 /* whileBP.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = whileBP.blk; sourceTree = "<group>"; };
-		AA16D54513B92275009A0843 /* anim.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = anim.xml; sourceTree = "<group>"; };
-		AA16D54613B92275009A0843 /* blocks.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = blocks.xml; sourceTree = "<group>"; };
-		AA16D54713B92275009A0843 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		AA16D54913B92275009A0843 /* anim.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = anim.xml; sourceTree = "<group>"; };
-		AA16D54A13B92275009A0843 /* blocks.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = blocks.xml; sourceTree = "<group>"; };
-		AA16D54B13B92275009A0843 /* example.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = example.png; sourceTree = "<group>"; };
-		AA16D54C13B92275009A0843 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		AA16D54E13B92275009A0843 /* anim.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = anim.xml; sourceTree = "<group>"; };
-		AA16D54F13B92275009A0843 /* blocks.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = blocks.xml; sourceTree = "<group>"; };
-		AA16D55013B92275009A0843 /* example.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = example.png; sourceTree = "<group>"; };
-		AA16D55113B92275009A0843 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		AA16D55313B92275009A0843 /* autoFlip.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = autoFlip.blk; sourceTree = "<group>"; };
-		AA16D55413B92275009A0843 /* autoTail.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = autoTail.blk; sourceTree = "<group>"; };
-		AA16D55513B92275009A0843 /* blink.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = blink.blk; sourceTree = "<group>"; };
-		AA16D55613B92275009A0843 /* blink.blk copy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "blink.blk copy"; sourceTree = "<group>"; };
-		AA16D55713B92275009A0843 /* button.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = button.blk; sourceTree = "<group>"; };
-		AA16D55813B92275009A0843 /* delay.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = delay.blk; sourceTree = "<group>"; };
-		AA16D55913B92275009A0843 /* digitalWrite.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = digitalWrite.blk; sourceTree = "<group>"; };
-		AA16D55A13B92275009A0843 /* flip.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = flip.blk; sourceTree = "<group>"; };
-		AA16D55B13B92275009A0843 /* forever.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = forever.blk; sourceTree = "<group>"; };
-		AA16D55C13B92275009A0843 /* forSeconds.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = forSeconds.blk; sourceTree = "<group>"; };
-		AA16D55D13B92275009A0843 /* if.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = if.blk; sourceTree = "<group>"; };
-		AA16D55E13B92275009A0843 /* ifBP.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ifBP.blk; sourceTree = "<group>"; };
-		AA16D55F13B92275009A0843 /* led.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = led.blk; sourceTree = "<group>"; };
-		AA16D56013B92275009A0843 /* once.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = once.blk; sourceTree = "<group>"; };
-		AA16D56113B92275009A0843 /* playing.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = playing.blk; sourceTree = "<group>"; };
-		AA16D56213B92275009A0843 /* playSound.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = playSound.blk; sourceTree = "<group>"; };
-		AA16D56313B92275009A0843 /* repeat.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = repeat.blk; sourceTree = "<group>"; };
-		AA16D56413B92275009A0843 /* sequence.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sequence.blk; sourceTree = "<group>"; };
-		AA16D56513B92275009A0843 /* stopSound.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stopSound.blk; sourceTree = "<group>"; };
-		AA16D56613B92275009A0843 /* tail.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tail.blk; sourceTree = "<group>"; };
-		AA16D56713B92275009A0843 /* while.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = while.blk; sourceTree = "<group>"; };
-		AA16D56813B92275009A0843 /* whileBP.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = whileBP.blk; sourceTree = "<group>"; };
-		AA16D56913B92275009A0843 /* wriggle.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wriggle.blk; sourceTree = "<group>"; };
-		AA16D56C13B92275009A0843 /* blocks.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = blocks.xml; sourceTree = "<group>"; };
-		AA16D56E13B92275009A0843 /* blocks.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = blocks.xml; sourceTree = "<group>"; };
-		AA16D57013B92275009A0843 /* autoFlip.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = autoFlip.blk; sourceTree = "<group>"; };
-		AA16D57113B92275009A0843 /* autoTail.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = autoTail.blk; sourceTree = "<group>"; };
-		AA16D57213B92275009A0843 /* blink.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = blink.blk; sourceTree = "<group>"; };
-		AA16D57313B92275009A0843 /* button.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = button.blk; sourceTree = "<group>"; };
-		AA16D57413B92275009A0843 /* delay.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = delay.blk; sourceTree = "<group>"; };
-		AA16D57513B92275009A0843 /* digitalWrite.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = digitalWrite.blk; sourceTree = "<group>"; };
-		AA16D57613B92275009A0843 /* flip.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = flip.blk; sourceTree = "<group>"; };
-		AA16D57713B92275009A0843 /* forever.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = forever.blk; sourceTree = "<group>"; };
-		AA16D57813B92275009A0843 /* forSeconds.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = forSeconds.blk; sourceTree = "<group>"; };
-		AA16D57913B92275009A0843 /* if.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = if.blk; sourceTree = "<group>"; };
-		AA16D57A13B92275009A0843 /* ifBP.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ifBP.blk; sourceTree = "<group>"; };
-		AA16D57B13B92275009A0843 /* led.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = led.blk; sourceTree = "<group>"; };
-		AA16D57C13B92275009A0843 /* once.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = once.blk; sourceTree = "<group>"; };
-		AA16D57D13B92275009A0843 /* playing.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = playing.blk; sourceTree = "<group>"; };
-		AA16D57E13B92275009A0843 /* playSound.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = playSound.blk; sourceTree = "<group>"; };
-		AA16D57F13B92275009A0843 /* repeat.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = repeat.blk; sourceTree = "<group>"; };
-		AA16D58013B92275009A0843 /* stopSound.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stopSound.blk; sourceTree = "<group>"; };
-		AA16D58113B92275009A0843 /* tail.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tail.blk; sourceTree = "<group>"; };
-		AA16D58213B92275009A0843 /* while.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = while.blk; sourceTree = "<group>"; };
-		AA16D58313B92275009A0843 /* whileBP.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = whileBP.blk; sourceTree = "<group>"; };
-		AA16D58413B92275009A0843 /* wriggle.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wriggle.blk; sourceTree = "<group>"; };
-		AA16D58613B92275009A0843 /* blocks.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = blocks.xml; sourceTree = "<group>"; };
 		AA16D59D13B9292F009A0843 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.txt; path = bin/data/README.txt; sourceTree = "<group>"; };
 		AA16D5B013B92DB1009A0843 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		AA4733091329770100DB227E /* blocks_MouseFuncs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = blocks_MouseFuncs.cpp; sourceTree = "<group>"; };
@@ -331,7 +238,7 @@
 		E45BE9770E8CC7DD009D7055 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		E45BE9790E8CC7DD009D7055 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
-		E4B69B5B0A3A1756003C02F2 /* arenaBotDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = arenaBotDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4B69B5B0A3A1756003C02F2 /* arenaBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = arenaBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B69E1D0A3A1BDC003C02F2 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
 		E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = testApp.cpp; path = src/testApp.cpp; sourceTree = SOURCE_ROOT; };
 		E4B69E1F0A3A1BDC003C02F2 /* testApp.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = testApp.h; path = src/testApp.h; sourceTree = SOURCE_ROOT; };
@@ -356,7 +263,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4C2422B10CC554B004149E2 /* openFrameworksDebug.a in Frameworks */,
+				E4C2422B10CC554B004149E2 /* openFrameworks.a in Frameworks */,
 				E45BE0AA0E8CC67C009D7055 /* GLee.a in Frameworks */,
 				E45BE2E40E8CC69C009D7055 /* rtAudio.a in Frameworks */,
 				E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */,
@@ -390,222 +297,9 @@
 			isa = PBXGroup;
 			children = (
 				AAE2276213CB27690068AA76 /* arena */,
-				AA16D51B13B92275009A0843 /* crab */,
-				AA16D54313B92275009A0843 /* fish */,
-				AA16D56A13B92275009A0843 /* snail */,
 			);
 			name = robots;
 			path = bin/data/robots;
-			sourceTree = "<group>";
-		};
-		AA16D51B13B92275009A0843 /* crab */ = {
-			isa = PBXGroup;
-			children = (
-				AA16D51C13B92275009A0843 /* 001_basic */,
-				AA16D52013B92275009A0843 /* 002_intermediate */,
-				AA16D52413B92275009A0843 /* 003_advanced */,
-				AA16D52813B92275009A0843 /* blocks */,
-			);
-			path = crab;
-			sourceTree = "<group>";
-		};
-		AA16D51C13B92275009A0843 /* 001_basic */ = {
-			isa = PBXGroup;
-			children = (
-				AA16D51D13B92275009A0843 /* anim.xml */,
-				AA16D51E13B92275009A0843 /* blocks.xml */,
-				AA16D51F13B92275009A0843 /* icon.png */,
-			);
-			path = 001_basic;
-			sourceTree = "<group>";
-		};
-		AA16D52013B92275009A0843 /* 002_intermediate */ = {
-			isa = PBXGroup;
-			children = (
-				AA16D52113B92275009A0843 /* anim.xml */,
-				AA16D52213B92275009A0843 /* blocks.xml */,
-				AA16D52313B92275009A0843 /* icon.png */,
-			);
-			path = 002_intermediate;
-			sourceTree = "<group>";
-		};
-		AA16D52413B92275009A0843 /* 003_advanced */ = {
-			isa = PBXGroup;
-			children = (
-				AA16D52513B92275009A0843 /* anim.xml */,
-				AA16D52613B92275009A0843 /* blocks.xml */,
-				AA16D52713B92275009A0843 /* icon.png */,
-			);
-			path = 003_advanced;
-			sourceTree = "<group>";
-		};
-		AA16D52813B92275009A0843 /* blocks */ = {
-			isa = PBXGroup;
-			children = (
-				AA16D52913B92275009A0843 /* autoColors.blk */,
-				AA16D52A13B92275009A0843 /* autoLeftClaw.blk */,
-				AA16D52B13B92275009A0843 /* autoRightClaw.blk */,
-				AA16D52C13B92275009A0843 /* autoTail.blk */,
-				AA16D52D13B92275009A0843 /* blocks.xml */,
-				AA16D52E13B92275009A0843 /* button.blk */,
-				AA16D52F13B92275009A0843 /* delay.blk */,
-				AA16D53013B92275009A0843 /* eyes.blk */,
-				AA16D53113B92275009A0843 /* flip.blk */,
-				AA16D53213B92275009A0843 /* forever.blk */,
-				AA16D53313B92275009A0843 /* forSeconds.blk */,
-				AA16D53413B92275009A0843 /* if.blk */,
-				AA16D53513B92275009A0843 /* ifBP.blk */,
-				AA16D53613B92275009A0843 /* ifLOpen.blk */,
-				AA16D53713B92275009A0843 /* ifROpen.blk */,
-				AA16D53813B92275009A0843 /* lclaw.blk */,
-				AA16D53913B92275009A0843 /* led.blk */,
-				AA16D53A13B92275009A0843 /* once.blk */,
-				AA16D53B13B92275009A0843 /* playSound.blk */,
-				AA16D53C13B92275009A0843 /* rclaw.blk */,
-				AA16D53D13B92275009A0843 /* repeat.blk */,
-				AA16D53E13B92275009A0843 /* sequence.blk */,
-				AA16D53F13B92275009A0843 /* shake.blk */,
-				AA16D54013B92275009A0843 /* stopSound.blk */,
-				AA16D54113B92275009A0843 /* tail.blk */,
-				AA16D54213B92275009A0843 /* whileBP.blk */,
-			);
-			path = blocks;
-			sourceTree = "<group>";
-		};
-		AA16D54313B92275009A0843 /* fish */ = {
-			isa = PBXGroup;
-			children = (
-				AA16D54413B92275009A0843 /* 001_basic */,
-				AA16D54813B92275009A0843 /* 002_intermediate */,
-				AA16D54D13B92275009A0843 /* 003_advanced */,
-				AA16D55213B92275009A0843 /* blocks */,
-			);
-			path = fish;
-			sourceTree = "<group>";
-		};
-		AA16D54413B92275009A0843 /* 001_basic */ = {
-			isa = PBXGroup;
-			children = (
-				AA16D54513B92275009A0843 /* anim.xml */,
-				AA16D54613B92275009A0843 /* blocks.xml */,
-				AA16D54713B92275009A0843 /* icon.png */,
-			);
-			path = 001_basic;
-			sourceTree = "<group>";
-		};
-		AA16D54813B92275009A0843 /* 002_intermediate */ = {
-			isa = PBXGroup;
-			children = (
-				AA16D54913B92275009A0843 /* anim.xml */,
-				AA16D54A13B92275009A0843 /* blocks.xml */,
-				AA16D54B13B92275009A0843 /* example.png */,
-				AA16D54C13B92275009A0843 /* icon.png */,
-			);
-			path = 002_intermediate;
-			sourceTree = "<group>";
-		};
-		AA16D54D13B92275009A0843 /* 003_advanced */ = {
-			isa = PBXGroup;
-			children = (
-				AA16D54E13B92275009A0843 /* anim.xml */,
-				AA16D54F13B92275009A0843 /* blocks.xml */,
-				AA16D55013B92275009A0843 /* example.png */,
-				AA16D55113B92275009A0843 /* icon.png */,
-			);
-			path = 003_advanced;
-			sourceTree = "<group>";
-		};
-		AA16D55213B92275009A0843 /* blocks */ = {
-			isa = PBXGroup;
-			children = (
-				AA16D55313B92275009A0843 /* autoFlip.blk */,
-				AA16D55413B92275009A0843 /* autoTail.blk */,
-				AA16D55513B92275009A0843 /* blink.blk */,
-				AA16D55613B92275009A0843 /* blink.blk copy */,
-				AA16D55713B92275009A0843 /* button.blk */,
-				AA16D55813B92275009A0843 /* delay.blk */,
-				AA16D55913B92275009A0843 /* digitalWrite.blk */,
-				AA16D55A13B92275009A0843 /* flip.blk */,
-				AA16D55B13B92275009A0843 /* forever.blk */,
-				AA16D55C13B92275009A0843 /* forSeconds.blk */,
-				AA16D55D13B92275009A0843 /* if.blk */,
-				AA16D55E13B92275009A0843 /* ifBP.blk */,
-				AA16D55F13B92275009A0843 /* led.blk */,
-				AA16D56013B92275009A0843 /* once.blk */,
-				AA16D56113B92275009A0843 /* playing.blk */,
-				AA16D56213B92275009A0843 /* playSound.blk */,
-				AA16D56313B92275009A0843 /* repeat.blk */,
-				AA16D56413B92275009A0843 /* sequence.blk */,
-				AA16D56513B92275009A0843 /* stopSound.blk */,
-				AA16D56613B92275009A0843 /* tail.blk */,
-				AA16D56713B92275009A0843 /* while.blk */,
-				AA16D56813B92275009A0843 /* whileBP.blk */,
-				AA16D56913B92275009A0843 /* wriggle.blk */,
-			);
-			path = blocks;
-			sourceTree = "<group>";
-		};
-		AA16D56A13B92275009A0843 /* snail */ = {
-			isa = PBXGroup;
-			children = (
-				AA16D56B13B92275009A0843 /* advanced */,
-				AA16D56D13B92275009A0843 /* basic */,
-				AA16D56F13B92275009A0843 /* blocks */,
-				AA16D58513B92275009A0843 /* intermediate */,
-			);
-			path = snail;
-			sourceTree = "<group>";
-		};
-		AA16D56B13B92275009A0843 /* advanced */ = {
-			isa = PBXGroup;
-			children = (
-				AA16D56C13B92275009A0843 /* blocks.xml */,
-			);
-			path = advanced;
-			sourceTree = "<group>";
-		};
-		AA16D56D13B92275009A0843 /* basic */ = {
-			isa = PBXGroup;
-			children = (
-				AA16D56E13B92275009A0843 /* blocks.xml */,
-			);
-			path = basic;
-			sourceTree = "<group>";
-		};
-		AA16D56F13B92275009A0843 /* blocks */ = {
-			isa = PBXGroup;
-			children = (
-				AA16D57013B92275009A0843 /* autoFlip.blk */,
-				AA16D57113B92275009A0843 /* autoTail.blk */,
-				AA16D57213B92275009A0843 /* blink.blk */,
-				AA16D57313B92275009A0843 /* button.blk */,
-				AA16D57413B92275009A0843 /* delay.blk */,
-				AA16D57513B92275009A0843 /* digitalWrite.blk */,
-				AA16D57613B92275009A0843 /* flip.blk */,
-				AA16D57713B92275009A0843 /* forever.blk */,
-				AA16D57813B92275009A0843 /* forSeconds.blk */,
-				AA16D57913B92275009A0843 /* if.blk */,
-				AA16D57A13B92275009A0843 /* ifBP.blk */,
-				AA16D57B13B92275009A0843 /* led.blk */,
-				AA16D57C13B92275009A0843 /* once.blk */,
-				AA16D57D13B92275009A0843 /* playing.blk */,
-				AA16D57E13B92275009A0843 /* playSound.blk */,
-				AA16D57F13B92275009A0843 /* repeat.blk */,
-				AA16D58013B92275009A0843 /* stopSound.blk */,
-				AA16D58113B92275009A0843 /* tail.blk */,
-				AA16D58213B92275009A0843 /* while.blk */,
-				AA16D58313B92275009A0843 /* whileBP.blk */,
-				AA16D58413B92275009A0843 /* wriggle.blk */,
-			);
-			path = blocks;
-			sourceTree = "<group>";
-		};
-		AA16D58513B92275009A0843 /* intermediate */ = {
-			isa = PBXGroup;
-			children = (
-				AA16D58613B92275009A0843 /* blocks.xml */,
-			);
-			path = intermediate;
 			sourceTree = "<group>";
 		};
 		AA16D59E13B929F8009A0843 /* data */ = {
@@ -1030,7 +724,7 @@
 			isa = PBXGroup;
 			children = (
 				AA16D59E13B929F8009A0843 /* data */,
-				E4B69B5B0A3A1756003C02F2 /* arenaBotDebug.app */,
+				E4B69B5B0A3A1756003C02F2 /* arenaBot.app */,
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
 				E4C2422310CC54B6004149E2 /* openFrameworks */,
@@ -1058,7 +752,7 @@
 		E4C2421710CC549C004149E2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E4C2421E10CC549C004149E2 /* openFrameworksDebug.a */,
+				E4C2421E10CC549C004149E2 /* openFrameworks.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1159,7 +853,7 @@
 			);
 			name = arenaBot;
 			productName = myOFApp;
-			productReference = E4B69B5B0A3A1756003C02F2 /* arenaBotDebug.app */;
+			productReference = E4B69B5B0A3A1756003C02F2 /* arenaBot.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1187,10 +881,10 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		E4C2421E10CC549C004149E2 /* openFrameworksDebug.a */ = {
+		E4C2421E10CC549C004149E2 /* openFrameworks.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = openFrameworksDebug.a;
+			path = openFrameworks.a;
 			remoteRef = E4C2421D10CC549C004149E2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};

@@ -124,7 +124,7 @@ void testApp::drawBase_and_Demo(int yPos)
   label.drawString(baseLabel, blocks.base.x+20, blocks.base.y+10);
   label.setMode(OF_FONT_RIGHT);
   baseLabel="2. Upload instructions";
-  ofRectangle two(blocks.base.x+blocks.base.w+upBut.w, blocks.base.y+10+label.stringHeight("K")+4,label.stringWidth(baseLabel)-5,2);
+  ofRectangle two(blocks.base.x+blocks.base.w+upBut.w, blocks.base.y+10+label.stringHeight("Kj")+4,label.stringWidth(baseLabel)-5,2);
   label.drawString(baseLabel, blocks.base.x+blocks.base.w+upBut.w, blocks.base.y+10);
   label.setMode(OF_FONT_LEFT);
   
@@ -140,7 +140,7 @@ void testApp::drawBase_and_Demo(int yPos)
   //------- Demo button
   
   ofSetShadowDarkness(.5);
-  ofShadowRounded(-30, yPos-30, objects->w-10, 105, 20);
+  ofShadowRounded(-20, yPos-20, objects->w-30, 80, 20);
   ofSetColor(0x555555);
   ofRaised(.2);
   ofRoundedRect(-20, yPos-20, objects->w-30, 80, 20);
@@ -177,7 +177,7 @@ void testApp::drawSubtitleBar(int yPos, int hgt, int tabHgt)
   ofSetColor(0x555555);
   ofSetShadowDarkness((0xCF-0xA8)/255.);
   ofRect(0, yPos, ofGetWidth(), hgt);
-  ofShade(0, yPos, ofGetWidth(), hgt, OF_DOWN);
+  ofShade(0, yPos, hgt, ofGetWidth(), OF_DOWN);
   ofShade(0, yPos+hgt, 10, ofGetWidth(), OF_UP,.25);
   ofShade(0, yPos+hgt, 10, ofGetWidth(), OF_DOWN);
   

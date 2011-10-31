@@ -3,8 +3,8 @@
 		<block name="go forward %d inches" color="0x993399">
       <dropdown>
           <ddlow>0</ddlow>
-          <ddhigh>10</ddhigh>
-          <ddsteps>6</ddsteps>
+          <ddhigh>12</ddhigh>
+          <ddsteps>7</ddsteps>
       </dropdown>
       <action>move:$dd[0].num()*$ppi</action>
       <file>forward.blk</file>
@@ -12,8 +12,8 @@
     <block name="go backward %d inches" color="0x993399">
       <dropdown>
           <ddlow>0</ddlow>
-          <ddhigh>10</ddhigh>
-          <ddsteps>6</ddsteps>
+          <ddhigh>12</ddhigh>
+          <ddsteps>7</ddsteps>
       </dropdown>
       <file>backward.blk</file>
       <action>move:-$dd[0].num()*$ppi</action>

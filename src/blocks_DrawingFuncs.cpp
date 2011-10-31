@@ -76,7 +76,7 @@ void block::drawDD(double vert){
 	//-------- draw the dd for the current block, if it is not open
 	for (unsigned int i=0; i<ddGroup.size(); i++) {
 		if(!ddGroup[i].open){
-			ddGroup[i].move(x+ddGroup[i].xdis,y+10*vert);
+			ddGroup[i].move(x+ddGroup[i].relPos.x,y+10*vert);
 			ddGroup[i].changeSize(ddGroup[i].w, (ddGroup[i].arial.stringHeight("1")+4)*vert);
 			if(h>=h0*.90) ddGroup[i].draw();
 			else if(vert>.01) ddGroup[i].drawShape();
@@ -96,7 +96,7 @@ void block::drawOpenDD(){
 	//-------- draw open dd for current block
 	for (unsigned int i=0; i<ddGroup.size(); i++) {
 		if(ddGroup[i].open){
-			ddGroup[i].move(x+ddGroup[i].xdis,y+10);
+			ddGroup[i].move(x+ddGroup[i].relPos.x,y+10);
 			if(h>=h0*.90) ddGroup[i].draw();
 		}
 	}
