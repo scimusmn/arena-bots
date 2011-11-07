@@ -32,7 +32,7 @@ void block::printOut(ofstream* fOut,ifstream * fInput,int t, map<string,bool> * 
 	//******* below, parses it to find references to contained blocks or dropdowns, and properly formats it
 	
 	bool printed=printList->find(title)->second;
-	bool partP=partnerWritten(printList);
+	bool siblingP=siblingnerWritten(printList);
 	
 	//-------- init the buffer, the pos counters and the end flag
 	string buffer;
@@ -146,7 +146,7 @@ void block::printOut(ofstream* fOut,ifstream * fInput,int t, map<string,bool> * 
 				//-------- if the buffer at the current pos is '~', print only if the block or a complement block
 				//-------- has not been printed before
 				else if(buffer[i]=='~'){
-					if (partP) i=buffer.length();
+					if (siblingP) i=buffer.length();
 				}
 				//-------- increment the foundtab count if we find a '\t'
 				else if(buffer[i]=='\t'){
@@ -169,7 +169,7 @@ void block::printOut(ofstream* fOut,ifstream * fInput,int t, map<string,bool> * 
 }
 
 /*****************************************************************
- * partnerWritten(map<string,bool> * printed) :: function of block
+ * siblingnerWritten(map<string,bool> * printed) :: function of block
  *
  *  Description::
  *
@@ -185,13 +185,13 @@ void block::printOut(ofstream* fOut,ifstream * fInput,int t, map<string,bool> * 
  */
 
 
-bool block::partnerWritten(map<string,bool> * printed)
+bool block::siblingnerWritten(map<string,bool> * printed)
 {
 	//-------- checks to see if a complement block has been printed
 	bool ret=false;
 	map<string,bool>::iterator it;
-	for (unsigned int i=0; i<part.size(); i++) {
-		it=printed->find(part[i]);
+	for (unsigned int i=0; i<sibling.size(); i++) {
+		it=printed->find(sibling[i]);
 		if(it!=printed->end()){
 			ret=ret||it->second;
 		}
@@ -202,14 +202,14 @@ bool block::partnerWritten(map<string,bool> * printed)
 }
 
 /*****************************************************************
- * printData(string part,ofstream* k,int t,map<string,bool> * printed, bool printIn) :: function of block
+ * printData(string sibling,ofstream* k,int t,map<string,bool> * printed, bool printIn) :: function of block
  *
  *  Description::
  *
  *
  *  Input_________
  *
- *    string part :
+ *    string sibling :
  *    ofstream* k :
  *    int t :
  *    map<string ,bool> * printed :
@@ -222,7 +222,7 @@ bool block::partnerWritten(map<string,bool> * printed)
  */
 
 
-void block::printData(string part,ofstream* k,int t,map<string,bool> * printed, bool printIn){
+void block::printData(string sibling,ofstream* k,int t,map<string,bool> * printed, bool printIn){
 	string buffer;
 	cout << filename << " is the base filename" << endl;
 	if(filename.compare("null")){
@@ -231,7 +231,7 @@ void block::printData(string part,ofstream* k,int t,map<string,bool> * printed, 
 		//-------- burn the buffer until we find the start of the end
 		bool found=false;
 		while(f.peek()!=EOF&&!found){
-			if (buffer.compare(part)) {
+			if (buffer.compare(sibling)) {
 				getline(f,buffer);
 			}
 			else {
@@ -248,16 +248,16 @@ void block::printData(string part,ofstream* k,int t,map<string,bool> * printed, 
 			//-------- print the start routines for the blocks on and in
 			if(printIn)
 				for (unsigned int i=0; i<blocksIn.size(); i++) {
-					blocksIn[i].printData(part,k,t,printed,printIn);
+					blocksIn[i].printData(sibling,k,t,printed,printIn);
 				}
 			for (unsigned int i=0; i<blocksOn.size(); i++) {
-				blocksOn[i].printData(part,k,t,printed,printIn);
+				blocksOn[i].printData(sibling,k,t,printed,printIn);
 			}
 		}
 	}
 	else {
 		for (unsigned int i=0; i<blocksOn.size(); i++) {
-			blocksOn[i].printData(part,k,t,printed,printIn);
+			blocksOn[i].printData(sibling,k,t,printed,printIn);
 		}
 	}
 

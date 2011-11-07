@@ -9,6 +9,7 @@
 
 #pragma once
 #include "../blocks.h"
+#include "../bracketBlock/bracketBlock.h"
 
 /*****************************************************************
  * struct storageState 
@@ -56,7 +57,6 @@ struct storageState {
  */
 
 class bGroup: public ofInterObj {
-	vector<block> blocks;
 	map<string,bool> used;
 	//deque<storageState> storedState;
 	//int stateCount;
@@ -74,6 +74,7 @@ public:
   ofImage mapp;
   ofTurtle turtle;
   
+  vector<block> blocks;
 	block base;
 	clock_t dblClick;
 	int lastBlock;

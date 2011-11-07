@@ -6,6 +6,8 @@ string ROOT_DIR;
 
 extern int pixPerInch;
 
+extern ofColor black,white,yellow,blue,orange, gray;
+
 //--------------------------------------------------------------
 void testApp::setup(){
 	ROOT_DIR=config("config.cfg");
@@ -62,14 +64,6 @@ void testApp::setup(){
     loadBlocks(sets[0]);
   }
   
-  devExists=false;
-  justChecked=false;
-  int numPorts = dev.listDir("/dev/");
-  for (int i=0; i<numPorts; i++) {
-    string split(dev.getPath(i),0,12);
-    if(split=="/dev/tty.usb")
-      devExists=true;
-  }
   mapps.loadImage("maps/map_2.jpg");
 }
 
@@ -113,15 +107,6 @@ void testApp::update(){
   if(anim.isPlaying())
     anim.updateNextEvent();
   
-  if((ofGetElapsedTimeMillis()/1000)%2&&!(justChecked)&&(justChecked=true)){
-    devExists=false;
-    int numPorts = dev.listDir("/dev/");
-    for (int i=0; i<numPorts; i++) {
-      if(dev.getPath(i).substr(0, 12)=="/dev/tty.usb")
-        devExists=true;
-    }
-  }
-  else if((ofGetElapsedTimeMillis()/1000)%2==0) justChecked=false;
   serChk.checkAvailability();
 }
 
@@ -143,13 +128,17 @@ void testApp::draw(){
     //--------- Draw background with slightly yellow grid over it.
 		ofBackground(0x33, 0x33, 0x33);
     
-		ofSetColor(0x444400);
+		/*ofSetColor(0x444400);
 		for (int i=0; i*10<ofGetHeight(); i++) {
 			ofRect(sideWidth, i*10, ofGetWidth()-(sideWidth), 1);
 		}
 		for (int i=0; i*10<ofGetWidth(); i++) {
 			ofRect(sideWidth+i*10, 0, 1, ofGetHeight());
-		}
+		}*/
+    
+    
+    ofSetColor(black);
+    drawHatching(0, 0, ofGetWidth(), ofGetHeight(), 2,2);
 		
 		//--------- Draw any blocks that are in the composition area and are not clicked.
 		blocks.draw();
@@ -167,7 +156,7 @@ void testApp::draw(){
 		int titleBarH=100;
     int subTitleH=50;
     
-    titleFont.setSize(70);
+    titleFont.setSize(35);
 		titleFont.setMode(OF_FONT_TOP);
 		string title="Program the "+ROOT_NAME+" behaviors";
     double scaleTitle=1;
@@ -196,7 +185,7 @@ void testApp::draw(){
     
     //****************** Title text, scaled
 		
-    titleFont.setSize(70);
+    titleFont.setSize(35);
 		titleFont.setMode(OF_FONT_TOP);
 		ofSetColor(229,224,15);
     ofPushMatrix();
@@ -347,10 +336,6 @@ void testApp::keyPressed(int key){
 			
 		}
 		anim.play();
-	}
-	if(key=='r'){
-		if(!anim.isPlaying()) anim.play();
-		else anim.pause();
 	}
   if(key=='n'){
     animationStepRequested(animXML);

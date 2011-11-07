@@ -48,7 +48,7 @@ string defaultFont="fonts/DinC.ttf";
  *
  */
 
-block::block(ofTag & cur,ofColor col, int _y):ofInterObj(-200,-200,150,45) {
+block::block(ofTag & cur,ofColor col):ofInterObj(-200,-200,150,45) {
 	//********* This is the method by which all of the blocks are first generated from the xml files in the data root.
 	//-------- TODO: get rid of the garbage with the color triples. blech.
 	//-------- load the font for the arialHeader, at 10 pt.
@@ -71,19 +71,17 @@ block::block(ofTag & cur,ofColor col, int _y):ofInterObj(-200,-200,150,45) {
 	//-------- init some variables, to prevent garbage from happening
 	ddOpen=false;
 	titlePos.x=10;
-	y=_y;
   
   type=BLK_DEFAULT;
   
 	placeHolder=false;
-	//-------- declare the vector for splitting the title string, and the map used for the switch
-	vector<string> titleSplit;
+	//-------- declare the map used for the switch
 	map<string,int> list;
 	list["seq"]=0;
 	list["bracket"]=1;
 	list["action"]=4;
 	list["file"]=5;
-	list["part"]=6;
+	list["sibling"]=6;
 	list["num"]=7;
 	list["dropdown"]=8;
 	list["blocksIn"]=9;
@@ -107,9 +105,9 @@ block::block(ofTag & cur,ofColor col, int _y):ofInterObj(-200,-200,150,45) {
           //-- definitely not deprecated, used to store value of which file to write from
           filename=node[1];
           break;
-        case 6: // part
+        case 6: // sibling
           //-- stores the name of the complement blocks
-          part.push_back(node[1]);
+          sibling.push_back(node[1]);
           break;
         case 7: // num
           //-- set the statement block flag
@@ -125,14 +123,14 @@ block::block(ofTag & cur,ofColor col, int _y):ofInterObj(-200,-200,150,45) {
         case 9:
           for (unsigned int j=0; j<cur[i].size(); j++) {
             if (cur[i][j].getLabel()=="block") {
-              blocksIn.push_back(block(cur[i][j],color,0));
+              blocksIn.push_back(block(cur[i][j],color));
             }
           }
           break;
         case 10:
           for (unsigned int j=0; j<cur[i].size(); j++) {
             if (cur[i][j].getLabel()=="block") {
-              blocksOn.push_back(block(cur[i][j],color,0));
+              blocksOn.push_back(block(cur[i][j],color));
             }
           }
           break;
@@ -141,6 +139,14 @@ block::block(ofTag & cur,ofColor col, int _y):ofInterObj(-200,-200,150,45) {
       }
     }
 	}
+  
+  parseTitle();
+}
+
+void block::parseTitle()
+{
+  vector<string> titleSplit;
+  
   orig.height=h;
   orig.width=w;
   titlePos.y=(ttlSize.y-10-arialHeader.stringHeight("Kjhg"))/2;
@@ -173,7 +179,7 @@ block::block(ofTag & cur,ofColor col, int _y):ofInterObj(-200,-200,150,45) {
 	for (unsigned int i=0; i<titleSplit.size(); i++) {
 		if(!titleSplit[i].compare("%d")){
 			if(ddNum<ddGroup.size()){
-				//-------- augment the orginal positon with the current total width
+				//-------- augment the relative position with the current total width
 				ddGroup[ddNum].relPos.x+=totalwidth;
 				//-------- update total width
 				totalwidth+=ddGroup[ddNum].w+spSize*2;
@@ -235,10 +241,10 @@ block::block(ofTag & cur,ofColor col, int _y):ofInterObj(-200,-200,150,45) {
 	else {
 		w=newWid-10;
 	}
-
+  
 	for(int i=0; i<ddGroup.size(); i++)
 		ddGroup[i].changeSize(ddGroup[i].w, (ddGroup[i].arial.stringHeight("1")+4));
-
+  
 	orig.height=h;
 }
 
@@ -390,39 +396,6 @@ block & block::lastBlock(){
 block & block::operator[](int i){
 	return blocksOn[i];
 }
-
-
-/*****************************************************************
- * fullWidth() :: function of block
- *
- *  Description::
- *
- *
- *  Input_________
- *
- *    NONE :
- *
- *  Output________
- *
- *    double :
- *
- */
-
-double block::fullWidth()
-{
-  double ret=0;
-  if(blocksIn.size()){
-    ret+=blocksIn[0].x-x;
-    double maximum=0;
-    for (unsigned int i=0; i<blocksIn.size(); i++) {
-      maximum=max(maximum,blocksIn[i].w);
-    }
-    ret+=maximum;
-  }
-  ret=max(w,ret);
-  return ret;
-}
-
 
 
 #endif

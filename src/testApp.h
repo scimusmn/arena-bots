@@ -12,6 +12,8 @@
 #include "blockLoad.h"
 #include "serialCheck.h"
 
+#include "../../dallasEng/dallasEng.h"
+
 /*****************************************************************
  * class testApp : public ofBaseApp
  *
@@ -89,6 +91,7 @@ class testApp : public ofBaseApp{
 	ofButton clearBut;
 	ofButton redoBut;
 	ofButton undoBut;
+  dallasButton  demo;
 	
 	ofButton skipBut;
 	
@@ -102,8 +105,6 @@ class testApp : public ofBaseApp{
 	
 	ofVMouse anim;
 	ofImage pointer;
-  
-  ofButton  demo;
   
   rootGroup sets;
   

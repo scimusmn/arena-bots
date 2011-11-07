@@ -9,7 +9,7 @@
 
 #include "blockDraw.h"
 
-void glBezier3f(double Ax,double Bx, double Cx,double Ay,double By, double Cy,double r, double g, double bl, double aug){
+void glBezier3f(double Ax,double Bx, double Cx,double Ay,double By, double Cy){
 	double a=1.0;
 	double b=1.0-a;
 	double x,y;
@@ -17,8 +17,6 @@ void glBezier3f(double Ax,double Bx, double Cx,double Ay,double By, double Cy,do
 	for (int i=0; i<steps+1; i++) {
 		x=Ax*a*a+Bx*2*a*b+Cx*b*b;
 		y=Ay*a*a+By*2*a*b+Cy*b*b;
-		//double dis = (Cy<Ay)? (y-Cy)/(Ay-Cy):(y-Ay)/(Cy-Ay);
-		//glColor3f(r+aug*dis,g+aug*dis,bl+aug*dis);
 		glVertex2d(x,y);
 		a-=1/steps;
 		b=1.0-a;

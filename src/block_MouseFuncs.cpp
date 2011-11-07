@@ -122,18 +122,6 @@ bool block::ddPassingClick(int _x, int _y){
 	return ret;
 }
 
-
-
-int block::onBlockOn(int _x,int _y){
-	//-------- if we are over a block below, and not looking for a dd click, returns the block's number in the vector+1.
-	//-------- else, returns 0 (false);
-	int ret=0;
-	for (unsigned int i=0; i<blocksOn.size(); i++) {
-		if(blocksOn[i].over(_x,_y)&&blocksOn[i].ddPassingClick(_x,_y)) ret=i+1;
-	}
-	return ret;
-}
-
 /*****************************************************************
  * newClickUp(int _x, int _y) :: function of block
  *

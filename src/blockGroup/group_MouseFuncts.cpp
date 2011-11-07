@@ -48,7 +48,7 @@ bool bGroup::newHandleClick(vector<block> & chk, int i, int _x, int _y, bool top
     if(!top) pullBlocks(chk, i);
     else held = chk[i],chk.erase(chk.begin()+i);
   }
-  else {
+  else if(chk[i].inOrOn(_x,_y)){
     for (unsigned int j=0; j<chk[i].blocksIn.size()&&!ret; j++) {
       if(!ret) ret=newHandleClick(chk[i].blocksIn,j,_x,_y,false);
     }
@@ -77,8 +77,6 @@ void resetInsertSpace(block & t){
     resetInsertSpace(t.blocksOn[i]);
   }
 }
-
-//******************************** bGroup ************************************
 
 void bGroup::drag(double _x, double _y){
 	//-------- if we're holding a block, update the position

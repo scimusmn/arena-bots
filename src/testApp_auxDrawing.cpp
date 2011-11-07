@@ -9,6 +9,8 @@
 
 #include "testApp.h"
 
+extern ofColor black,white,yellow,blue,orange, gray;
+
 /*****************************************************************
  * drawSidebar(int sideWidth, int menuBarH) :: member of testApp
  *
@@ -194,7 +196,7 @@ void testApp::drawSubtitleBar(int yPos, int hgt, int tabHgt)
     }
   }
   
-  ofSetColor(0xDFF500);
+  ofSetColor(yellow);
   titleFont.setSize(24);
   titleFont.setMode(OF_FONT_TOP);
   titleFont.setMode(OF_FONT_LEFT);

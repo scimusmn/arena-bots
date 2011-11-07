@@ -80,7 +80,7 @@ struct blockAction {
  *   vector<block> blocksIn:: _ _ _ 
  *   vector<block> blocksOn:: _ _ _ 
  *   ofFontContainer arialHeader::_ 
- *   vector<string> part::_ _ _ _ _ 
+ *   vector<string> sibling::_ _ _ _ _ 
  *   unsigned char typ::_ _ _ _ _ _ 
  *   vector<ofDropDown> ddGroup:: _ 
  *   int oH:: _ _ _ _ _ _ _ _ _ _ _ 
@@ -102,7 +102,7 @@ public:
 	vector<block> blocksIn;
 	vector<block> blocksOn;
 	ofFont arialHeader;
-	vector<string> part;
+	vector<string> sibling;
 	vector<ofDropDown> ddGroup;
   
   bGroup * group;
@@ -117,7 +117,9 @@ public:
 	string filename;
 	string title;
 	
-	block(ofTag & xml,ofColor col, int y);
+	block(ofTag & xml,ofColor col);
+  
+  void parseTitle();
 	
 	block():ofInterObj(){
 		placeHolder=true;
@@ -170,16 +172,18 @@ public:
   double fullWidth();
 	
 	int onBlockOn(int x,int y);
+  
+  bool inOrOn(int x, int y);
 	
 	bool ddPassingClick(int x, int y);
 	
 	void motion(int x, int y);
 	
-	bool partnerWritten(map<string,bool> * printed);
+	bool siblingnerWritten(map<string,bool> * printed);
 	
 	void printOut(ofstream* k,ifstream * f,int t=0, map<string,bool> * printed=0);
 	
-	void printData(string part,ofstream* k,int t=0,map<string,bool> * printed=0, bool printIn=true);
+	void printData(string sibling,ofstream* k,int t=0,map<string,bool> * printed=0, bool printIn=true);
   
   //--------------------------- New functions --------------------------
   

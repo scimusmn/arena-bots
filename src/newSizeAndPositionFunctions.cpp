@@ -107,3 +107,50 @@ bool block::inBounds(int xX, int yX, int wX, int hX)
   if(((x>=xX && x<xX+wX)||(x+w>=xX && x+w<xX+wX)||(x<=xX && x+w >= xX + wX))&&((y>=yX && y<yX+hX)||(y+pH>=yX && y+pH<yX+hX))) ret=true;
   return ret;
 }
+
+int block::onBlockOn(int _x,int _y){
+	//-------- if we are over a block below, and not looking for a dd click, returns the block's number in the vector+1.
+	//-------- else, returns 0 (false);
+	int ret=0;
+	for (unsigned int i=0; i<blocksOn.size(); i++) {
+		if(blocksOn[i].over(_x,_y)&&blocksOn[i].ddPassingClick(_x,_y)) ret=i+1;
+	}
+	return ret;
+}
+
+bool block::inOrOn(int _x, int _y)
+{
+  return (_x>x&&_x<x+w&&_y>y&&_y<y+h+newHeightOn());
+}
+
+/*****************************************************************
+ * fullWidth() :: function of block
+ *
+ *  Description::
+ *
+ *
+ *  Input_________
+ *
+ *    NONE :
+ *
+ *  Output________
+ *
+ *    double :
+ *
+ */
+
+double block::fullWidth()
+{
+  double ret=0;
+  if(blocksIn.size()){
+    ret+=blocksIn[0].x-x;
+    double maximum=0;
+    for (unsigned int i=0; i<blocksIn.size(); i++) {
+      maximum=max(maximum,blocksIn[i].w);
+    }
+    ret+=maximum;
+  }
+  ret=max(w,ret);
+  return ret;
+}
+

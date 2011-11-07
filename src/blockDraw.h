@@ -13,7 +13,7 @@
 #include "ofMain.h"
 #include "ofExtended.h"
 
-void glBezier3f(double Ax,double Bx, double Cx,double Ay,double By, double Cy,double r=1, double g=1, double bl=1, double aug=.2);
+void glBezier3f(double Ax,double Bx, double Cx,double Ay,double By, double Cy);
 
 void glWideCurve(double Ax,double Bx, double Cx,double Ay,double By, double Cy,double sp=1,double r=1, double g=1, double bl=1, double aug=.2,bool top=false);
 

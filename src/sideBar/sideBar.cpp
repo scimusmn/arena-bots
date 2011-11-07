@@ -270,7 +270,7 @@ sbGroup::sbGroup(ofXML & xml,bGroup * destin):ofInterObj(){
 			for (unsigned int j=0; j<tag[i].size(); j++) {
 				if (tag[i][j].getLabel()=="block") {
           int curBlock=bars[curBar].blocks.size();
-					bars[curBar].blocks.push_back(block(tag[i][j],color,j*45));
+					bars[curBar].blocks.push_back(block(tag[i][j],color));
           bars[curBar].w=max(bars[curBar].w,bars[curBar].blocks[curBlock].fullWidth());
           w=max(bars[curBar].w+barHeight,w);
 				}
