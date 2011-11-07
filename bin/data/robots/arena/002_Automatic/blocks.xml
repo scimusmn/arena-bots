@@ -55,24 +55,24 @@
 	</bar>
   <bar name="Automatic blocks" color="0x336699">
 		<block name="while path in front is clear" color="0x336699">
-      <cond>1</cond>
+      <bracket>1</bracket>
       <file>pathClear.blk</file>
       <action>while:$front(4)</action>
     </block>
     <block name="if path on left is clear" color="0x336699">
-      <cond>1</cond>
+      <bracket>1</bracket>
       <file>leftPathClear.blk</file>
       <action>if:$leftPath(2)</action>
     </block>
     <block name="if path in front is blocked" color="0x336699">
-      <cond>1</cond>
+      <bracket>1</bracket>
       <file>pathBlocked.blk</file>
       <action>if:!$front(4)</action>
     </block>
 	</bar>
   <bar name="Timing blocks" color="0xFF6600">
 		<block name="repeat %d times">
-			<cond>1</cond>
+			<bracket>1</bracket>
       <dropdown>
           <ddlow>0</ddlow>
           <ddhigh>10</ddhigh>
@@ -83,7 +83,7 @@
       <action>repeat:$dd[0].num()</action>
 		</block>
 		<block name="forever">
-			<cond>1</cond>
+			<bracket>1</bracket>
 			<file>forever.blk</file>
       <action>repeat:$forever</action>
 		</block>

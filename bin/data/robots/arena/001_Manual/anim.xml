@@ -52,7 +52,7 @@
   </step>
   <step type="clickDown" time=".25" />
   <step type="clickUp" time=".25" />
-#grab a conditional block
+#grab a bracket block
   <step type="move" speed="500">
     <pos type="obj" where="sidebar[2][0]" x="20" y="20"/>
   </step>
@@ -115,7 +115,7 @@
     <pos type="obj" where="base[0][i1][i1]" x="20" y="h+10" />
   </step>
   <step type="clickUp" time=".25" />
-#move to the dropdown on the wait block in the cond block
+#move to the dropdown on the wait block in the bracket block
   <step type="move" speed="500">
     <pos type="obj" where="base[0][i1][i2][d0]" x="w/2" y="h/2"/>
   </step>

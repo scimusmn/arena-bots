@@ -7,9 +7,10 @@
 #include "ofxSystemCall.h"
 #endif
 #include "ofxShapes.h"
-#include "blocks.h"
+#include "sideBar/sideBar.h"
 #include "ofVMouse.h"
 #include "blockLoad.h"
+#include "serialCheck.h"
 
 /*****************************************************************
  * class testApp : public ofBaseApp
@@ -111,6 +112,8 @@ class testApp : public ofBaseApp{
   bool devExists;
   
   ofImage mapps;
+  
+  serialCheck serChk;
 };
 
 #endif

@@ -29,23 +29,18 @@ int block::newHeightIn()
   
 }
 
-int block::effectiveHeight()
-{
-  return h+insertSpace;
-}
-
 int block::newUpdateHeight()
 {
   int ret=0;
-  int topHeight=yIn0;
-  int botHeight=h0-(yIn0+hIn0);
-  if(bConditional){
+  int topHeight=interior.y;
+  int botHeight=orig.height-(interior.y+interior.height);
+  if(type==BLK_BRACKET){
     for (unsigned int i=0; i<blocksIn.size(); i++) {
       ret+=blocksIn[i].newUpdateHeight()-5;
     }
     ret+=5;
   }
-  if(ret<hIn0) ret=hIn0; 
+  if(ret<interior.height) ret=interior.height; 
   h=ret+topHeight+botHeight;
   for (unsigned int i=0; i<blocksOn.size(); i++) {
     blocksOn[i].newUpdateHeight();
@@ -64,7 +59,7 @@ void alignBlocks(vector<block> & t)
 void block::newUpdatePositions()
 {
   if(blocksIn.size()){
-    blocksIn[0].move(x+xIn0,y+yIn0+insertSpace);
+    blocksIn[0].move(x+interior.x,y+interior.y+insertSpace);
     blocksIn[0].newUpdatePositions();
   }
   alignBlocks(blocksIn);
@@ -77,33 +72,14 @@ void block::newUpdatePositions()
 
 //********************* position boolean functions ********************
 
-bool block::newBelow(block & t)
+bool block::inside(block & drop)
 {
   bool ret=0;
-  int midLine=y;
-  int cH=h+y+newHeightOn();
-  if(bConditional){
-    int bottomSpace=h0-(yIn0+hIn0);
-    midLine=y+h-bottomSpace;
-    cH+=yIn0/2-midLine;
-  }
-  else {
-    midLine=y+h/2;
-    cH+=h/2-midLine;
-  }
-  if(t.inBounds(x, midLine, w, cH))
-    ret=true;
-  return ret;
-}
-
-bool block::newInside(block & drop)
-{
-  bool ret=0;
-  if(bConditional){
-    int inLine=y+yIn0/2;
-    int bottomSpace=h0-(yIn0+hIn0);
-    int inH=yIn0/2+h-(yIn0+bottomSpace);
-    if(drop.inBounds(x+xIn0, inLine, w-xIn0, inH))
+  if(type==BLK_BRACKET){
+    int inLine=y+interior.y/2;
+    int bottomSpace=orig.height-(interior.y+interior.height);
+    int inH=interior.y/2+h-(interior.y+bottomSpace);
+    if(drop.inBounds(x+interior.x, inLine, w-interior.x, inH))
       ret=true;
   }
   return ret;
@@ -111,14 +87,15 @@ bool block::newInside(block & drop)
 
 bool block::beneath(block & chk, int blw)
 {
+  if(blw<0) blw=ttlSize.y/2;
   bool ret=0;
-  int bottomSpace=h0-(yIn0+hIn0);
-  int midLine=y+h/2;
+  int bottomSpace=orig.height-(interior.y+interior.height);
+  int midLine=y+ttlSize.y/2;
   
-  if(bConditional) midLine=y+h-bottomSpace;
-  int cH=h+y-midLine+blw;
+  if(type==BLK_BRACKET) midLine=y+h-bottomSpace;
+  int checkHeight=h+y-midLine+blw;
   
-  if(chk.inBounds(x, midLine, w, cH)) ret=true;  
+  if(chk.inBounds(x, midLine, w, checkHeight)) ret=true;  
   return ret;
 }
 
@@ -126,7 +103,7 @@ bool block::inBounds(int xX, int yX, int wX, int hX)
 {
   bool ret=0;
   int pH=h;
-  if(bConditional) pH=yIn0;
-  if(((x>xX && x<xX+wX)||(x+w>xX && x+w<xX+wX)||(x<=xX && x+w >= xX + wX))&&((y>yX && y<yX+hX)||(y+pH>yX && y+pH<yX+hX))) ret=true;
+  if(type==BLK_BRACKET) pH=interior.y;
+  if(((x>=xX && x<xX+wX)||(x+w>=xX && x+w<xX+wX)||(x<=xX && x+w >= xX + wX))&&((y>=yX && y<yX+hX)||(y+pH>=yX && y+pH<yX+hX))) ret=true;
   return ret;
 }

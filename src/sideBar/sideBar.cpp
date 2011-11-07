@@ -7,7 +7,7 @@
  *
  */
 
-#include "blocks.h"
+#include "sideBar.h"
 
 extern string defaultFont;
 
@@ -233,7 +233,7 @@ void sbGroup::updateBlocks(int i){
 		bars[i].blocks[j].x=(bars[i].w-30-w)/2;
 		bars[i].blocks[j].y=bars[i].y+5*bars[i].h/4+sideBarSpace*j*\
 		((bars[i+1].y-(bars[i].y+bars[i].h))/sideBarSpace)/divs;
-		bars[i].blocks[j].h=bars[i].blocks[j].h0*((bars[i+1].y-(bars[i].y+bars[i].h))/sideBarSpace);
+		bars[i].blocks[j].h=bars[i].blocks[j].orig.height*((bars[i+1].y-(bars[i].y+bars[i].h))/sideBarSpace);
 	}
 }
 

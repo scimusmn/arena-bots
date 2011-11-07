@@ -54,6 +54,7 @@ block::block(ofTag & cur,ofColor col, int _y):ofInterObj(-200,-200,150,45) {
 	//-------- load the font for the arialHeader, at 10 pt.
 	
 	arialHeader.loadFont(defaultFont);
+  arialHeader.setMode(OF_FONT_TOP);
 	arialHeader.setSize(14);
 	insertSpace=0;
 	//-------- color initialization
@@ -63,24 +64,23 @@ block::block(ofTag & cur,ofColor col, int _y):ofInterObj(-200,-200,150,45) {
 	
 	//-------- load name from the name of the xmlNode
 	title=cur.getAttribute("name");
+  ttlSize.x=w;
+  ttlSize.y=h;
 	//cout << title << endl;
 	
 	//-------- init some variables, to prevent garbage from happening
-	bConditional=0;
-	numBlock=ddOpen=false;
-	titleDisp=10;
+	ddOpen=false;
+	titlePos.x=10;
 	y=_y;
-	numHolder=false;
+  
+  type=BLK_DEFAULT;
+  
 	placeHolder=false;
-	bBase=false;
-	bSeq=false;
 	//-------- declare the vector for splitting the title string, and the map used for the switch
 	vector<string> titleSplit;
 	map<string,int> list;
 	list["seq"]=0;
-	list["cond"]=1;
-	list["wid"]=2;
-	list["hgt"]=3;
+	list["bracket"]=1;
 	list["action"]=4;
 	list["file"]=5;
 	list["part"]=6;
@@ -93,21 +93,12 @@ block::block(ofTag & cur,ofColor col, int _y):ofInterObj(-200,-200,150,45) {
 		//-- node[0] is the label, node[1] is the value
     if(list.find(node[0])!=list.end()){
       switch (list.find(node[0])->second) {
-        case 0: // indicates whether or not a block is a sequence of other blocks
-          bSeq=true;
-          break;
-        case 1: //-- cond
-          //-------- set cond=true, and change size
-          bConditional=atoi(node[1].c_str());
+        case 1: //-- bracket
+          //-------- set type to bracket, and change size
+          type=BLK_BRACKET;
           h=105;
           w=200;
-          titleDisp=30;
-          break;
-        case 2: //wid, deprecated, handled with routines below switch
-          w=atoi(node[1].c_str());
-          break;
-        case 3: // hgt, deprecated, same as above
-          h=atoi(node[1].c_str());
+          titlePos.x=30;
           break;
         case 4: //actions
           registerAction(node[1]);
@@ -122,10 +113,10 @@ block::block(ofTag & cur,ofColor col, int _y):ofInterObj(-200,-200,150,45) {
           break;
         case 7: // num
           //-- set the statement block flag
-          numBlock=true;
-          titleDisp=0;
-          h=20;
-          w=90;
+          type=BLK_VAL;
+          titlePos.x=0;
+          ttlSize.x=w=90;
+          ttlSize.y=h=20;
           break;
         case 8: // dropdown
           //-- add a new dropdown menu to the block
@@ -150,23 +141,25 @@ block::block(ofTag & cur,ofColor col, int _y):ofInterObj(-200,-200,150,45) {
       }
     }
 	}
-  h0=h;
-  w0=w;
-  if(bConditional){
-    xIn0=20;
-    yIn0=40;
-    hIn0=45;
+  orig.height=h;
+  orig.width=w;
+  titlePos.y=(ttlSize.y-10-arialHeader.stringHeight("Kjhg"))/2;
+  if(type==BLK_BRACKET){
+    interior.x=20;
+    interior.y=40;
+    interior.height=45;
   }
-  else xIn0=yIn0=hIn0=0;
+  else interior.x=interior.y=interior.height=0;
 	int ddNum=0;
 	
 	//-------- assign a default value to the xdis of each dd
 	for (unsigned int i=0; i<ddGroup.size(); i++) {
 		ddGroup[i].relPos.x=0;
+    ddGroup[i].relPos.y=(ttlSize.y-10-ddGroup[i].h)/2;
 	}
 	
 	//-------- change the font size if it is a statement block
-	if(numBlock){
+	if(type==BLK_VAL){
     arialHeader.setSize(7);
   }
 	
@@ -174,7 +167,7 @@ block::block(ofTag & cur,ofColor col, int _y):ofInterObj(-200,-200,150,45) {
 	titleSplit = ofSplitString(title, " ");
 	int sp=1;
 	int spSize=arialHeader.stringWidth(".");
-	int totalwidth=titleDisp;
+	int totalwidth=titlePos.x;
 	
 	//-------- set the displacement for each object in the title, statement blocks and dropdowns
 	for (unsigned int i=0; i<titleSplit.size(); i++) {
@@ -193,11 +186,10 @@ block::block(ofTag & cur,ofColor col, int _y):ofInterObj(-200,-200,150,45) {
 		}
 		else if(!titleSplit[i].compare("%b")){
 			//-------- if we find a statement block, init it as a placeholder
-			numHolder=true;
 			int cur=numBlocks.size();
 			numBlocks.push_back(block());
-			numBlocks[cur].x=totalwidth+titleDisp;
-			numBlocks[cur].xo=numBlocks[cur].x;
+			numBlocks[cur].x=totalwidth+titlePos.x;
+			numBlocks[cur].relPos.x=numBlocks[cur].x;
 			numBlocks[cur].w=50;
 			numBlocks[cur].h=20;
 			if(h<=5+numBlocks[cur].h) h=5+numBlocks[cur].h;
@@ -238,8 +230,8 @@ block::block(ofTag & cur,ofColor col, int _y):ofInterObj(-200,-200,150,45) {
 			}
 		}
 	}
-	double newWid=totalwidth+titleDisp;
-	if(!numBlock) w=max(newWid,w);
+	double newWid=totalwidth+titlePos.x;
+	if(type!=BLK_VAL) w=max(newWid,w);
 	else {
 		w=newWid-10;
 	}
@@ -247,7 +239,7 @@ block::block(ofTag & cur,ofColor col, int _y):ofInterObj(-200,-200,150,45) {
 	for(int i=0; i<ddGroup.size(); i++)
 		ddGroup[i].changeSize(ddGroup[i].w, (ddGroup[i].arial.stringHeight("1")+4));
 
-	h0=h;
+	orig.height=h;
 }
 
 /*****************************************************************
@@ -310,32 +302,29 @@ block::~block() {
 
 void block::operator=(const block &t) {
 	x=t.x;
-	xo=t.xo;
 	y=t.y;
 	w=t.w;
 	h=t.h;
-  w0=t.w0;
-  h0=t.h0;
-  yIn0=t.yIn0;
-  xIn0=t.xIn0;
-  hIn0=t.hIn0;
+  relPos=t.relPos;
+  
+  orig=t.orig;
+  interior=t.interior;
+  titlePos=t.titlePos;
+  ttlSize=t.ttlSize;
+  
 	arialHeader=t.arialHeader;
-	numBlock=t.numBlock;
-	bConditional=t.bConditional;
+	type=t.type;
 	bGrabbed=t.bGrabbed;
 	title =t.title;
 	filename=t.filename;
 	numBlocks=t.numBlocks;
-	titleDisp=t.titleDisp;
+	
 	ddGroup=t.ddGroup;
 	blocksOn=t.blocksOn;
 	blocksIn=t.blocksIn;
 	ddOpen=t.ddOpen;
-	numHolder=t.numHolder;
 	placeHolder=t.placeHolder;
 	color=t.color;
-	bBase=t.bBase;
-	bSeq=t.bSeq;
   insertSpace=t.insertSpace;
   action=t.action;
 }
@@ -360,25 +349,27 @@ void block::operator=(const block &t) {
 void block::setup(double _w, double _h)
 {
 	w=_w, h=_h;
-  w0=w;
-  h0=h;
-  hIn0=0;
-  yIn0=0;
-  xIn0=0;
+  orig.width=w;
+  orig.height=h;
+  interior.height=0;
+  interior.y=0;
+  interior.x=0;
 	arialHeader.loadFont("DinC.ttf");
-	arialHeader.setSize(20);
+	arialHeader.setSize(21);
 	//title="to program, connect blocks here";
 	//title="connect blocks here and press button";
   title="";
-	bGrabbed=bConditional=0;
+  type=BLK_BASE;
+	bGrabbed=0;
 	w=max(w,double(arialHeader.stringWidth(title)+20));
-	numBlock=ddOpen=false;
-	titleDisp=10;
-	numHolder=false;
+	ddOpen=false;
+	titlePos.x=10;
 	color.set(0xdbb700);
 	filename="null";
 	placeHolder=false;
-	bBase=true;
+  
+  ttlSize.y=_h;
+  ttlSize.x=_w;
 }
 
 //--------------- Maybe unnecessary functions? --------------
@@ -430,148 +421,6 @@ double block::fullWidth()
   }
   ret=max(w,ret);
   return ret;
-}
-
-
-
-
-
-/****************************************************************
- *********************BlockGroup*********************************/
-
-bGroup::bGroup(double _x, double _y,double wid,double hgt):ofInterObj(_x,_y,wid,hgt){
-	//blocks.reserve(100);
-	x=_x,y=_y,w=wid,h=hgt;
-	used[""]=false;
-}
-
-/*****************************************************************
- * bGroup():ofInterObj() :: constructor for bGroup, a subclass of ofInterObj()
- *
- *  Description::
- *
- *
- *  Input_________
- *
- *    NONE :
- *
- *  Output________
- *
- *    New instance of bGroup :
- *
- */
-
-bGroup::bGroup():ofInterObj(){
-	bGrabbed=inHand=ddopen=0;
-}
-
-bGroup::~bGroup(){
-	blocks.clear();
-}
-
-//------------------------ Utilities -------------------
-
-void bGroup::setup(double _x, double _y,double wid,double hgt){
-	//blocks.reserve(100);
-  bSequencePlay=bTesting=false;
-	bGrabbed=inHand=ddopen=false;
-	cSetup(_x,_y,wid,hgt);
-	used[""]=false;
-  base.setup(530, 90);
-	base.blocksOn.reserve(100);
-	states.recordState(storageState(blocks,base));
-  held.setup(0,0);
-  
-  mapp.loadImage("maps/map_2.jpg");
-  turtle.setup(2.5*(mapp.width/12.),mapp.width-1.5*(mapp.width/12.), 25*4.25,4.5*25);
-  actionTime.set(0.01);
-  pixPerInch=mapp.width/48;
-  currentTest=0;
-}
-
-int bGroup::size(){
-	return blocks.size();
-}
-
-void bGroup::clear(){
-	base.blocksOn.clear();
-	blocks.clear();
-}
-
-block bGroup::operator[](int i){
-	return blocks[i];
-}
-
-void bGroup::recordState()
-{
-	states.recordState(storageState(blocks,base));
-}
-
-void bGroup::undoState()
-{
-	if(states.undoAvailable()){
-    storageState * t;
-    if((t=states.undoState())){
-      blocks=t->blocks;
-      base=t->base;
-    }
-  }
-}
-
-void bGroup::redoState()
-{
-	if(states.redoAvailable()){
-    storageState * t;
-    if((t=states.redoState())){
-      blocks=t->blocks;
-      base=t->base;
-    }
-  }
-}
-
-bool bGroup::undoAvailable()
-{
-	return states.undoAvailable();
-}
-
-bool bGroup::redoAvailable()
-{
-	return states.redoAvailable();
-}
-
-
-//----------------------- Add block Functions -------------------
-
-void bGroup::addFromSB(block t,int _x,int _y){
-	if(t.over(_x,_y)||t.onBlockOn(_x, _y)&&!inHand){
-		int numBlocks=size();
-		if(numBlocks<99){
-			used[t.title]=false;
-      held=t;
-      held.bGrabbed=bGrabbed=inHand=true;
-			dispx = held.x-_x;
-			dispy = held.y-_y;
-		}
-		else {
-			printf("Remove some blocks, doncha know.");
-		}
-	}
-}
-
-void bGroup::update()
-{
-  if(!bTesting){
-    for (unsigned int i=0; i<blocks.size(); i++) {
-      blocks[i].newUpdateHeight();
-      blocks[i].newUpdatePositions();
-    }
-  }
-  base.newUpdateHeight();
-  base.newUpdatePositions();
-	
-  if(bTesting){
-    bSequencePlay=idleSequence(&base);
-  }
 }
 
 

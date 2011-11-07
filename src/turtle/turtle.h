@@ -12,19 +12,6 @@
 #include "ofMain.h"
 #include "ofExtended.h"
 
-class wall {
-public:
-  ofPoint pos;
-  int w,h;
-  wall(int x, int y, int _w, int _h);
-  void setup(int x, int y, int _w, int _h);
-  bool inside(ofPoint p);
-};
-
-vector<wall> & walls();
-
-void addWall(int x, int y, int w, int h);
-
 class ofTurtle {
   int whlWid;
   int whlHgt;
@@ -41,7 +28,6 @@ public:
   void move(int pixels);
   void turn(int degrees);
   void clear(){ lines.clear();}
-  bool front(int pixels, vector<wall> & walls);
   bool sensorIsClear(ofPoint strtPnt,int pixels, ofImage & walls, int direction=0);
   bool frontIsClear(int pixels, ofImage & walls);
   bool frontLeftIsClear(int pixels, ofImage & walls);

@@ -70,8 +70,6 @@ void testApp::setup(){
     if(split=="/dev/tty.usb")
       devExists=true;
   }
-  
-  addWall(400, 300, 200, 20);
   mapps.loadImage("maps/map_2.jpg");
 }
 
@@ -119,12 +117,12 @@ void testApp::update(){
     devExists=false;
     int numPorts = dev.listDir("/dev/");
     for (int i=0; i<numPorts; i++) {
-      string split(dev.getPath(i),0,12);
-      if(split=="/dev/tty.usb")
+      if(dev.getPath(i).substr(0, 12)=="/dev/tty.usb")
         devExists=true;
     }
   }
   else if((ofGetElapsedTimeMillis()/1000)%2==0) justChecked=false;
+  serChk.checkAvailability();
 }
 
 
@@ -200,7 +198,7 @@ void testApp::draw(){
 		
     titleFont.setSize(70);
 		titleFont.setMode(OF_FONT_TOP);
-		ofSetColor(0xDFF500);
+		ofSetColor(229,224,15);
     ofPushMatrix();
     ofTranslate(ofGetWidth()/2, 0, 0);
     ofScale(scaleTitle, scaleTitle, 0);
@@ -259,7 +257,7 @@ void testApp::draw(){
     pointer.draw(mouseX-10, mouseY, pointer.width*2,pointer.height*2);
   }
   
-  if(0&&!devExists){
+  if(!serChk.isAvailable()){
     ofSetColor(0, 0, 0,196);
     ofRect(0, 0, ofGetWidth(), ofGetHeight());
 		titleFont.setSize(70);

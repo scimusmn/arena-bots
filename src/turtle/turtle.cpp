@@ -11,30 +11,6 @@
 
 extern int pixPerInch;
 
-vector<wall> Walls;
-
-vector<wall> & walls(){
-  return Walls;
-}
-
-void addWall(int x, int y, int w, int h)
-{
-  Walls.push_back(wall(x,y,w,h));
-}
-
-wall::wall(int _x, int _y, int _w, int _h){
-  setup(_x, _y, _w, _h);
-}
-
-void wall::setup(int _x, int _y, int _w, int _h){
-  pos.x=_x,pos.y=_y,w=_w, h=_h;
-}
-
-bool wall::inside(ofPoint p)
-{
-  return p.x>pos.x&&p.x<pos.x+w&&p.y>pos.y&&p.y<pos.y+h;
-}
-
 ofTurtle::ofTurtle()
 {
   start.x=start.y=0;
@@ -64,15 +40,6 @@ void ofTurtle::turn(int degrees)
 {
   bTurnSinceRecord=true;
   bearing.rotate(degrees);
-}
-
-bool ofTurtle::front(int pixels, vector<wall> & walls)
-{
-  bool ret=false;
-  for(unsigned int i=0; i<walls.size(); i++){
-    if(walls[i].inside(pos+bearing.unit()*pixels)) ret=true;
-  }
-  return ret;
 }
 
 bool ofTurtle::sensorIsClear(ofPoint strtPnt,int pixels, ofImage & walls, int direction)
