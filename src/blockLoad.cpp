@@ -92,7 +92,7 @@ void blockGroup::load(string dir)
   //you can now iterate through the files as you like
   for(int i = 0; i < nDir; i++){
     vector<string> spl= ofSplitString(DIR.getPath(i), "/");
-    cout << spl[spl.size()-1] << endl;
+    //cout << spl[spl.size()-1] << endl;
     if(spl[spl.size()-1]=="blocks.xml") blockXML.loadFile(DIR.getPath(i)), nLoaded++;
     else if(spl[spl.size()-1]=="anim.xml") animXML.loadFile(DIR.getPath(i)), nLoaded++;
     else if(spl[spl.size()-1]=="icon.png") choice.setup(256,256,DIR.getPath(i)), nLoaded++;
@@ -101,7 +101,7 @@ void blockGroup::load(string dir)
   blockXML.setCurrentTag(";blocks");
   title=blockXML.getAttribute("name");
   subtitle=blockXML.getAttribute("subtitle");
-  cout << blockXML.filename << endl;
+  //cout << blockXML.filename << endl;
 }
 
 /******************

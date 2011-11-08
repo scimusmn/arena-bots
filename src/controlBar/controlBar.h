@@ -7,11 +7,30 @@
  *
  */
 
+#pragma once
+
 #include "ofMain.h"
 #include "ofExtended.h"
 #include "demoAnim.h"
+#include "blockLoad.h"
 
 #include "serialCheck.h"
+#include "../../../dallasEng/dallasEng.h"
+
+class buttonHolder : public ofInterObj {
+protected:
+  double space;
+  double pad;
+public:
+  buttonHolder();
+  ofRectangle area;
+  vector<ofInterObj *> objs;
+  void addObj(ofInterObj & obj);
+  void internalSpace(int space);
+  double maxHeight();
+  void padding(int pad);
+  void draw(int x, int y); 
+};
 
 class controlBar {
 protected:
@@ -20,14 +39,31 @@ protected:
   
   demoAnim anim;
   
-  ofButton clearBut;
+  dallasButton clearBut;
 	ofButton redoBut;
 	ofButton undoBut;
   dallasButton  demo;
+  
+  buttonHolder demoHldr;
+  buttonHolder setsHldr;
+  buttonHolder undoHldr;
+  buttonHolder clearHldr;
+  
+  ofRectangle buttonBar;
+  
+  ofFont subtitle;
+  
+  ofButton skipBut;
+  
+  serialCheck serChk;
+  
+  rootGroup sets;
 public:
+  double x,y,w,h;
   //controlBar();
+  void loadBlocks(blockGroup & bg);
   void setup(bGroup * bG, sbGroup * sbG);
-  void draw(int x, int y, int w, int h);
+  void draw(int x, int y);
   void update();
   bool clickDown(int x, int y);
   bool clickUp();

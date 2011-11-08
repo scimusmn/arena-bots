@@ -7,22 +7,31 @@
  *
  */
 
+#pragma once
+
 #include "../sideBar/sideBar.h"
 
-class demoAnim {
+#include "ofVMouse.h"
+
+class demoAnim : public ofAnimation {
 protected:
   int animStep;
   ofXML animXML;
-  ofButton skipBut;
-  ofVMouse anim;
 	ofImage pointer;
   
   bGroup * blocks;
   sbGroup * sideBar;
 public:
   void setup(bGroup * bG, sbGroup * sbG);
-  void animationStepRequested(ofXML & animXML);
+  void animationStepRequested();
   ofInterObj * searchForObject(ofTag & tag, int & _x, int & _y);
   ofInterObj * searchBlock(vector<string> spl, block & b, int offset);
-
+  void changeAnimXML(ofXML & newXML);
+  void update();
+  void draw(int x, int y);
+  void drawCursor();
+  void play();
+  bool isPlaying();
+  void stop();
+  
 };

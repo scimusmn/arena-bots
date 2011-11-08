@@ -44,6 +44,16 @@ sideBar::sideBar(int _x,int _y,int w,int h,string file,ofColor col):ofInterObj(_
 	filename=file;
 }
 
+sideBar::sideBar(string title,ofColor col):ofInterObj(){
+	arialHeader.loadFont("DinC.ttf");
+	arialHeader.setSize(20);
+	bOver=bPressed=false;
+	Open = false;
+	color=col;
+  h=40;
+	filename=title;
+}
+
 /*****************************************************************
  * sideBar():ofInterObj() :: constructor for sideBar, a subclass of ofInterObj()
  *
@@ -290,6 +300,50 @@ sbGroup::sbGroup(ofXML & xml,bGroup * destin):ofInterObj(){
 	for (unsigned int i=0; i<bars.size(); i++) {
 		//updateBlocks(i);
 	}
+}
+
+void sbGroup::setup(ofXML & xml,bGroup * destin)
+{
+  dest=destin;
+  xml.setCurrentTag(";blocks");
+	string font=xml.getCurrentTag().getAttribute("font");
+	ofTag & tag=xml.getCurrentTag();
+	for (unsigned int i=0; i<tag.size(); i++) {
+		if (tag[i].getLabel()=="bar") {
+			string col=tag[i].getAttribute("color");
+			unsigned long colTrip=strtol(col.c_str(),NULL,0);
+			ofColor color(colTrip);
+			unsigned int curBar=bars.size();
+      int barHeight=40;
+			bars.push_back( sideBar(tag[i].getAttribute("name"),color));
+			for (unsigned int j=0; j<tag[i].size(); j++) {
+				if (tag[i][j].getLabel()=="block") {
+          int curBlock=bars[curBar].blocks.size();
+					bars[curBar].blocks.push_back(block(tag[i][j],color));
+          bars[curBar].w=max(bars[curBar].w,bars[curBar].blocks[curBlock].fullWidth());
+          w=max(bars[curBar].w+barHeight,w);
+				}
+			}
+		}
+	}
+	bars.push_back( sideBar("Filler",ofColor(0,0,0)));
+	if (bars.size()) {
+		y=bars[0].y;
+		x=0;
+	}
+  for (unsigned int i=0; i<bars.size(); i++) {
+    bars[i].w=w;
+  }
+	updateHeight();
+	if(bars.size()>=2) bars[0].Open=true;
+	for (unsigned int i=0; i<bars.size(); i++) {
+		//updateBlocks(i);
+	}
+}
+
+void sbGroup::clear()
+{
+  bars.clear();
 }
 
 /*****************************************************************

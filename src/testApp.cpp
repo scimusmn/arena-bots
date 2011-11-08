@@ -17,7 +17,7 @@ void testApp::setup(){
 	//--------- Initialize the valid working space for the blocks
 	blocks.setup(250, 0, ofGetWidth(), ofGetHeight());
 	
-	objects = 0;
+	//objects = 0;
 	
 	//--------- Load the background images (wood panel and aluminum
 	background.loadImage("images/background.jpg");
@@ -54,7 +54,7 @@ void testApp::setup(){
 	
 	//screenCast.loadMovie("movies/screenCast.mp4");
 	//screenCast.setLoopState(false);
-	anim.setup();
+	anim.setup(0);
   animStep=0;
   
 	ofHideCursor();
@@ -65,6 +65,10 @@ void testApp::setup(){
   }
   
   mapps.loadImage("maps/map_2.jpg");
+  
+  
+  cout << "here" << endl;
+  controls.setup(&blocks, &objects);
 }
 
 //--------------------------------------------------------------
@@ -74,7 +78,7 @@ void testApp::update(){
   //if((ofGetElapsedTimeMillis()/500)%2)
     blocks.update();
   if(timeOut.running())
-    objects->update();
+    objects.update();
 	
 	//---------- Set which blocks are available to be pressed
 	redoBut.setAvailable(blocks.redoAvailable());
@@ -118,7 +122,7 @@ void testApp::draw(){
 	if(timeOut.running()){
 		
 		//--------- Init the size variables for the side and bottom bar
-		int sideWidth=objects->w-15;
+		int sideWidth=objects.w-15;
 		int menuBarH=75;
 		
 		//--------- Slightly dim the background image, and draw it on the bottom layer
@@ -202,6 +206,7 @@ void testApp::draw(){
 		
 		blocks.drawForeground();
 		
+    controls.draw(0, 300);
 	}
 	//************************** if the exhibit has timed out, draw the welcome screen ************** 
 	else {
@@ -387,12 +392,11 @@ void testApp::mouseDragged(int x, int y, int button){
 void testApp::loadBlocks(blockGroup & bg){
 	
   if(bg.nLoaded>=3){
-    //--------- Delete the old parsing of the xml file and the current selection of blocks
-    if(objects) delete objects;
     
     //--------- load the new blocks with the blockGroup data
     ROOT_NAME=bg.title;
-    objects = new sbGroup(bg.blockXML,&blocks);
+    objects.clear();
+    objects.setup(bg.blockXML,&blocks);
     
     animXML=bg.animXML;
     //--------- set the timeout timer to three minutes
@@ -420,6 +424,9 @@ void testApp::mousePressed(int x, int y, int button){
       anim.pause(); 
     }
   }
+  
+  controls.clickDown(x, y);
+  
 	//--------- If we aren't timed out, check all of the click for the composition screen
 	if(timeOut.running()&&(!anim.isPlaying()||(anim.isPlaying()&&button==VMOUSE_BUTTON))){
 		
@@ -427,7 +434,7 @@ void testApp::mousePressed(int x, int y, int button){
 		timeOut.set(180);
 		
 		//--------- Check the blocks in the sidebar, to see if they have been clicked
-		objects->clickDown(x, y);
+		objects.clickDown(x, y);
 		
 		//--------- Check the blocks in the comp area
 		//blocks.clickDown(x, y);
@@ -463,6 +470,7 @@ void testApp::mousePressed(int x, int y, int button){
 
 //--------------------------------------------------------------
 void testApp::mouseReleased(int x, int y, int button){
+  controls.clickUp();
 	if(timeOut.running()&&(!anim.isPlaying()||(anim.isPlaying()&&button==VMOUSE_BUTTON))){
     //--------- do a bunch of clickups
     blocks.newClickUp(x, y);
@@ -480,8 +488,8 @@ void testApp::mouseReleased(int x, int y, int button){
 void testApp::windowResized(int w, int h){
 	//--------- if the window changes size, refresh the size of the objects group
   if(timeOut.running()){
-    objects->updateHeight();
-    blocks.move(objects->w, 0);
+    objects.updateHeight();
+    blocks.move(objects.w, 0);
   }
 	blocks.changeSize(ofGetWidth()-blocks.x, ofGetHeight());
 }

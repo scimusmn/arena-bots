@@ -6,7 +6,7 @@
  *  Copyright 2011 Science Museum of Minnesota. All rights reserved.
  *
  */
-
+#pragma once
 
 #include "../blockGroup/blockGroup.h"
 
@@ -47,6 +47,7 @@ public:
 	//int textNum;
 	sideBar();
 	sideBar(int x,int y,int w,int h,string file="",ofColor col=ofColor(255,255,255));
+  sideBar(string title="",ofColor col=ofColor(255,255,255));
 	~sideBar();
 	void update(double spc);
 	
@@ -88,11 +89,16 @@ public:
 	vector<sideBar> bars;
 	void updateBlocks(int i);
 	
+  sbGroup(){}
 	sbGroup(ofXML & xml,bGroup * destin=0);
 	
 	~sbGroup(){
 		bars.clear();
 	}
+  
+  void setup(ofXML & xml,bGroup * destin=0);
+  
+  void clear();
 	
 	int size(){ return bars.size();}
 	

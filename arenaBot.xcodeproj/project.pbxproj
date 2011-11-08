@@ -610,6 +610,26 @@
 			name = demoAnim;
 			sourceTree = "<group>";
 		};
+		AA7A312F14687EF400D95060 /* control */ = {
+			isa = PBXGroup;
+			children = (
+				AA7A313014687F0A00D95060 /* dirLoad */,
+				AAB4E89E1461982000276A4D /* serialChecker */,
+				AA7A3108146862F800D95060 /* demoAnim */,
+				AA7A3101146847DB00D95060 /* controlBar */,
+			);
+			name = control;
+			sourceTree = "<group>";
+		};
+		AA7A313014687F0A00D95060 /* dirLoad */ = {
+			isa = PBXGroup;
+			children = (
+				AA949E5813B3D944009141B0 /* blockLoad.cpp */,
+				AA949E5A13B3D964009141B0 /* blockLoad.h */,
+			);
+			name = dirLoad;
+			sourceTree = "<group>";
+		};
 		AA89D383137B07F00055C130 /* Blocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1002,18 +1022,14 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				AA7A3101146847DB00D95060 /* controlBar */,
-				AA7A3108146862F800D95060 /* demoAnim */,
+				AA7A312F14687EF400D95060 /* control */,
 				AA7A30A01468332B00D95060 /* dallasEng */,
-				AAB4E89E1461982000276A4D /* serialChecker */,
 				AA8D772313280895000F0763 /* Blocks */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
 				AA949D8213B384F1009141B0 /* testApp_auxDrawing.cpp */,
 				AA949D7413B38424009141B0 /* testApp_animation.cpp */,
-				AA949E5813B3D944009141B0 /* blockLoad.cpp */,
-				AA949E5A13B3D964009141B0 /* blockLoad.h */,
 				AA16D5B013B92DB1009A0843 /* README.txt */,
 			);
 			path = src;

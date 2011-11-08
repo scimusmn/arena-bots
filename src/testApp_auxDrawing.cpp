@@ -40,12 +40,12 @@ void testApp::drawSidebar(int sideWidth, int menuBarH)
   ofShade(sideWidth, ofGetHeight()-menuBarH, 5, menuBarH, OF_RIGHT,.5);
   
   //--------- Draw the bars into the sidebar, and then draw the blocks for the open bar
-  objects->draw(0,blocks.base.y+80); 
+  objects.draw(0,blocks.base.y+80); 
   
   if(sets.getSelected()){
     ofImage & img=sets.getSelected()->example;
     ofSetColor(200,200,200,196);
-    img.draw((objects->w-img.width)/2, objects->y+objects->h+40);
+    img.draw((objects.w-img.width)/2, objects.y+objects.h+40);
   }
 }
 
@@ -142,10 +142,10 @@ void testApp::drawBase_and_Demo(int yPos)
   //------- Demo button
   
   ofSetShadowDarkness(.5);
-  ofShadowRounded(-20, yPos-20, objects->w-30, 80, 20);
+  ofShadowRounded(-20, yPos-20, objects.w-30, 80, 20);
   ofSetColor(0x555555);
   ofRaised(.2);
-  ofRoundedRect(-20, yPos-20, objects->w-30, 80, 20);
+  ofRoundedRect(-20, yPos-20, objects.w-30, 80, 20);
   
   demo.draw(20, yPos+10);
 }

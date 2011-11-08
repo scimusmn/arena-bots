@@ -12,6 +12,8 @@
 #include "blockLoad.h"
 #include "serialCheck.h"
 
+#include "controlBar/controlBar.h"
+
 #include "../../dallasEng/dallasEng.h"
 
 /*****************************************************************
@@ -61,12 +63,6 @@ class testApp : public ofBaseApp{
   void drawSidebar(int sideWidth, int menuBarH);
   void drawAttract();
   
-  //--------- Animation functions
-  void animationStepRequested(ofXML & animXML);
-  ofInterObj * searchForObject(ofTag & tag, int & _x, int & _y);
-  ofInterObj * searchBlock(vector<string> spl, block & b, int offset);
-  int animStep;
-  ofXML animXML;
 
 		void keyPressed  (int key);
 		void keyReleased(int key);
@@ -81,17 +77,13 @@ class testApp : public ofBaseApp{
   void loadBlocks(blockGroup & bg);
 	
 	bGroup blocks;
-	sbGroup * objects;
+	sbGroup objects;
 	ofXML parse;
   
 
 	ofImage background;
 	
 	ofButton upBut;
-	ofButton clearBut;
-	ofButton redoBut;
-	ofButton undoBut;
-  dallasButton  demo;
 	
 	ofButton skipBut;
 	
@@ -102,19 +94,34 @@ class testApp : public ofBaseApp{
 	ofProgressSpinner spinner;
 	
 	ofVideoPlayer crabMovie;
-	
-	ofVMouse anim;
-	ofImage pointer;
   
   rootGroup sets;
   
-  ofxDirList dev;
-  bool justChecked;
-  bool devExists;
+  controlBar controls;
+  
+  /* to delete */
+  
+  ofVMouse anim;
+	ofImage pointer;
+  
+  ofButton clearBut;
+	ofButton redoBut;
+	ofButton undoBut;
+  dallasButton  demo;
+  
+  serialCheck serChk;
+  
+  //--------- Animation functions
+  void animationStepRequested(ofXML & animXML);
+  ofInterObj * searchForObject(ofTag & tag, int & _x, int & _y);
+  ofInterObj * searchBlock(vector<string> spl, block & b, int offset);
+  int animStep;
+  ofXML animXML;
+  
+  /////////////////
   
   ofImage mapps;
   
-  serialCheck serChk;
 };
 
 #endif
