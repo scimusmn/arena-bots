@@ -10,6 +10,7 @@
 
 #include "blockGroup.h"
 
+
 //------------------ bGroup Writeout Functions ----------------
 
 void bGroup::resetUsed(block & t)

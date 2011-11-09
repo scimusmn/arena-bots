@@ -12,8 +12,8 @@
 
 extern ofColor black, white, gray,blue,yellow,orange, red;
 
-string ROOT_NAME2="";
-string ROOT_DIR2="";
+string ROOT_NAME="";
+string ROOT_DIR="";
 
 //_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_
 //_-_-_-_-_//_-_-_-_-_button Hldr//_-_-_-_-_//_-_-_-_-_
@@ -73,22 +73,29 @@ void controlBar::setup(bGroup * bG, sbGroup * sbG)
   blocks=bG;
   sideBar=sbG;
   
-  sets.load(config("config.cfg"));
-  loadBlocks(sets[0]);
-  
-  clearBut.setup("Clear blocks", "fonts/Arial.ttf", 20);
+  clearBut.setup("Clear blocks", "fonts/HelveticaBold.otf", 19);
   redoBut.setup(64, 64, "images/redo.png");
 	undoBut.setup(64, 64, "images/undo.png");
-  demo.setup("View demo", "fonts/Arial.ttf", 20);
+  demo.setup("View Demo", "fonts/HelveticaBold.otf", 19);
   skipBut.setup(300, 100, "images/skipBut.png");
   
   anim.setup(blocks, sideBar);
   
-  cout << "how\n";
-  //sets.load(config("config.cfg"));
+  subtitle.loadFont("fonts/DinC.ttf");
+  subtitle.setSize(22);
+  subtitle.setMode(OF_FONT_TOP);
   
+  subBar.height=subtitle.stringHeight("Kjhg")*1.5;
+  subBar.width=ofGetWidth();
   
-  //_-_-_-_-_//_-_-_-_-_ spacing setup //_-_-_-_-_//_-_-_-_-_//_-_-_-_-_
+  ROOT_DIR=config("config.cfg");
+  
+  sets.load(ROOT_DIR);
+  loadBlocks(sets[0]);
+  
+  sets[0].choice.setAvailable(false);
+  
+  //_-_-_-_-_//_-_-_-_-_ spacing setup //_-_-_-_-_//_-_-_-_-_
   demoHldr.addObj(demo);
   
   for (unsigned int i=0; i<sets.size(); i++) setsHldr.addObj(sets(i));
@@ -102,7 +109,7 @@ void controlBar::setup(bGroup * bG, sbGroup * sbG)
   clearHldr.addObj(clearBut);
   
   double maxH=max(demoHldr.maxHeight(),max(setsHldr.maxHeight(),undoHldr.maxHeight()));
-  buttonBar=ofRectangle(x,y,ofGetWidth(),maxH*1.5);
+  buttonBar=ofRectangle(x,y,ofGetWidth(),maxH*1.2);
   
   demoHldr.area.height=setsHldr.area.height=undoHldr.area.height=clearHldr.area.height=buttonBar.height;
   
@@ -111,6 +118,12 @@ void controlBar::setup(bGroup * bG, sbGroup * sbG)
   setsHldr.padding(pad);
   undoHldr.padding(pad);
   clearHldr.padding(pad);
+  
+  h=subBar.height+buttonBar.height;
+  w=ofGetWidth();
+  
+  loadBlocks(sets[0]);
+  setAvailableButtons();
 }
 
 void controlBar::loadBlocks(blockGroup & bg){
@@ -118,7 +131,7 @@ void controlBar::loadBlocks(blockGroup & bg){
   if(bg.nLoaded>=3){
     
     //--------- load the new blocks with the blockGroup data
-    ROOT_NAME2=bg.title;
+    ROOT_NAME=bg.title;
     sideBar->clear();
     sideBar->setup(bg.blockXML,blocks);
     
@@ -126,75 +139,128 @@ void controlBar::loadBlocks(blockGroup & bg){
   }
 }
 
-void controlBar::draw(int x, int y)
+void controlBar::draw(int _x, int _y)
 {
-  buttonBar.x=x;
-  buttonBar.y=y;
+  buttonBar.x=x=_x;
+  buttonBar.y=y=_y;
+  subBar.x=x;
+  subBar.y=y+buttonBar.height;
   
-  
-  ofSetColor(gray);
-  ofRect(buttonBar);
-  //_-_-_-_-_//_-_-_-_-_ move to class def and setup 
-  
-  /*double buttonMaxH=((sets.size())?sets(0).h:0);
-  buttonMaxH=max(demo.h,max(clearBut.h,buttonMaxH));
-  ofRectangle buttonBar(x,y,ofGetWidth(),buttonMaxH);
-  
-  double butWidth=0;
-  for (unsigned int i=0; i<sets.size(); i++) {
-    butWidth+=sets(i).w+((i<sets.size()-1)?20:0);
-  }
-  butWidth+=demo.w;
-  butWidth+=undoBut.w+20+redoBut.w;
-  butWidth+=clearBut.w;
-  
-  double posAug=(buttonBar.w-butWidth)/4;*/
   
   //_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_
-  //_-_-_-_-_//_-_-_-_-_ demo space//_-_-_-_-_//_-_-_-_-_
+  //_-_-_-_-_//_-_-_-_-_//buttonbar//_-_-_-_-_//_-_-_-_-_
+  
+  ofSetColor(white*.5);
+  ofRect(buttonBar);
   
   demoHldr.draw(buttonBar.x,buttonBar.y);
   setsHldr.draw(demoHldr.x+demoHldr.area.width,buttonBar.y);
   undoHldr.draw(setsHldr.x+setsHldr.area.width,buttonBar.y);
   clearHldr.draw(undoHldr.x+undoHldr.area.width,buttonBar.y);
+  
+  //_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_
+  //_-_-_-_-_//_-_-_-_-_//subTitle //_-_-_-_-_//_-_-_-_-_
+  
+  ofSetColor(white*.3);
+  ofRect(subBar);
+  drawShadowsAroundRect(subBar, 10);
+  
+  ofSetColor(black);
+  ofRect(subBar.x, subBar.y, subBar.width, 2);
+  
+  if(sets.getSelected()){
+    ofButton & t=sets.getSelected()->choice;
+    int wid=t.w/16+2;
+    ofSetColor(black);
+    ofFlat();
+    ofRoundedRect(t.x-wid, t.y-wid, t.w+wid*2, buttonBar.height+wid/3, wid);
+    wid=t.w/16;
+    ofSetColor(white*.3);
+    ofRoundedRect(t.x-wid, t.y-wid, t.w+wid*2, buttonBar.height+10, wid);
+    t.draw(t.x,t.y);
+    
+    ofSetColor(yellow);
+    subtitle.drawString(sets.getSelected()->subtitle, 50, subBar.y+(subBar.height-subtitle.stringHeight(sets.getSelected()->subtitle))/2);
+  }
+  
+  //_-_-_-_-_//_-_-_-_-_ shadow below bar //_-_-_-_-_//_-_-_-_-_
+  ofSetShadowDarkness(.5);
+  ofShade(x, y+h, 10, w, OF_DOWN);
+}
+
+void controlBar::drawForeground(){
+  anim.drawCursor();
+  
+  if(anim.isPlaying()){
+    ofSetColor(0, 0, 0,128);
+    ofRect(skipBut.x-10, skipBut.y-10, skipBut.w+20, skipBut.h+20);
+    skipBut.draw((ofGetWidth()-skipBut.w)/2, ofGetHeight()*3./4);
+  }
+  
+  serChk.drawWaitScreen();
 }
 
 void controlBar::update()
 {
-  redoBut.setAvailable(blocks->redoAvailable());
-	undoBut.setAvailable(blocks->undoAvailable());
-  demo.setAvailable(anim.isPlaying());
-  
   serChk.checkAvailability();
+  anim.update();
 }
 
-bool controlBar::clickDown(int x, int y)
+//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_
+//_-_-_-_-_//_-_-_-_-_ mouse func//_-_-_-_-_//_-_-_-_-_
+
+bool controlBar::clickDown(int _x, int _y, int button)
 {
-  if(sets.clickDown(x,y)&&!anim.isPlaying()){
+  if(sets.clickDown(_x,_y)&&!anim.isPlaying()){
     if(sets.getSelected())
       loadBlocks((*sets.getSelected()));
   }
   
-  if (clearBut.clickDown(x, y)) {
+  if (clearBut.clickDown(_x, _y)) {
     blocks->clear();
   }
   
-  if(demo.clickDown(x, y)){
+  if(demo.clickDown(_x, _y)){
     anim.play();
   }
   
   //--------- if we press the undo button, roll back the state of the blockGroup
-  if (undoBut.clickDown(x, y)) {
+  if (undoBut.clickDown(_x, _y)) {
     blocks->undoState();
   }
   
   //--------- if we press the redo button, push the state forward
-  if (redoBut.clickDown(x, y)) {
+  if (redoBut.clickDown(_x, _y)) {
     blocks->redoState();
   }
+  
+  //--------- if we press the skip button while the anim is running, stop anim
+  if(anim.isPlaying()&&skipBut.clickDown(_x, _y)){
+    anim.stop();
+  }
+  
+  if(blocks->base.uploadBut.clickDown(_x,_y));
 }
 
 bool controlBar::clickUp()
 {
-  
+  sets.clickUp();
+  clearBut.clickUp();
+  demo.clickUp();
+  undoBut.clickUp();
+  redoBut.clickUp();
+  skipBut.clickUp();
+  blocks->base.uploadBut.clickUp();
+}
+
+bool controlBar::mouseLockout(int button)
+{
+  return (!anim.isPlaying()||(anim.isPlaying()&&button==VMOUSE_BUTTON));
+}
+
+void controlBar::setAvailableButtons()
+{
+  redoBut.setAvailable(blocks->redoAvailable());
+	undoBut.setAvailable(blocks->undoAvailable());
+  demo.setAvailable(!anim.isPlaying());
 }

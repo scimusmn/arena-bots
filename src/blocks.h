@@ -25,7 +25,7 @@
 #include <deque>
 #include "turtle.h"
 
-
+#include "../../dallasEng/dallasEng.h"
 
 //************ type for different kinds of blocks *********
 enum blkVectType {
@@ -113,6 +113,7 @@ public:
   ofPoint ttlSize;
   ofRectangle orig;
   ofRectangle interior;
+  double bottomBar;
   
 	string filename;
 	string title;
@@ -157,7 +158,7 @@ public:
 	
 	virtual void draw(bool fade=false);
 	
-	void draw(int _x, int _y);
+	virtual void draw(int _x, int _y);
 	
 	int size(int j=0);
 	
@@ -179,7 +180,7 @@ public:
 	
 	void motion(int x, int y);
 	
-	bool siblingnerWritten(map<string,bool> * printed);
+	bool siblingWritten(map<string,bool> * printed);
 	
 	void printOut(ofstream* k,ifstream * f,int t=0, map<string,bool> * printed=0);
 	
@@ -199,7 +200,7 @@ public:
   
   void newUpdatePositions();
   
-  bool beneath(block & blockToCheck, int spaceBelow=-1);
+  bool beneath(block & blockToCheck,signed int spaceBelow=-1);
   
   bool inside(block & t);
   

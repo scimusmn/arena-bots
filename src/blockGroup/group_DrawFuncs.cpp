@@ -9,6 +9,7 @@
 
 #include "blockGroup.h"
 
+
 //---------------Group Draw Functions ------------------
 
 /*****************************************************************
@@ -56,6 +57,13 @@ void bGroup::drawIndicators(block & held, block & k)
       indicate(db);
     }
   }
+}
+
+void bGroup::draw(int _x, int _y, int _w, int _h)
+{
+  x=_x,y=_y,w=_w,h=_h;
+  draw();
+  base.draw(x+(w-base.w)/2, y);
 }
 
 void bGroup::drawBase(int _x, int _y)

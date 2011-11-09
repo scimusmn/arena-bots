@@ -28,7 +28,6 @@ public:
   ofInterObj * searchBlock(vector<string> spl, block & b, int offset);
   void changeAnimXML(ofXML & newXML);
   void update();
-  void draw(int x, int y);
   void drawCursor();
   void play();
   bool isPlaying();

@@ -10,6 +10,7 @@
 
 #include "blockGroup.h"
 
+
 extern int pixPerInch;
 
 block * bGroup::nextActionBlock(block & b, bool skip)

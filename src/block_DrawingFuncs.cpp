@@ -110,13 +110,10 @@ void block::draw(bool fade){
   ofSetColor(color);
   if (type==BLK_BRACKET) drawBigBlock(x,y,w,h,orig.height,orig.width);
   else if(type==BLK_VAL) ofRaised(.3),ofRoundedRect(x,y,w,h,h/4);
-  else if(type==BLK_BASE) drawBaseBlock(x, y, w, h);
   else drawBlock(x,y,w,h);
   
-  if(type!=BLK_BASE){
-    glColor3f(1,1,1);
-    arialHeader.drawString(title,x+titlePos.x,y+titlePos.y);
-  }
+  glColor3f(1,1,1);
+  arialHeader.drawString(title,x+titlePos.x,y+titlePos.y);
   
 	//-------- for each of the statement positions,draw a placeholder or the block in that position
 	for (unsigned int i=0; i<numBlocks.size(); i++) {

@@ -9,6 +9,7 @@
 
 #include "blockGroup.h"
 
+
 extern int pixPerInch;
 
 /****************************************************************
@@ -135,6 +136,14 @@ void bGroup::addFromSB(block t,int _x,int _y){
 
 void bGroup::update()
 {
+	
+  if(bTesting){
+    bSequencePlay=idleSequence(&base);
+  }
+}
+
+void bGroup::updatePositions()
+{
   if(!bTesting){
     for (unsigned int i=0; i<blocks.size(); i++) {
       blocks[i].newUpdateHeight();
@@ -143,8 +152,4 @@ void bGroup::update()
   }
   base.newUpdateHeight();
   base.newUpdatePositions();
-	
-  if(bTesting){
-    bSequencePlay=idleSequence(&base);
-  }
 }

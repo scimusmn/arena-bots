@@ -9,6 +9,7 @@
 
 #pragma once
 #include "../blocks.h"
+#include "../baseBlock/baseBlock.h"
 #include "../bracketBlock/bracketBlock.h"
 
 /*****************************************************************
@@ -25,9 +26,9 @@
 
 struct storageState {
   vector<block> blocks;
-  block base;
+  baseBlock base;
   storageState(){}
-  storageState(vector<block> & k, block b){
+  storageState(vector<block> & k, baseBlock b){
     blocks=k;
     base=b;
   }
@@ -75,7 +76,7 @@ public:
   ofTurtle turtle;
   
   vector<block> blocks;
-	block base;
+	baseBlock base;
 	clock_t dblClick;
 	int lastBlock;
 	bool bGrabbed,inHand,ddopen;
@@ -142,12 +143,16 @@ public:
 	void resetUsed();
 	
 	void draw();
+  
+  void draw(int _x, int _y, int _w, int _h);
 	
 	void drawBase(int _x, int _y);
 	
 	void drawIndicators(block & grab,block & k);
 	
 	void update();
+  
+  void updatePositions();
 	
 	int heightUpdate(block& grab, block & comp);
 	

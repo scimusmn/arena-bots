@@ -13,6 +13,8 @@
 #include "ofExtended.h"
 #include "ofxDirList.h"
 
+#include "ofxThread.h"
+
 enum deviceType {
   NOT_USB_SERIAL, ARD_UNO, ARD_DUEM
 };
@@ -29,9 +31,10 @@ struct serialDevice {
   serialDevice(string prtNm);
 };
 
-class serialCheck {
+class serialCheck : public ofxThread{
 protected:
   bool bAvailable;
+  bool bIdent;
   ofSerial serial;
   int nCurrentDevice;
   int numDevices;
@@ -43,12 +46,27 @@ protected:
 	unsigned char		data[3];
   
   vector<serialDevice> devices;
+  
+  ofFont report;
 public:
   serialCheck();
+  ~serialCheck();
   bool isAvailable();
   void addDevice(string prtNm);
   void deviceRemoved();
   void checkAvailability();
+  void threadCheckAvailability();
   bool getDeviceNumber();
   int deviceNumber();
+  
+  void drawWaitScreen();
+  
+  void start(){
+    startThread(true, false);   // blocking, verbose
+  }
+  
+  void stop(){
+    stopThread();
+  }
+  void threadedFunction();
 };

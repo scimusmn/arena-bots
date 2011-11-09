@@ -32,16 +32,16 @@ int block::newHeightIn()
 int block::newUpdateHeight()
 {
   int ret=0;
-  int topHeight=interior.y;
-  int botHeight=orig.height-(interior.y+interior.height);
+  int topHeight=ttlSize.y;
   if(type==BLK_BRACKET){
     for (unsigned int i=0; i<blocksIn.size(); i++) {
       ret+=blocksIn[i].newUpdateHeight()-5;
     }
-    ret+=5;
+    //ret+=5;
+    if(ret<orig.height-(ttlSize.y+bottomBar)) ret=orig.height-(ttlSize.y+bottomBar);
+    interior.height=ret;
+    h=ret+topHeight+bottomBar;
   }
-  if(ret<interior.height) ret=interior.height; 
-  h=ret+topHeight+botHeight;
   for (unsigned int i=0; i<blocksOn.size(); i++) {
     blocksOn[i].newUpdateHeight();
   }
@@ -76,27 +76,30 @@ bool block::inside(block & drop)
 {
   bool ret=0;
   if(type==BLK_BRACKET){
-    int inLine=y+interior.y/2;
-    int bottomSpace=orig.height-(interior.y+interior.height);
-    int inH=interior.y/2+h-(interior.y+bottomSpace);
+    int inLine=y+ttlSize.y/2;
+    //int bottomSpace=orig.height-(interior.y+interior.height);
+    int inH=ttlSize.y/2+interior.height;
     if(drop.inBounds(x+interior.x, inLine, w-interior.x, inH))
       ret=true;
   }
   return ret;
 }
 
-bool block::beneath(block & chk, int blw)
+bool block::beneath(block & chk,signed int blw)
 {
-  if(blw<0) blw=ttlSize.y/2;
-  bool ret=0;
-  int bottomSpace=orig.height-(interior.y+interior.height);
-  int midLine=y+ttlSize.y/2;
+  if(blw<ttlSize.y){
+    blw=ttlSize.y;
+  }
+  else blw+=ttlSize.y;
+  cout << blw<<endl;
+  int midLine=y+h-ttlSize.y/2;
   
-  if(type==BLK_BRACKET) midLine=y+h-bottomSpace;
-  int checkHeight=h+y-midLine+blw;
+  if(type==BLK_BRACKET){
+    midLine=y+(interior.y+interior.height);
+    blw=blw+(y+h)-midLine;
+  }
   
-  if(chk.inBounds(x, midLine, w, checkHeight)) ret=true;  
-  return ret;
+  return (chk.inBounds(x, midLine, w, blw));
 }
 
 bool block::inBounds(int xX, int yX, int wX, int hX)

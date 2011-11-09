@@ -14,8 +14,6 @@
 
 #include "controlBar/controlBar.h"
 
-#include "../../dallasEng/dallasEng.h"
-
 /*****************************************************************
  * class testApp : public ofBaseApp
  *
@@ -27,7 +25,7 @@
  *    int animStep:: _ _ _ _ _ _ _ _ the current animation step, if playing.
  *    ofXML animXML::_ _ _ _ _ _ _ _ the xmlParser to hold the data for the current animation
  *    bGroup blocks::_ _ _ _ _ _ _ _ the block group, containing the base block and all the blocks which have been drag onto the stage
- *    sbGroup * objects::_ _ _ _ _ _ the sidebar bars and blocks
+ *    sbGroup * sidebar::_ _ _ _ _ _ the sidebar bars and blocks
  *    ofImage background:: _ _ _ _ _ the background image, now used as sidebar image
  *    ofButton upBut:: _ _ _ _ _ _ _ the upload button, possibly should be migrated to the 'bGroup'
  *    ofButton clearBut::_ _ _ _ _ _ button to clear the workspace blocks
@@ -73,13 +71,11 @@ class testApp : public ofBaseApp{
 		void windowResized(int w, int h);
 	
 	void upload();
-	void loadBlocks(string dir);
-  void loadBlocks(blockGroup & bg);
 	
 	bGroup blocks;
-	sbGroup objects;
-	ofXML parse;
+	sbGroup sidebar;
   
+  titleBar topTitle;
 
 	ofImage background;
 	
@@ -87,36 +83,17 @@ class testApp : public ofBaseApp{
 	
 	ofButton skipBut;
 	
-	ofTimer timeOut;
 	ofFont	titleFont;
   ofFont  label;
 	ofSystemCall systemCall;
 	ofProgressSpinner spinner;
 	
-	ofVideoPlayer crabMovie;
-  
   rootGroup sets;
   
   controlBar controls;
   
   /* to delete */
   
-  ofVMouse anim;
-	ofImage pointer;
-  
-  ofButton clearBut;
-	ofButton redoBut;
-	ofButton undoBut;
-  dallasButton  demo;
-  
-  serialCheck serChk;
-  
-  //--------- Animation functions
-  void animationStepRequested(ofXML & animXML);
-  ofInterObj * searchForObject(ofTag & tag, int & _x, int & _y);
-  ofInterObj * searchBlock(vector<string> spl, block & b, int offset);
-  int animStep;
-  ofXML animXML;
   
   /////////////////
   

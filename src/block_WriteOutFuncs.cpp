@@ -32,7 +32,7 @@ void block::printOut(ofstream* fOut,ifstream * fInput,int t, map<string,bool> * 
 	//******* below, parses it to find references to contained blocks or dropdowns, and properly formats it
 	
 	bool printed=printList->find(title)->second;
-	bool siblingP=siblingnerWritten(printList);
+	bool siblingP=siblingWritten(printList);
 	
 	//-------- init the buffer, the pos counters and the end flag
 	string buffer;
@@ -169,7 +169,7 @@ void block::printOut(ofstream* fOut,ifstream * fInput,int t, map<string,bool> * 
 }
 
 /*****************************************************************
- * siblingnerWritten(map<string,bool> * printed) :: function of block
+ * siblingWritten(map<string,bool> * printed) :: function of block
  *
  *  Description::
  *
@@ -185,7 +185,7 @@ void block::printOut(ofstream* fOut,ifstream * fInput,int t, map<string,bool> * 
  */
 
 
-bool block::siblingnerWritten(map<string,bool> * printed)
+bool block::siblingWritten(map<string,bool> * printed)
 {
 	//-------- checks to see if a complement block has been printed
 	bool ret=false;

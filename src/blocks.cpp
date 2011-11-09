@@ -27,7 +27,7 @@
 
 int pixPerInch=25;
 
-string defaultFont="fonts/DinC.ttf";
+string defaultFont="fonts/HelveticaBold.otf";
 
 /*****************************************************************
  * block(ofTag & cur,ofColor col, int _y):ofInterObj(-200,-200,150,45) :: constructor for block, a subclass of ofInterObj
@@ -154,8 +154,9 @@ void block::parseTitle()
     interior.x=20;
     interior.y=40;
     interior.height=45;
+    bottomBar=orig.height-(interior.y+interior.height);
   }
-  else interior.x=interior.y=interior.height=0;
+  else interior.x=interior.y=interior.height=bottomBar=0;
 	int ddNum=0;
 	
 	//-------- assign a default value to the xdis of each dd
@@ -180,7 +181,7 @@ void block::parseTitle()
 		if(!titleSplit[i].compare("%d")){
 			if(ddNum<ddGroup.size()){
 				//-------- augment the relative position with the current total width
-				ddGroup[ddNum].relPos.x+=totalwidth;
+				ddGroup[ddNum].relPos.x+=totalwidth-spSize;
 				//-------- update total width
 				totalwidth+=ddGroup[ddNum].w+spSize*2;
 				//-------- if you have two dropdowns in a row, make sure they don't overlap
@@ -317,6 +318,7 @@ void block::operator=(const block &t) {
   interior=t.interior;
   titlePos=t.titlePos;
   ttlSize=t.ttlSize;
+  bottomBar=t.bottomBar;
   
 	arialHeader=t.arialHeader;
 	type=t.type;
@@ -357,7 +359,7 @@ void block::setup(double _w, double _h)
 	w=_w, h=_h;
   orig.width=w;
   orig.height=h;
-  interior.height=0;
+  interior.height=bottomBar=0;
   interior.y=0;
   interior.x=0;
 	arialHeader.loadFont("DinC.ttf");
@@ -374,7 +376,7 @@ void block::setup(double _w, double _h)
 	filename="null";
 	placeHolder=false;
   
-  ttlSize.y=_h;
+  ttlSize.y=h/2;
   ttlSize.x=_w;
 }
 

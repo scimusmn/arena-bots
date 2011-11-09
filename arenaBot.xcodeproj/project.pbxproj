@@ -14,10 +14,10 @@
 		AA7A30C41468332B00D95060 /* dallasEng.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7A30C21468332B00D95060 /* dallasEng.cpp */; };
 		AA7A31041468482400D95060 /* controlBar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7A31031468482400D95060 /* controlBar.cpp */; };
 		AA7A3107146862F400D95060 /* demoAnim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7A3106146862F400D95060 /* demoAnim.cpp */; };
+		AA7A37F4146ADDDE00D95060 /* baseBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7A37F3146ADDDE00D95060 /* baseBlock.cpp */; };
 		AA82B56613BE184300054749 /* block_MouseFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA82B56513BE184300054749 /* block_MouseFuncs.cpp */; };
 		AA8D7719132806D0000F0763 /* block_DrawingFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8D7718132806D0000F0763 /* block_DrawingFuncs.cpp */; };
 		AA8D772213280768000F0763 /* block_WriteOutFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8D772113280768000F0763 /* block_WriteOutFuncs.cpp */; };
-		AA949D7513B38424009141B0 /* testApp_animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA949D7413B38424009141B0 /* testApp_animation.cpp */; };
 		AA949D8313B384F1009141B0 /* testApp_auxDrawing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA949D8213B384F1009141B0 /* testApp_auxDrawing.cpp */; };
 		AA949DB013B390B7009141B0 /* ofxDirList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA949DAE13B390B7009141B0 /* ofxDirList.cpp */; };
 		AA949E5913B3D944009141B0 /* blockLoad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA949E5813B3D944009141B0 /* blockLoad.cpp */; };
@@ -186,6 +186,8 @@
 		AA7A31031468482400D95060 /* controlBar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = controlBar.cpp; path = controlBar/controlBar.cpp; sourceTree = "<group>"; };
 		AA7A3105146862F400D95060 /* demoAnim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demoAnim.h; path = demoAnim/demoAnim.h; sourceTree = "<group>"; };
 		AA7A3106146862F400D95060 /* demoAnim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demoAnim.cpp; path = demoAnim/demoAnim.cpp; sourceTree = "<group>"; };
+		AA7A37F2146ADDDE00D95060 /* baseBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = baseBlock.h; path = baseBlock/baseBlock.h; sourceTree = "<group>"; };
+		AA7A37F3146ADDDE00D95060 /* baseBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = baseBlock.cpp; path = baseBlock/baseBlock.cpp; sourceTree = "<group>"; };
 		AA82B56513BE184300054749 /* block_MouseFuncs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = block_MouseFuncs.cpp; sourceTree = "<group>"; };
 		AA89D384137B07F00055C130 /* blink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blink.h; sourceTree = "<group>"; };
 		AA89D385137B080F0055C130 /* crabEyes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crabEyes.h; sourceTree = "<group>"; };
@@ -193,7 +195,6 @@
 		AA8B5F1B13816E7A0086AE3D /* rbTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rbTimer.h; sourceTree = "<group>"; };
 		AA8D7718132806D0000F0763 /* block_DrawingFuncs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = block_DrawingFuncs.cpp; sourceTree = "<group>"; };
 		AA8D772113280768000F0763 /* block_WriteOutFuncs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = block_WriteOutFuncs.cpp; sourceTree = "<group>"; };
-		AA949D7413B38424009141B0 /* testApp_animation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testApp_animation.cpp; sourceTree = "<group>"; };
 		AA949D8213B384F1009141B0 /* testApp_auxDrawing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testApp_auxDrawing.cpp; sourceTree = "<group>"; };
 		AA949DAB13B390B7009141B0 /* Instructions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Instructions.txt; sourceTree = "<group>"; };
 		AA949DAC13B390B7009141B0 /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
@@ -630,6 +631,15 @@
 			name = dirLoad;
 			sourceTree = "<group>";
 		};
+		AA7A37F1146ADDB100D95060 /* baseBlock */ = {
+			isa = PBXGroup;
+			children = (
+				AA7A37F2146ADDDE00D95060 /* baseBlock.h */,
+				AA7A37F3146ADDDE00D95060 /* baseBlock.cpp */,
+			);
+			name = baseBlock;
+			sourceTree = "<group>";
+		};
 		AA89D383137B07F00055C130 /* Blocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -650,6 +660,7 @@
 		AA8D772313280895000F0763 /* Blocks */ = {
 			isa = PBXGroup;
 			children = (
+				AA7A37F1146ADDB100D95060 /* baseBlock */,
 				AA7A30811468275C00D95060 /* bracketBlock */,
 				AAB4E7161460793500276A4D /* sideBar */,
 				AAB4E7031460741A00276A4D /* Block Group */,
@@ -1029,7 +1040,6 @@
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
 				AA949D8213B384F1009141B0 /* testApp_auxDrawing.cpp */,
-				AA949D7413B38424009141B0 /* testApp_animation.cpp */,
 				AA16D5B013B92DB1009A0843 /* README.txt */,
 			);
 			path = src;
@@ -1204,7 +1214,6 @@
 				AA8D7719132806D0000F0763 /* block_DrawingFuncs.cpp in Sources */,
 				AA8D772213280768000F0763 /* block_WriteOutFuncs.cpp in Sources */,
 				AA9C32641338E09B00CB0F81 /* ofxThread.cpp in Sources */,
-				AA949D7513B38424009141B0 /* testApp_animation.cpp in Sources */,
 				AA949D8313B384F1009141B0 /* testApp_auxDrawing.cpp in Sources */,
 				AA949DB013B390B7009141B0 /* ofxDirList.cpp in Sources */,
 				AA949E5913B3D944009141B0 /* blockLoad.cpp in Sources */,
@@ -1224,6 +1233,7 @@
 				AA7A30C41468332B00D95060 /* dallasEng.cpp in Sources */,
 				AA7A31041468482400D95060 /* controlBar.cpp in Sources */,
 				AA7A3107146862F400D95060 /* demoAnim.cpp in Sources */,
+				AA7A37F4146ADDDE00D95060 /* baseBlock.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

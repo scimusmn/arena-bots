@@ -176,11 +176,6 @@ void demoAnim::update()
     anim.updateNextEvent();
 }
 
-void demoAnim::draw(int x, int y)
-{
-  
-}
-
 void demoAnim::drawCursor()
 {
   ofSetColor(255, 255, 255);

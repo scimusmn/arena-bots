@@ -50,6 +50,7 @@ protected:
   buttonHolder clearHldr;
   
   ofRectangle buttonBar;
+  ofRectangle subBar;
   
   ofFont subtitle;
   
@@ -64,7 +65,10 @@ public:
   void loadBlocks(blockGroup & bg);
   void setup(bGroup * bG, sbGroup * sbG);
   void draw(int x, int y);
+  void drawForeground();
   void update();
-  bool clickDown(int x, int y);
+  void setAvailableButtons();
+  bool clickDown(int x, int y, int button=0);
   bool clickUp();
+  bool mouseLockout(int button);
 };

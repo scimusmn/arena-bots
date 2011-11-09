@@ -10,6 +10,7 @@
 
 #include "blockGroup.h"
 
+
 /*************************** Mouse Functions ***************************
  ***********************************************************************/
 
@@ -110,6 +111,9 @@ bool bGroup::newClickUp(int _x, int _y)
     recordState();
   }
   bGrabbed=inHand=false;
+  
+  updatePositions();
+  
   return ret;
 }
 

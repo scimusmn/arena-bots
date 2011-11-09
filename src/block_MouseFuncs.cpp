@@ -152,6 +152,10 @@ bool block::newClickUp(int _x, int _y)
   for (unsigned int i=0; i<blocksOn.size(); i++) {
     blocksOn[i].newClickUp(_x,_y);
   }
+  
+  //newUpdateHeight();
+  //newUpdatePositions();
+  
   return false;
 }
 
@@ -199,7 +203,7 @@ bool searchUnderBlock(dropBlock & foundBlock,block & strt, block & drpd, blkVect
     }
     //------- if we're checking blocksIn, check immediately inside
     else {
-      if (drpd.inBounds(strt.x+strt.interior.x,strt.y+strt.interior.y/2, strt.w-strt.interior.x, strt.interior.height)) {
+      if (drpd.inBounds(strt.x+strt.interior.x,strt.y+strt.ttlSize.y/2, strt.w-strt.interior.x, ((strt.blocksIn.size())?strt.ttlSize.y:strt.interior.height))) {
         tmp=true;
         //------- set the foundBlock to the 0 Position of the vector
         foundBlock.set(strt,t,0);

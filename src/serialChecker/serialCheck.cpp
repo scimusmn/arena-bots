@@ -43,11 +43,40 @@ serialCheck::serialCheck()
   MODE=0;
 	waitForData=2;
 	data[0]=data[1]=data[2]=0;
+  
+  report.loadFont("fonts/DinC.ttf");
+  report.setMode(OF_FONT_CENTER);
+  report.setSize(70);
+  
+  //start();
+}
+
+serialCheck::~serialCheck(){
+  stop();
+  delete [] data;
+  devices.clear();
 }
 
 bool serialCheck::isAvailable()
 {
-  return bAvailable;
+  bool ret=0;
+  if(lock()){
+    ret=bAvailable;
+    unlock();
+  }
+  return ret;
+}
+
+void serialCheck::drawWaitScreen()
+{
+  if(!isAvailable()){
+    ofSetColor(0, 0, 0,196);
+    ofRect(0, 0, ofGetWidth(), ofGetHeight());
+    string printOut="Connect the robot to begin";
+    if(bIdent) printOut="Identifying: Do not unplug";
+    ofSetColor(255, 255, 255);
+    report.drawString(printOut, ofGetWidth()/2, ofGetHeight()/2);
+  }
 }
 
 void serialCheck::checkAvailability()
@@ -61,6 +90,7 @@ void serialCheck::checkAvailability()
   #if defined( TARGET_OSX )
         for (int i=0; i<serial.numDevices(); i++) {
           if(serial.deviceNameByNumber(i).substr(0,7) == "tty.usb" ){
+            bIdent=true;
             ofTimer delay;
             delay.set(.5);
             delay.run();
@@ -70,6 +100,7 @@ void serialCheck::checkAvailability()
             if(getDeviceNumber()){
               bAvailable=true;
             }
+            bIdent=false;
             serial.close();
           }
         }
@@ -77,7 +108,9 @@ void serialCheck::checkAvailability()
         for (int i=0; i<serial.numDevices(); i++) {
           serial.setup(serial.deviceNameByNumber(i), 9600);
           if(getDeviceNumber()){
+            lock();
             bAvailable=true;
+            unlock();
           }
           serial.close();
         }
@@ -136,8 +169,10 @@ bool serialCheck::getDeviceNumber()
       if(waitForData==0) {
         switch (data[0]) {
           case ROBOT_NUMBER:{
+            lock();
             nCurrentDevice=data[1];
             cout <<"Robot number is " << int(nCurrentDevice)<<endl;
+            unlock();
             ret=true;
           }
             break;
@@ -165,5 +200,20 @@ void serialCheck::deviceRemoved()
 
 int serialCheck::deviceNumber()
 {
-  return nCurrentDevice;
+  int ret=0;
+  if(lock()){
+    ret=nCurrentDevice;
+    unlock();
+  }
+  return ret;
+}
+
+void serialCheck::threadedFunction(){
+  
+  while( isThreadRunning() != 0 ){
+    //if( lock() ){
+      checkAvailability();
+    //  unlock();
+    //}
+  }
 }

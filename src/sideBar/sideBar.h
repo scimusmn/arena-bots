@@ -20,7 +20,7 @@
  *
  *    public: ofFont arialLabel::_ _ 
  *    ofFont arialHeader:: _ _ _ _ _ 
- *    bool Open::_ _ _ _ _ _ _ _ _ _ 
+ *    bool bOpen::_ _ _ _ _ _ _ _ _ _ 
  *    float r,g,b::_ _ _ _ _ _ _ _ _ 
  *    ofColor color::_ _ _ _ _ _ _ _ 
  *    int xo,yo::_ _ _ _ _ _ _ _ _ _ 
@@ -36,7 +36,7 @@ class sideBar: public ofInterObj {
 public:
 	ofFont arialLabel;
 	ofFont arialHeader;
-	bool Open;
+	bool bOpen;
 	float r,g,b;
 	ofColor color;
 	int xo,yo;
@@ -85,7 +85,9 @@ public:
 class sbGroup : public ofInterObj {
 	bGroup * dest;
 	int sideBarSpace;
+  double barHeight;
 public:
+  ofRectangle area;
 	vector<sideBar> bars;
 	void updateBlocks(int i);
 	
@@ -115,6 +117,8 @@ public:
 	void draw();
 	
 	void draw(int _x, int _y);
+  
+  void draw(int _x, int _y, int _w, int _h);
 	
 	bool clickDown(double x, double y);
 	
