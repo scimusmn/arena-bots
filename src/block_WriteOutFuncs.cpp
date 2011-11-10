@@ -262,3 +262,26 @@ void block::printData(string sibling,ofstream* k,int t,map<string,bool> * printe
 	}
 
 }
+
+//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_
+//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_ tag saving//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_
+
+ofTag block::saveTag(){
+  ofTag ret=origTag;
+  //if(ret.getNumTags("blocksIn")>0) cout << "deleting node\n",ret.removeNode("blocksIn",0);
+  //cout <<ret.getNumTags("blocksIn") << " num of blocksIN tags\n"; 
+  while(ret.removeNode("blocksIn",0));
+  if(blocksIn.size()) ret.addNode("blocksIn");
+  for (unsigned int i=0; i<blocksIn.size(); i++) {
+    ret.getNode("blocksIn",0).addNode(blocksIn[i].saveTag());
+  }
+  for (unsigned int i=0; i<ddGroup.size(); i++) {
+    ofTag& t=ret.getNode("dropdown",i);
+    if(t.getNumTags("selected")==0) t.addNode("selected");
+    
+    t.getNode("selected").setValue(ddGroup[i].getString());
+    cout <<  t.getNode("selected").getValue() << " vs " << ddGroup[i].getIndex() << endl;
+  }
+  if(ret.getAttribute("color").length()==0) ret.addAttribute("color", ofToString(color.r*65536+color.g*256+color.b));
+  return ret;
+}

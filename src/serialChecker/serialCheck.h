@@ -34,6 +34,8 @@ struct serialDevice {
 class serialCheck : public ofxThread{
 protected:
   bool bAvailable;
+  bool bJustFound;
+  bool bJustLost;
   bool bIdent;
   ofSerial serial;
   int nCurrentDevice;
@@ -52,6 +54,8 @@ public:
   serialCheck();
   ~serialCheck();
   bool isAvailable();
+  bool justFoundDevice();
+  bool justLostDevice();
   void addDevice(string prtNm);
   void deviceRemoved();
   void checkAvailability();

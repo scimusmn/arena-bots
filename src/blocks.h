@@ -117,6 +117,8 @@ public:
   
 	string filename;
 	string title;
+  
+  ofTag origTag;
 	
 	block(ofTag & xml,ofColor col);
   
@@ -186,6 +188,8 @@ public:
 	void printOut(ofstream* k,ifstream * f,int t=0, map<string,bool> * printed=0);
 	
 	void printData(string sibling,ofstream* k,int t=0,map<string,bool> * printed=0, bool printIn=true);
+  
+  ofTag saveTag();
   
   //--------------------------- New functions --------------------------
   

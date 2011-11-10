@@ -12,6 +12,8 @@
 
 extern ofColor black, white, gray,blue,yellow,orange, red;
 
+extern int CURRENT_ROBOT_NUMBER;
+
 string ROOT_NAME="";
 string ROOT_DIR="";
 
@@ -209,6 +211,16 @@ void controlBar::update()
 {
   serChk.threadCheckAvailability();
   anim.update();
+  
+  if(serChk.justLostDevice()){
+    cout << "lost it\n";
+    blocks->saveXML("programs/"+ofToString(CURRENT_ROBOT_NUMBER)+"/program.xml");
+    blocks->clear();
+  }
+  if(serChk.justFoundDevice()){
+    blocks->loadFile("programs/"+ofToString(CURRENT_ROBOT_NUMBER)+"/program.xml");
+    blocks->updatePositions();
+  }
 }
 
 //_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_

@@ -131,6 +131,9 @@ public:
   block * nextActionBlock(block & b,bool skip=false);
   
   
+  void saveXML(string filename);
+  
+  void loadFile(string filename);
 	
 	void addFromSB(block t,int x,int y);
 	

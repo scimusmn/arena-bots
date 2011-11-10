@@ -167,3 +167,32 @@ void bGroup::writeFile(ofstream *k){
 		}
 	}
 }
+
+//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_
+//_-_-_-_-_//_-_-_-_-_ xml save  //_-_-_-_-_//_-_-_-_-_
+
+void bGroup::saveXML(string filename){
+  ofXML save;
+  save.newCurrentTag("base");
+  ofTag & top=save.getCurrentTag();
+  top.addAttribute("robot_number", ofToString(CURRENT_ROBOT_NUMBER));
+  for (unsigned int i=0; i<base.blocksOn.size(); i++) {
+    top.addNode(base.blocksOn[i].saveTag());
+  }
+  save.writeFile(filename);
+}
+
+void bGroup::loadFile(string filename)
+{
+  ofXML xml;
+  clear();
+  xml.loadFile(filename);
+  xml.setCurrentTag(";base");
+	ofTag & tag=xml.getCurrentTag();
+	for (unsigned int i=0; i<tag.size(); i++) {
+    cout <<tag[i].getLabel()<< endl;
+		if (tag[i].getLabel()=="block") {
+			base.blocksOn.push_back(block(tag[i],base.color));
+		}
+	}
+}

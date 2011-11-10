@@ -91,7 +91,6 @@ bool block::beneath(block & chk,signed int blw)
     blw=ttlSize.y;
   }
   else blw+=ttlSize.y;
-  cout << blw<<endl;
   int midLine=y+h-ttlSize.y/2;
   
   if(type==BLK_BRACKET){

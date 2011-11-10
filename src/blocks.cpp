@@ -54,11 +54,13 @@ block::block(ofTag & cur,ofColor col):ofInterObj(-200,-200,150,TITLE_HEIGHT) {
 	//********* This is the method by which all of the blocks are first generated from the xml files in the data root.
 	//-------- TODO: get rid of the garbage with the color triples. blech.
 	//-------- load the font for the arialHeader, at 10 pt.
-	
+	origTag=cur;
+  
 	arialHeader.loadFont(defaultFont);
   arialHeader.setMode(OF_FONT_TOP);
 	arialHeader.setSize(14);
 	insertSpace=0;
+  bGrabbed=false;
 	//-------- color initialization
 	if(cur.getAttribute("color").length())
 		color=ofColor(strtol(cur.getAttribute("color").c_str(),NULL,0));
@@ -337,6 +339,8 @@ void block::operator=(const block &t) {
 	color=t.color;
   insertSpace=t.insertSpace;
   action=t.action;
+  
+  origTag=t.origTag;
 }
 
 /*****************************************************************

@@ -41,7 +41,7 @@ serialCheck::serialCheck()
   numDevices=0;
   checkTimer.set(1);
   checkTimer.run();
-  bAvailable=false;
+  bAvailable=bJustFound=bJustLost=false;
   MODE=0;
 	waitForData=2;
 	data[0]=data[1]=data[2]=0;
@@ -100,6 +100,7 @@ void serialCheck::checkAvailability()
             serial.setup("/dev/"+serial.deviceNameByNumber(i), 9600);
             if(getDeviceNumber()){
               bAvailable=true;
+              bJustFound=true;
             }
             bIdent=false;
             serial.close();
@@ -111,6 +112,7 @@ void serialCheck::checkAvailability()
           if(getDeviceNumber()){
             lock();
             bAvailable=true;
+            bJustFound=true;
             unlock();
           }
           serial.close();
@@ -122,6 +124,7 @@ void serialCheck::checkAvailability()
         nCurrentDevice=-1;
         numDevices=serial.numDevices();
         bAvailable=false;
+        bJustLost=true;
         for (int i=0; i<serial.numDevices(); i++)
           cout << serial.deviceNameByNumber(i) << endl;
       }
@@ -129,6 +132,7 @@ void serialCheck::checkAvailability()
         nCurrentDevice=-1;
         numDevices=serial.numDevices();
         bAvailable=false;
+        bJustLost=true;
         for (int i=0; i<serial.numDevices(); i++)
           cout << serial.deviceNameByNumber(i) << endl;
       }
@@ -174,7 +178,7 @@ bool serialCheck::getDeviceNumber()
             CURRENT_ROBOT_NUMBER=nCurrentDevice=data[1];
             cout <<"Robot number is " << int(nCurrentDevice)<<endl;
             unlock();
-            ret=true;
+            if(nCurrentDevice>=100&&nCurrentDevice<=110) ret=true;
           }
             break;
             
@@ -202,9 +206,9 @@ void serialCheck::deviceRemoved()
 int serialCheck::deviceNumber()
 {
   int ret=0;
-  if(lock()){
-    ret=nCurrentDevice;
-    unlock();
+  if(!isThreadRunning()||lock()){
+    ret=CURRENT_ROBOT_NUMBER;
+    if(isThreadRunning()) unlock();
   }
   return ret;
 }
@@ -214,6 +218,20 @@ void serialCheck::threadCheckAvailability()
   if (checkTimer.expired()) {
     start();
   }
+}
+
+bool serialCheck::justFoundDevice()
+{
+  bool ret=bJustFound;
+  bJustFound=false;
+  return ret;
+}
+
+bool serialCheck::justLostDevice()
+{
+  bool ret=bJustLost;
+  bJustLost=false;
+  return ret;
 }
 
 void serialCheck::threadedFunction(){
