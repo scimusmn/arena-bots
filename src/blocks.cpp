@@ -27,6 +27,8 @@
 
 int pixPerInch=25;
 
+int TITLE_HEIGHT=40;
+
 string defaultFont="fonts/HelveticaBold.otf";
 
 /*****************************************************************
@@ -48,7 +50,7 @@ string defaultFont="fonts/HelveticaBold.otf";
  *
  */
 
-block::block(ofTag & cur,ofColor col):ofInterObj(-200,-200,150,45) {
+block::block(ofTag & cur,ofColor col):ofInterObj(-200,-200,150,TITLE_HEIGHT) {
 	//********* This is the method by which all of the blocks are first generated from the xml files in the data root.
 	//-------- TODO: get rid of the garbage with the color triples. blech.
 	//-------- load the font for the arialHeader, at 10 pt.
@@ -65,7 +67,7 @@ block::block(ofTag & cur,ofColor col):ofInterObj(-200,-200,150,45) {
 	//-------- load name from the name of the xmlNode
 	title=cur.getAttribute("name");
   ttlSize.x=w;
-  ttlSize.y=h;
+  ttlSize.y=TITLE_HEIGHT;
 	//cout << title << endl;
 	
 	//-------- init some variables, to prevent garbage from happening
@@ -149,11 +151,11 @@ void block::parseTitle()
   
   orig.height=h;
   orig.width=w;
-  titlePos.y=(ttlSize.y-10-arialHeader.stringHeight("Kjhg"))/2;
+  titlePos.y=(ttlSize.y-arialHeader.stringHeight("Kjhg"))/2;
   if(type==BLK_BRACKET){
     interior.x=20;
-    interior.y=40;
-    interior.height=45;
+    interior.y=TITLE_HEIGHT;
+    interior.height=TITLE_HEIGHT;
     bottomBar=orig.height-(interior.y+interior.height);
   }
   else interior.x=interior.y=interior.height=bottomBar=0;
@@ -162,7 +164,7 @@ void block::parseTitle()
 	//-------- assign a default value to the xdis of each dd
 	for (unsigned int i=0; i<ddGroup.size(); i++) {
 		ddGroup[i].relPos.x=0;
-    ddGroup[i].relPos.y=(ttlSize.y-10-ddGroup[i].h)/2;
+    ddGroup[i].relPos.y=(ttlSize.y-ddGroup[i].h)/2;
 	}
 	
 	//-------- change the font size if it is a statement block

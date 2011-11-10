@@ -142,15 +142,17 @@ void sideBar::operator=(const sideBar t) {
 
 void sideBar::draw(int _x, int _y){
 	x=_x, y=_y;
-	ofSetShadowDarkness( .5);
-  ofShadowRounded(x-h/4,y,w,h,h/4,5);
-	ofSetColor(white*.3);
-	ofRaised( .2);
-  ofRoundedRect(x-h/4,y,w,h,h/4);
-	ofSetColor(color);
-	if(!bOpen) ofRoundedRect(x-w*7/8,y,w,h,h/4);
-	else ofRoundedRect(x-h/4,y,w,h,h/4);
-	ofSetColor(white);
+	
+  ofSetColor(gray);
+  trimmedRect(x, y, w, h);
+  ofSetColor(color);
+	if(!bOpen) trimmedRect(x,y,w/8,h);
+	else trimmedRect(x,y,w,h);
+	ofSetColor(yellow);
+  ofNoFill();
+  trimmedRect(x,y,w,h);
+  ofFill();
+  ofSetColor(white);
 	arialHeader.drawString(filename,x+w/8+10,y+3*h/4);
   int pad=20;
 	if(bOpen){
@@ -158,8 +160,10 @@ void sideBar::draw(int _x, int _y){
 		for (unsigned int j=0; j<blocks.size(); j++) {
 			blocks[j].draw(x+pad,temp);
       if(j<blocks.size()-1){
-        ofShade(x, temp+blocks[j].h+blocks[j].newHeightOn()+pad/2, 3, w-h-1, OF_UP);
-        ofShade(x, temp+blocks[j].h+blocks[j].newHeightOn()+pad/2, 3, w-h-1, OF_DOWN,false);
+        //ofShade(x, temp+blocks[j].h+blocks[j].newHeightOn()+pad/2, 3, w-h-1, OF_UP);
+        //ofShade(x, temp+blocks[j].h+blocks[j].newHeightOn()+pad/2, 3, w-h-1, OF_DOWN,false);
+        ofSetColor(black.opacity(.5));
+        ofRect(x, temp+blocks[j].h+blocks[j].newHeightOn()+pad/2, w, 1);
       }
 			temp+=blocks[j].h+blocks[j].newHeightOn()+pad;
 		}
@@ -240,7 +244,7 @@ void sbGroup::setup(ofXML & xml,bGroup * destin)
           int curBlock=bars[curBar].blocks.size();
 					bars[curBar].blocks.push_back(block(tag[i][j],color));
           bars[curBar].w=max(bars[curBar].w,bars[curBar].blocks[curBlock].fullWidth());
-          w=max(bars[curBar].w+bars[curBar].h,w);
+          w=max(bars[curBar].w,w);
 				}
 			}
 		}
@@ -371,7 +375,7 @@ void sbGroup::draw(int _x, int _y)
   area.y=y=_y;
   
   area.height=ofGetHeight()-area.y;
-  area.width=w-15;
+  area.width=w;
   
   y+=30;
   
@@ -379,13 +383,17 @@ void sbGroup::draw(int _x, int _y)
   ofRect(area);
   
   ofSetColor(black.opacity(.2));
-  drawHatching(area.x, area.y, area.width, area.height, 10, 10);
+  drawHatching(area.x, area.y, area.width, area.height, 50, 50);
   
-  ofSetShadowDarkness(.5);
-  ofShade(area.x+area.width, area.y, 10, area.height, OF_LEFT);
+  ofSetColor(yellow);
+  ofRect(area.x+area.width, area.y, 2, area.height);
+  //ofRect(x,y+h,w,1);
   
-  ofSetShadowDarkness(.5);
-  ofShade(area.x+area.width, area.y, 10, area.height, OF_RIGHT);
+  ofSetColor(gray);
+  ofRect(x,y+h+1,w,15);
+  ofSetColor(yellow);
+  ofRect(x,y+h+1,w,1);
+  ofRect(x,y+h+16,w,1);
   
 	draw();
 }
@@ -411,25 +419,19 @@ void sbGroup::draw(){
 	
 	//--------- Draw a gray box onto the sidebar to hold the blocks
 	//ofSetColor(0x80633B);
-  int binWidth=w-barHeight;
+  int binWidth=w;
+  for (unsigned int i=0; i<bars.size()-1; i++) {
+    if(bars[i].bOpen) ofSetColor((bars[i].color*.5).opacity(.25));
+  }
   
-	ofSetColor((white*.3).opacity(.9));
+	//ofSetColor((white*.2).opacity(.7));
 	ofRect(x,y,binWidth,h);
 	
 	int pos=0;
 	for (unsigned int i=0; i<bars.size()-1; i++) {
 		bars[i].draw(x,pos+y);
     if(bars[i].bOpen){
-      ofSetShadowDarkness(.5);
-      ofShade(0,bars[i].y+bars[i].h,5,bars[i].w-bars[i].h,OF_DOWN);
-      ofShade(0,bars[i+1].y,5,bars[i].w-bars[i].h,OF_UP);
       
-      ofSetShadowDarkness(.5);
-      ofShade(x,bars[i].y+bars[i].h,5,sideBarSpace,OF_RIGHT);
-      ofShade(x+binWidth,bars[i].y+bars[i].h,5,sideBarSpace,OF_LEFT);
-      
-      ofSetShadowDarkness(.3);
-      ofShade(x+binWidth,bars[i].y+bars[i].h,10,sideBarSpace,OF_RIGHT,false);
     }
 		pos+=bars[i].h;
 		if(bars[i].bOpen) pos+=sideBarSpace;

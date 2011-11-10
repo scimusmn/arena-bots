@@ -130,7 +130,8 @@ public:
 	
 	~block();
 	
-	void setup(double _w, double _h);
+	virtual 
+  void setup(double _w, double _h);
 	
 	void operator=(const block &t);
   
@@ -210,9 +211,9 @@ public:
   
   bool newClickDD(int _x, int _y, bool & ddopen);
   
-  bool newClickDown(int x, int y);
+  virtual bool clickDown(int x, int y);
   
-  bool newClickUp(int _x, int _y);
+  virtual bool newClickUp(int _x, int _y);
   
   void addBlock(blkVectType bType, int index);
   

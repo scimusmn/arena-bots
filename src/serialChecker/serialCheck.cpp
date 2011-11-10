@@ -53,7 +53,6 @@ serialCheck::serialCheck()
 
 serialCheck::~serialCheck(){
   stop();
-  delete [] data;
   devices.clear();
 }
 
@@ -208,12 +207,20 @@ int serialCheck::deviceNumber()
   return ret;
 }
 
+void serialCheck::threadCheckAvailability()
+{
+  if (checkTimer.expired()) {
+    start();
+  }
+}
+
 void serialCheck::threadedFunction(){
   
-  while( isThreadRunning() != 0 ){
+  //while( isThreadRunning() != 0 ){
     //if( lock() ){
-      checkAvailability();
+    checkAvailability();
+    stop();
     //  unlock();
     //}
-  }
+  //}
 }

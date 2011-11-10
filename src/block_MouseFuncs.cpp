@@ -36,7 +36,7 @@ bool block::newClickInside(int _x, int _y)
 }
 
 /*****************************************************************
- * newClickDown(int _x, int _y) :: function of block
+ * clickDown(int _x, int _y) :: function of block
  *
  *  Description::
  *
@@ -52,7 +52,7 @@ bool block::newClickInside(int _x, int _y)
  *
  */
 
-bool block::newClickDown(int _x, int _y)
+bool block::clickDown(int _x, int _y)
 {
   bool ret=false;
   if(over(_x,_y)&&!newClickInside(_x, _y)&&ddPassingClick(_x, _y)&&!ddSelected){

@@ -23,7 +23,7 @@ void bGroup::motion(double _x, double _y){
 	}
 }
 
-bool bGroup::newClickDown(int _x, int _y)
+bool bGroup::clickDown(int _x, int _y)
 {
   bool ret=false;
   for (unsigned int i=0; i<blocks.size()&&!ret; i++) {
@@ -32,6 +32,7 @@ bool bGroup::newClickDown(int _x, int _y)
   for (unsigned int i=0; i<base.blocksOn.size()&&!ret; i++) {
     if(!ret) ret=newHandleClick(base.blocksOn,i,_x,_y);
   }
+  if(!ret) ret=base.clickDown(_x, _y);
   return ret;
 }
 
@@ -42,7 +43,7 @@ bool bGroup::newHandleClick(vector<block> & chk, int i, int _x, int _y, bool top
     if(chk[i].newClickDD(_x,_y,ddopen))
       ret=true;
   }
-  else if(!ret&&chk[i].newClickDown(_x,_y)&&!ddopen){
+  else if(!ret&&chk[i].clickDown(_x,_y)&&!ddopen){
     inHand=ret=true;
     dispx = chk[i].x-_x;
     dispy = chk[i].y-_y;

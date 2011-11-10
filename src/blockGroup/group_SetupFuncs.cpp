@@ -53,7 +53,7 @@ void bGroup::setup(double _x, double _y,double wid,double hgt){
 	bGrabbed=inHand=ddopen=false;
 	cSetup(_x,_y,wid,hgt);
 	used[""]=false;
-  base.setup(530, 90);
+  base.setup(this);
 	base.blocksOn.reserve(100);
 	states.recordState(storageState(blocks,base));
   held.setup(0,0);

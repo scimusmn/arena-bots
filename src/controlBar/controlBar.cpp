@@ -95,6 +95,8 @@ void controlBar::setup(bGroup * bG, sbGroup * sbG)
   
   sets[0].choice.setAvailable(false);
   
+  upload.setup(blocks);
+  
   //_-_-_-_-_//_-_-_-_-_ spacing setup //_-_-_-_-_//_-_-_-_-_
   demoHldr.addObj(demo);
   
@@ -150,8 +152,11 @@ void controlBar::draw(int _x, int _y)
   //_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_
   //_-_-_-_-_//_-_-_-_-_//buttonbar//_-_-_-_-_//_-_-_-_-_
   
-  ofSetColor(white*.5);
+  ofSetColor(black);
   ofRect(buttonBar);
+  
+  ofSetColor(gray);
+  drawHatching(buttonBar.x, buttonBar.y, buttonBar.width, buttonBar.height, 85,80);
   
   demoHldr.draw(buttonBar.x,buttonBar.y);
   setsHldr.draw(demoHldr.x+demoHldr.area.width,buttonBar.y);
@@ -161,22 +166,21 @@ void controlBar::draw(int _x, int _y)
   //_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_
   //_-_-_-_-_//_-_-_-_-_//subTitle //_-_-_-_-_//_-_-_-_-_
   
-  ofSetColor(white*.3);
+  ofSetColor(gray);
   ofRect(subBar);
   drawShadowsAroundRect(subBar, 10);
   
-  ofSetColor(black);
-  ofRect(subBar.x, subBar.y, subBar.width, 2);
+  ofSetColor(yellow);
+  ofRect(subBar.x, subBar.y, subBar.width, 1);
   
   if(sets.getSelected()){
     ofButton & t=sets.getSelected()->choice;
-    int wid=t.w/16+2;
-    ofSetColor(black);
-    ofFlat();
-    ofRoundedRect(t.x-wid, t.y-wid, t.w+wid*2, buttonBar.height+wid/3, wid);
+    int wid=t.w/16+1;
+    ofSetColor(yellow);
+    ofRect(t.x-wid, y, t.w+wid*2, buttonBar.height);
     wid=t.w/16;
-    ofSetColor(white*.3);
-    ofRoundedRect(t.x-wid, t.y-wid, t.w+wid*2, buttonBar.height+10, wid);
+    ofSetColor(gray);
+    ofRect(t.x-wid, y, t.w+wid*2, buttonBar.height+10);
     t.draw(t.x,t.y);
     
     ofSetColor(yellow);
@@ -184,8 +188,8 @@ void controlBar::draw(int _x, int _y)
   }
   
   //_-_-_-_-_//_-_-_-_-_ shadow below bar //_-_-_-_-_//_-_-_-_-_
-  ofSetShadowDarkness(.5);
-  ofShade(x, y+h, 10, w, OF_DOWN);
+  //ofSetShadowDarkness(.5);
+  //ofShade(x, y+h, 10, w, OF_DOWN);
 }
 
 void controlBar::drawForeground(){
@@ -198,11 +202,12 @@ void controlBar::drawForeground(){
   }
   
   serChk.drawWaitScreen();
+  upload.drawUploadWait();
 }
 
 void controlBar::update()
 {
-  serChk.checkAvailability();
+  serChk.threadCheckAvailability();
   anim.update();
 }
 
@@ -239,7 +244,7 @@ bool controlBar::clickDown(int _x, int _y, int button)
     anim.stop();
   }
   
-  if(blocks->base.uploadBut.clickDown(_x,_y));
+  upload.clickDown(_x, _y);
 }
 
 bool controlBar::clickUp()
@@ -250,7 +255,6 @@ bool controlBar::clickUp()
   undoBut.clickUp();
   redoBut.clickUp();
   skipBut.clickUp();
-  blocks->base.uploadBut.clickUp();
 }
 
 bool controlBar::mouseLockout(int button)

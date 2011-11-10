@@ -10,6 +10,8 @@
 #include "blocks.h"
 #include "blockDraw.h"
 
+extern ofColor white, gray, black, yellow, blue, red, orange;
+
 //-------------------------block Draw Functions ---------------
 
 void block::drawShadow(){
@@ -17,7 +19,7 @@ void block::drawShadow(){
 	
 	ofSetColor(0, 0, 0,75);
 	if (type==BLK_BRACKET) {
-		drawBigBlockShadow(x+5,y+5,w,h,orig.height);
+		drawBigBlock(x+5,y+5,w,h,interior.x,interior.y,h-bottomBar);
 	}
 	//-------- if a block is a value block, draw the rounded block shadow
 	else if(type==BLK_VAL) {
@@ -25,7 +27,7 @@ void block::drawShadow(){
 	}
 	//-------- if it's a normal block, draw a regular block shadow
 	else {
-		drawBlockShadow(x+5,y+5,w,h);
+		drawBlock(x+5,y+5,w,h);
 	}
 	//-------- draw shadows for blocks on
 	for (unsigned int i=0; i<blocksOn.size(); i++) {
@@ -42,7 +44,7 @@ void block::drawSelected(){
 	
 	ofSetColor(0xF4ED47);
 	if (type==BLK_BRACKET) {
-		drawBigBlockShadow(x-5,y-5,w+10,h+10,orig.height+10);
+		drawBigBlock(x-5,y-5,w+10,h+10,interior.x+5,interior.y+5,h-bottomBar-5);
 	}
 	//-------- if a block is a value block, draw the rounded block shadow
 	else if(type==BLK_VAL) {
@@ -50,7 +52,7 @@ void block::drawSelected(){
 	}
 	//-------- if it's a normal block, draw a regular block shadow
 	else {
-		drawBlockShadow(x-5,y-5,w+10,h+10);
+		drawBlock(x-5,y-5,w+10,h+10);
 	}
 	//-------- draw shadows for blocks on
 	for (unsigned int i=0; i<blocksOn.size(); i++) {
@@ -107,10 +109,23 @@ void block::draw(int _x, int _y)
 
 void block::draw(bool fade){
   //-------- we set the color of the block and draw the shape depending on type
-  ofSetColor(color);
-  if (type==BLK_BRACKET) drawBigBlock(x,y,w,h,orig.height,orig.width);
+  ofSetColor(color.opacity(1));
+  ofSetLineWidth(2);
+  if (type==BLK_BRACKET){
+    drawBigBlock(x,y,w,h,interior.x,interior.y,h-bottomBar);//drawBigBlock(x,y,w,h,orig.height,orig.width);
+    ofSetColor(black);
+    ofNoFill();
+    drawBigBlock(x,y,w,h,interior.x,interior.y,h-bottomBar);
+    ofFill();
+  }
   else if(type==BLK_VAL) ofRaised(.3),ofRoundedRect(x,y,w,h,h/4);
-  else drawBlock(x,y,w,h);
+  else {
+    drawBlock(x,y,w,h);
+    ofSetColor(black);
+    ofNoFill();
+    drawBlock(x,y,w,h);
+    ofFill();
+  }
   
   glColor3f(1,1,1);
   arialHeader.drawString(title,x+titlePos.x,y+titlePos.y);
@@ -140,20 +155,6 @@ void block::draw(bool fade){
 	drawDD();
 	
 	drawOpenDD();
-	if(fade){
-		ofSetColor(255, 255, 255,75);
-		if (type==BLK_BRACKET) {
-			drawBigBlockShadow(x,y,w,h,orig.height);
-		}
-		//-------- if a block is a value block, draw the rounded block shadow
-		else if(type==BLK_VAL) {
-			if(bGrabbed) ofSetShadowDarkness(.4),ofShadowRounded(x,y,w,h,h/2);
-		}
-		//-------- if it's a normal block, draw a regular block shadow
-		else {
-			drawBlockShadow(x,y,w,h);
-		}
-	}
 }
 
 

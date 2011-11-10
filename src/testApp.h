@@ -4,12 +4,9 @@
 #include "ofMain.h"
 #include "ofExtended.h"
 #if defined( TARGET_OSX ) || defined( TARGET_LINUX )
-#include "ofxSystemCall.h"
 #endif
 #include "ofxShapes.h"
 #include "sideBar/sideBar.h"
-#include "ofVMouse.h"
-#include "blockLoad.h"
 #include "serialCheck.h"
 
 #include "controlBar/controlBar.h"

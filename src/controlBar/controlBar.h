@@ -15,6 +15,7 @@
 #include "blockLoad.h"
 
 #include "serialCheck.h"
+#include "uploadModule.h"
 #include "../../../dallasEng/dallasEng.h"
 
 class buttonHolder : public ofInterObj {
@@ -53,6 +54,8 @@ protected:
   ofRectangle subBar;
   
   ofFont subtitle;
+  
+  uploadModule upload;
   
   ofButton skipBut;
   

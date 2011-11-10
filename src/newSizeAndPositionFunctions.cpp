@@ -35,7 +35,7 @@ int block::newUpdateHeight()
   int topHeight=ttlSize.y;
   if(type==BLK_BRACKET){
     for (unsigned int i=0; i<blocksIn.size(); i++) {
-      ret+=blocksIn[i].newUpdateHeight()-5;
+      ret+=blocksIn[i].newUpdateHeight();
     }
     //ret+=5;
     if(ret<orig.height-(ttlSize.y+bottomBar)) ret=orig.height-(ttlSize.y+bottomBar);
@@ -51,7 +51,7 @@ int block::newUpdateHeight()
 void alignBlocks(vector<block> & t)
 {
   for (unsigned i=1; i<t.size(); i++) {
-    t[i].move(t[i-1].x,t[i-1].y+t[i-1].h+t[i-1].insertSpace-5);
+    t[i].move(t[i-1].x,t[i-1].y+t[i-1].h+t[i-1].insertSpace);
     t[i].newUpdatePositions();
   }
 }
@@ -64,7 +64,7 @@ void block::newUpdatePositions()
   }
   alignBlocks(blocksIn);
   if(blocksOn.size()){
-    blocksOn[0].move(x,y+h+insertSpace-5);
+    blocksOn[0].move(x,y+h+insertSpace);
     blocksOn[0].newUpdatePositions();
   }
   alignBlocks(blocksOn);
@@ -87,7 +87,7 @@ bool block::inside(block & drop)
 
 bool block::beneath(block & chk,signed int blw)
 {
-  if(blw<ttlSize.y){
+  if(blw<ttlSize.y/2){
     blw=ttlSize.y;
   }
   else blw+=ttlSize.y;

@@ -62,7 +62,7 @@ void testApp::draw(){
   
   
   ofSetColor(black);
-  drawHatching(0, 0, ofGetWidth(), ofGetHeight(), 3,3);
+  drawHatching(0, 0, ofGetWidth(), ofGetHeight(), 15,1);
   
   //--------- Draw any blocks that are in the composition area and are not clicked.
   
@@ -85,29 +85,12 @@ void testApp::draw(){
   blocks.drawForeground();
 	
 	//************************ if we're uploading, draw a fancy "uploading..." on screen
-
-	if (systemCall.isRunning()) {
-    ofSetColor(0, 0, 0,128);
-    ofRect(0, 0, ofGetWidth(), ofGetHeight());
-		ofSetColor(255, 255, 255);
-		spinner.draw((ofGetWidth())/2,ofGetHeight()/2, 300);
-		titleFont.setMode(OF_FONT_LEFT);
-		titleFont.setSize(70);
-		string printOut="uploading";
-		for (int i=0; i<(spinner.count()/3)%4; i++) {
-			printOut.append(".");
-		}
-		ofSetColor(255, 255, 255);
-		titleFont.drawString(printOut, ofGetWidth()/4, ofGetHeight()/4);
-		titleFont.setMode(OF_FONT_CENTER);
-		titleFont.setSize(30);
-	}
 	
   
   if(blocks.isTesting()){
 
     
-    ofSetColor(0x33, 0x33, 0x33);
+    /*ofSetColor(0x33, 0x33, 0x33);
     ofRect(0, 0, ofGetWidth(), ofGetHeight());
     
 		ofSetColor(0x444400);
@@ -116,7 +99,13 @@ void testApp::draw(){
 		}
 		for (int i=0; i*10<ofGetWidth(); i++) {
 			ofRect(i*10, 0, 1, ofGetHeight());
-		}
+		}*/
+    ofSetColor(0x33, 0x33, 0x33);
+    ofRect(0, 0, ofGetWidth(), ofGetHeight());
+    
+    
+    ofSetColor(black);
+    drawHatching(0, 0, ofGetWidth(), ofGetHeight(), 15,1);
     
     blocks.base.draw(ofGetHeight(), 75);
     blocks.drawCurrentBlock();
@@ -232,7 +221,7 @@ void testApp::mousePressed(int x, int y, int button){
   sidebar.clickDown(x, y);
   
   //--------- Check the blocks in the comp area
-  blocks.newClickDown(x, y);
+  blocks.clickDown(x, y);
   
   //--------- Run upload function if the upload button is pressed
   if(upBut.clickDown(x, y)){

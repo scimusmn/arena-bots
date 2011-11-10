@@ -12,6 +12,8 @@
 
 extern ofColor white, black, blue, yellow, gray;
 
+extern int TITLE_HEIGHT;
+
 baseBlock::baseBlock():block(){
   w=530, h=90;
   orig.width=w;
@@ -31,10 +33,13 @@ baseBlock::baseBlock():block(){
 	filename="null";
 	placeHolder=false;
   
-  ttlSize.y=h/2;
+  ttlSize.y=TITLE_HEIGHT;
   ttlSize.x=w;
   
   uploadBut.setup( 128,128,"images/upload2.png");
+  
+  butArea.x=uploadBut.w;
+  butArea.y=uploadBut.h;
 }
 
 void baseBlock::draw(int _x, int _y)
@@ -42,7 +47,14 @@ void baseBlock::draw(int _x, int _y)
   x=_x, y=_y;
   
   ofSetColor(color*.9);
-  drawBaseBlock(x, y, w, h);
+  drawBaseBlock(x, y, w, h,butArea.x,butArea.y);
+  
+  ofSetColor(black);
+  ofNoFill();
+  ofSetLineWidth(2);
+  drawBaseBlock(x, y, w, h,butArea.x,butArea.y);
+  ofSetLineWidth(1);
+  ofFill();
   
   //-------- Draw the blocks below
 	for (unsigned int i=0; i<blocksOn.size(); i++) {
@@ -53,8 +65,24 @@ void baseBlock::draw(int _x, int _y)
 		blocksIn[i].draw();
 	}
   
-  uploadBut.draw(x+w+10,y+h-50);
+  uploadBut.draw(x+w-butArea.x,y+10);
 }
+
+bool baseBlock::clickDown(int _x, int _y)
+{
+  uploadBut.clickDown(_x, _y);
+}
+
+bool baseBlock::newClickUp( int _x, int _y)
+{
+  uploadBut.clickUp();
+}
+
+void baseBlock::setup(bGroup * grp)
+{
+  group=grp;
+}
+
 
 baseBlock & baseBlock::operator=(baseBlock & t)
 {

@@ -15,6 +15,7 @@
 		AA7A31041468482400D95060 /* controlBar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7A31031468482400D95060 /* controlBar.cpp */; };
 		AA7A3107146862F400D95060 /* demoAnim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7A3106146862F400D95060 /* demoAnim.cpp */; };
 		AA7A37F4146ADDDE00D95060 /* baseBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7A37F3146ADDDE00D95060 /* baseBlock.cpp */; };
+		AA7A3CB9146C2FF000D95060 /* uploadModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7A3CB8146C2FF000D95060 /* uploadModule.cpp */; };
 		AA82B56613BE184300054749 /* block_MouseFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA82B56513BE184300054749 /* block_MouseFuncs.cpp */; };
 		AA8D7719132806D0000F0763 /* block_DrawingFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8D7718132806D0000F0763 /* block_DrawingFuncs.cpp */; };
 		AA8D772213280768000F0763 /* block_WriteOutFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8D772113280768000F0763 /* block_WriteOutFuncs.cpp */; };
@@ -188,6 +189,8 @@
 		AA7A3106146862F400D95060 /* demoAnim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demoAnim.cpp; path = demoAnim/demoAnim.cpp; sourceTree = "<group>"; };
 		AA7A37F2146ADDDE00D95060 /* baseBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = baseBlock.h; path = baseBlock/baseBlock.h; sourceTree = "<group>"; };
 		AA7A37F3146ADDDE00D95060 /* baseBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = baseBlock.cpp; path = baseBlock/baseBlock.cpp; sourceTree = "<group>"; };
+		AA7A3CB7146C2FF000D95060 /* uploadModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = uploadModule.h; path = uploadModule/uploadModule.h; sourceTree = "<group>"; };
+		AA7A3CB8146C2FF000D95060 /* uploadModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = uploadModule.cpp; path = uploadModule/uploadModule.cpp; sourceTree = "<group>"; };
 		AA82B56513BE184300054749 /* block_MouseFuncs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = block_MouseFuncs.cpp; sourceTree = "<group>"; };
 		AA89D384137B07F00055C130 /* blink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blink.h; sourceTree = "<group>"; };
 		AA89D385137B080F0055C130 /* crabEyes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crabEyes.h; sourceTree = "<group>"; };
@@ -614,6 +617,7 @@
 		AA7A312F14687EF400D95060 /* control */ = {
 			isa = PBXGroup;
 			children = (
+				AA7A3CB6146C2FB100D95060 /* uploadModule */,
 				AA7A313014687F0A00D95060 /* dirLoad */,
 				AAB4E89E1461982000276A4D /* serialChecker */,
 				AA7A3108146862F800D95060 /* demoAnim */,
@@ -638,6 +642,15 @@
 				AA7A37F3146ADDDE00D95060 /* baseBlock.cpp */,
 			);
 			name = baseBlock;
+			sourceTree = "<group>";
+		};
+		AA7A3CB6146C2FB100D95060 /* uploadModule */ = {
+			isa = PBXGroup;
+			children = (
+				AA7A3CB7146C2FF000D95060 /* uploadModule.h */,
+				AA7A3CB8146C2FF000D95060 /* uploadModule.cpp */,
+			);
+			name = uploadModule;
 			sourceTree = "<group>";
 		};
 		AA89D383137B07F00055C130 /* Blocks */ = {
@@ -1234,6 +1247,7 @@
 				AA7A31041468482400D95060 /* controlBar.cpp in Sources */,
 				AA7A3107146862F400D95060 /* demoAnim.cpp in Sources */,
 				AA7A37F4146ADDDE00D95060 /* baseBlock.cpp in Sources */,
+				AA7A3CB9146C2FF000D95060 /* uploadModule.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,7 +19,7 @@ void glWideCurve(double Ax,double Bx, double Cx,double Ay,double By, double Cy,d
 
 void drawBlock(double x, double y, double w, double h);
 
-void drawBaseBlock(double x, double y, double w, double h);
+void drawBaseBlock(double x, double y, double w, double h, double butX, double butY);
 
 void drawBlockShadow(double x, double y, double w, double h);
 
@@ -27,8 +27,6 @@ void shadeCircleSlice(double x, double y, double ir, double oR,int beg,int end, 
 
 void drawCircleSeg(double x, double y, double ir, double oR,int beg,int end, double r,double g, double b);
 
-void drawBigBlockShadow(double x, double y, double w, double h,double oH);
-
-void drawBigBlock(double x, double y, double w, double h, double oh, double ow);
+void drawBigBlock(int x, int y, int w, int h, int xI, int yI, int yB);
 
 #endif

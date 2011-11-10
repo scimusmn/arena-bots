@@ -154,25 +154,9 @@ public:
   
   void updatePositions();
 	
-	int heightUpdate(block& grab, block & comp);
-	
-	int add(vector<block> t, int j=0);
-	
 	void addNum(block & holder, block & held);
 	
-	void addFromClick(block & t, int x, int y);
-	
-	void blockDown(block & t,int x,int y);
-	
-	void doubleClick(double x, double y, void func());
-	
-	void clickDown(double x, double y);
-	
 	void clear();
-	
-	//bool isInsideBlockBelow(block &t);
-	
-	int onIf(int x,int y,block t);
 	
 	void drawForeground();
 	
@@ -180,17 +164,7 @@ public:
 	
 	void motion(double x, double y);
 	
-	void deleteBlock(block * delBlk);
-	
-	block * deleteLast(block * del);
-	
-	void deleteGroup(block * del);
-	
 	int handleClickUps(block & first, block & second, bool checkOn=true);
-	
-	void clickUp(double x, double y);
-	
-	int grabbedBlockBelow(int i, int j);
 	
 	int above(int i, int j);
   
@@ -198,7 +172,7 @@ public:
   
   block held;
   
-  bool newClickDown(int _x, int _y);
+  bool clickDown(int _x, int _y);
   
   bool newClickUp(int _x, int _y);
   
