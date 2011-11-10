@@ -19,6 +19,7 @@ enum robotDirection {
 
 class roboMotors {
 protected:
+  bool running;
   float robutDiameter;
   float rCirc,wCirc;
   float wheelDiameter;
@@ -39,6 +40,7 @@ public:
     inchesPerStep=wCirc/((float)stepsPerRot);
   }
   void setup(){
+    running=false;
     leftMotor.setSpeed(100);
     rightMotor.setSpeed(100);
     start();
@@ -52,7 +54,7 @@ public:
     rightMotor.release();
   }
   void doubleStep(int steps, int direction, int style) {
-    while (steps--) {
+    while (running&&steps--) {
       leftMotor.step(1, direction, style); 
       rightMotor.step(1, direction, style); 
     }
@@ -66,7 +68,7 @@ public:
     doubleStep(steps,FORWARD,DOUBLE);
   }
   void leftStep(int steps, int style) {
-    while (steps--) {
+    while (running&&steps--) {
       leftMotor.step(1, FORWARD, style); 
       rightMotor.step(1, BACKWARD, style); 
     }
@@ -76,7 +78,7 @@ public:
     leftStep(steps,DOUBLE);
   }
   void rightStep(int steps, int style) {
-    while (steps--) {
+    while (running&&steps--) {
       leftMotor.step(1, BACKWARD, style); 
       rightMotor.step(1, FORWARD, style); 
     }
@@ -85,19 +87,17 @@ public:
     int steps=(rCirc*(degrees/360))/inchesPerStep;
     rightStep(steps,DOUBLE);
   }
-  void rollingTurn(int steps, int augment){
-    float leftSteps=steps-augment, rightSteps=steps+augment;
-    float percSteps=(leftSteps/rightSteps);
-    if(percSteps>=1) steps=rightSteps;
-    else steps=leftSteps;
-    while (steps--) {
-      if(leftSteps--)
-        leftMotor.step(1, BACKWARD,DOUBLE);
-      else leftMotor.release();
-      if(rightSteps--) 
-        rightMotor.step(1, BACKWARD,DOUBLE); 
-      else rightMotor.release();
-    }
+  void toggleRun(){
+    running=!running;
+  }
+  bool isRunning(){
+    return running;
+  }
+  void startRun(){
+    running=true;
+  }
+  void stopRun(){
+    running=0;
   }
 };
 

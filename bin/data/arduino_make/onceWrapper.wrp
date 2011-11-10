@@ -1,15 +1,31 @@
-#include <stdlib.h>
+#define IS_ROBOT 0x06
+#define ROBOT_NUMBER 0x0C
 
 $blocks.global()
+
 bool thru=false;
+bool running=false;
+
+void changeRun(){
+  robot.toggleRun();
+  running=robot.isRunning();
+  if(!running) robot.end();
+  thru=false;
+}
 
 void setup(){
+  attachInterrupt(0, changeRun, RISING);
+  Serial.begin(9600);
 	$blocks.setup()
 }
 
 void loop(){
+  Serial.print(IS_ROBOT,BYTE);
+  Serial.print(ROBOT_NUMBER,BYTE);
+  Serial.print($deviceNumber.,BYTE);
+  Serial.print("\n");
   $blocks.start()
-  if(!thru){
+  if(running&&!thru){
     $blocks.loop()
   }
   $blocks.end()

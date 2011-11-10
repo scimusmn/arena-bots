@@ -13,6 +13,8 @@
 #define ROBOT_NUMBER 0x0C
 #define REQUEST_IDENT 0x04
 
+int CURRENT_ROBOT_NUMBER=0;
+
 //_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_
 //_-_-_-_-_//_-_-_-_-_//_-_-_-_-_ SerialDev //_-_-_-_-_//_-_-_-_-_//_-_-_-_-_
 
@@ -169,7 +171,7 @@ bool serialCheck::getDeviceNumber()
         switch (data[0]) {
           case ROBOT_NUMBER:{
             lock();
-            nCurrentDevice=data[1];
+            CURRENT_ROBOT_NUMBER=nCurrentDevice=data[1];
             cout <<"Robot number is " << int(nCurrentDevice)<<endl;
             unlock();
             ret=true;

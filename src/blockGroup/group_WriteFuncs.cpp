@@ -10,6 +10,7 @@
 
 #include "blockGroup.h"
 
+extern int CURRENT_ROBOT_NUMBER;
 
 //------------------ bGroup Writeout Functions ----------------
 
@@ -112,7 +113,7 @@ void bGroup::writeFile(ofstream *k){
 				else if(buffer[i]=='$'){
 					//-------- find the next word after the $
 					strtPos=endPos=++i;
-					while (buffer[endPos]!='.'&&buffer[endPos]) {
+					while (buffer[endPos]!='.'&&buffer[endPos]!=','&&buffer[endPos]) {
 						endPos++;
 					}
 					i=endPos;
@@ -151,6 +152,10 @@ void bGroup::writeFile(ofstream *k){
 						}
 						i=endPos+1;
 					}
+          else if(temp=="deviceNumber"){
+            *k << CURRENT_ROBOT_NUMBER;
+            i=endPos;
+          }
 				}
 				//-------- if we didn't find either of those things, write the i^th character to k. 
 				else {

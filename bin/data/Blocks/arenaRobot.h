@@ -32,6 +32,7 @@ public:
     roboMotors::start();
   }
   void end(){
+    running=false;
     roboMotors::end();
   }
   /*void followLine(){
