@@ -18,6 +18,8 @@ class ofTurtle {
   deque<ofPoint> lines;
   int numLineStored;
   bool bTurnSinceRecord;
+  
+  ofImage map;
 public:
   ofPoint start,pos;
   int w,h;
@@ -34,6 +36,8 @@ public:
   bool frontRightIsClear(int pixels, ofImage & walls);
   bool rightIsClear(int pixels, ofImage & walls);
   bool leftIsClear(int pixels, ofImage & walls);
+  bool frontIsClear(int distance);
+  bool leftIsClear(int distance);
   ofPoint pointAlongBearing(int pix);
   void draw(int _x, int _y);
 };

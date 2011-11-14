@@ -1,52 +1,33 @@
 <base robot_number="102">
-	<block name="go forward %d inches" color="0xde8c3a">
-		<dropdown>
-			<ddlow>0</ddlow>
-			<ddhigh>12</ddhigh>
-			<ddsteps>7</ddsteps>
-			<selected>12</selected>
-		</dropdown>
-		<action>move:$dd[0].num()*$ppi</action>
-		<file>forward.blk</file>
+	<block name="step forward" color="0xde8c3a">
+		<file>stepForward.blk</file>
+		<action>move:1</action>
 	</block>
-	<block name="turn right %d degrees" color="0xde8c3a">
-		<dropdown>
-			<ddlow>0</ddlow>
-			<ddhigh>180</ddhigh>
-			<ddsteps>5</ddsteps>
-			<selected>90</selected>
-		</dropdown>
-		<action>turn:$dd[0].num()</action>
-		<file>rightTurn.blk</file>
-	</block>
-	<block name="go forward %d inches" color="0xde8c3a">
-		<dropdown>
-			<ddlow>0</ddlow>
-			<ddhigh>12</ddhigh>
-			<ddsteps>7</ddsteps>
-			<selected>8</selected>
-		</dropdown>
-		<file>forward.blk</file>
-		<action>move:$dd[0].num()*$ppi</action>
-	</block>
-	<block name="turn left %d degrees" color="0xde8c3a">
-		<dropdown>
-			<ddlow>0</ddlow>
-			<ddhigh>180</ddhigh>
-			<selected>90</selected>
-			<ddsteps>5</ddsteps>
-		</dropdown>
-		<action>turn:-$dd[0].num()</action>
-		<file>leftTurn.blk</file>
-	</block>
-	<block name="go forward %d inches" color="0xde8c3a">
-		<dropdown>
-			<ddlow>0</ddlow>
-			<ddhigh>12</ddhigh>
-			<ddsteps>7</ddsteps>
-			<selected>12</selected>
-		</dropdown>
-		<file>forward.blk</file>
-		<action>move:$dd[0].num()*$ppi</action>
+	<block name="if path in front is blocked" color="0x65c270">
+		<bracket>1</bracket>
+		<file>pathBlocked.blk</file>
+		<action>if:!$front(4)</action>
+		<blocksIn>
+			<block name="go backward %d inches" color="0xde8c3a">
+				<dropdown>
+					<ddlow>0</ddlow>
+					<ddhigh>12</ddhigh>
+					<ddsteps>7</ddsteps>
+					<selected>2</selected>
+				</dropdown>
+				<file>backward.blk</file>
+				<action>move:-$dd[0].num()*$ppi</action>
+			</block>
+			<block name="turn right %d degrees" color="0xde8c3a">
+				<dropdown>
+					<ddlow>0</ddlow>
+					<ddhigh>180</ddhigh>
+					<ddsteps>5</ddsteps>
+					<selected>90</selected>
+				</dropdown>
+				<action>turn:$dd[0].num()</action>
+				<file>rightTurn.blk</file>
+			</block>
+		</blocksIn>
 	</block>
 </base>

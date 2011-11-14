@@ -66,6 +66,8 @@ void baseBlock::draw(int _x, int _y)
 	}
   
   uploadBut.draw(x+w-butArea.x,y+10);
+  
+  drawOpenDD();
 }
 
 bool baseBlock::clickDown(int _x, int _y)

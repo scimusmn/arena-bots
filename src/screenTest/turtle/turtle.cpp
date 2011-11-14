@@ -91,6 +91,16 @@ bool ofTurtle::leftIsClear(int pixels, ofImage & walls)
   return sensorIsClear(ps, pixels, walls,270);
 }
 
+bool ofTurtle::frontIsClear(int distance)
+{
+  frontIsClear(pixels,map);
+}
+
+bool ofTurtle::leftIsClear(int distance)
+{
+  leftIsClear(pixels,map);
+}
+
 ofPoint ofTurtle::pointAlongBearing(int pix)
 {
    return pos+bearing.unit()*pix;

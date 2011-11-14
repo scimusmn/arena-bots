@@ -13,25 +13,10 @@ void testApp::setup(){
 	
 	//--------- Initialize the valid working space for the blocks
 	blocks.setup(250, 0, ofGetWidth(), ofGetHeight());
-	
-	//sidebar = 0;
-	
-	//--------- Load the background images (wood panel and aluminum
-	background.loadImage("images/background.jpg");
-	
-	//--------- Load the images for the buttons
-	upBut.setup( 128,128,"images/upload2.png");
   
 	//--------- Load font for drawing on screen
-	titleFont.loadFont("fonts/DinC.ttf");
-	titleFont.setSize(30);
-	titleFont.setMode(OF_FONT_CENTER);
   
   topTitle.loadFont("fonts/DinC.ttf", 35);
-  
-  label.loadFont("fonts/HelveticaBold.otf");
-  label.setSize(20);
-  label.setMode(OF_FONT_TOP);
 
   
 	ofHideCursor();
@@ -43,12 +28,6 @@ void testApp::setup(){
 
 //--------------------------------------------------------------
 void testApp::update(){
-	
-  //blocks.update();
-	
-	//---------- Set which blocks are available to be pressed
-	
-	//upBut.setAvailable(!systemCall.isRunning());
 	
   controls.update();
 }
@@ -64,13 +43,7 @@ void testApp::draw(){
   ofSetColor(black);
   drawHatching(0, 0, ofGetWidth(), ofGetHeight(), 15,1);
   
-  //--------- Draw any blocks that are in the composition area and are not clicked.
-  
-  //blocks.draw();
-  
   //******************** Menu Bar **************************
-  
-  //drawBase_and_Demo(controls.h+topTitle.h);
   
   blocks.draw(sidebar.area.width,controls.h+topTitle.h,ofGetWidth()-sidebar.area.width,ofGetHeight()-(controls.h+topTitle.h));
   
@@ -88,18 +61,6 @@ void testApp::draw(){
 	
   
   if(blocks.isTesting()){
-
-    
-    /*ofSetColor(0x33, 0x33, 0x33);
-    ofRect(0, 0, ofGetWidth(), ofGetHeight());
-    
-		ofSetColor(0x444400);
-		for (int i=0; i*10<ofGetHeight(); i++) {
-			ofRect(0, i*10, ofGetWidth(), 1);
-		}
-		for (int i=0; i*10<ofGetWidth(); i++) {
-			ofRect(i*10, 0, 1, ofGetHeight());
-		}*/
     ofSetColor(0x33, 0x33, 0x33);
     ofRect(0, 0, ofGetWidth(), ofGetHeight());
     
@@ -131,11 +92,6 @@ void testApp::draw(){
     ofPoint ps = blocks.turtle.pos+blocks.turtle.bearing.unit()*4*pixPerInch;
     ofCircle(ps.x, ps.y, 5);
     
-    /*if(!blocks.turtle.rightIsClear(2*pixPerInch, blocks.mapp)) ofSetColor(255, 0, 0);
-    else ofSetColor(0, 255, 0);
-    ps = blocks.turtle.pos-blocks.turtle.bearing.ortho().unit()*blocks.turtle.w/2-blocks.turtle.bearing.unit()*blocks.turtle.w/2+blocks.turtle.bearing.unit().rotate(90)*2*pixPerInch;
-    ofCircle(ps.x, ps.y, 5);*/
-    
     if(!blocks.turtle.leftIsClear(2*pixPerInch, blocks.mapp)) ofSetColor(255, 0, 0);
     else ofSetColor(0, 255, 0);
     ps = blocks.turtle.pos+blocks.turtle.bearing.ortho().unit()*blocks.turtle.w/2-blocks.turtle.bearing.unit()*blocks.turtle.w/2+blocks.turtle.bearing.unit().rotate(270)*2*pixPerInch;
@@ -146,31 +102,8 @@ void testApp::draw(){
   controls.drawForeground();
 }
 
-void testApp::upload()
-{
-	//--------- Generate the file which we will compile and upload to the arduino
-	blocks.writeFile("arduino_make/arduino_make.pde");
-	
-	//--------- once we've generated the file, compile and upload with one of teh following scripts
-#if defined( TARGET_OSX ) || defined( TARGET_LINUX )
-	systemCall.run(ofToDataPath("arduino_make/upload.sh"));
-#else
-	systemCall.run(ofToDataPath("\"data\\arduino_make\\build.bat\""));
-#endif
-	
-	//--------- unpress the upload button 
-	upBut.setPressed(false);
-}
-
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-	
-	//************** only the key=='n' is used, to signal when the animation has finished a step.
-	if(key=='w'){
-		upload();
-	}
-	
-  
   if(key=='t'){
     if (blocks.isTesting()) blocks.stopTesting();
     else blocks.startTesting();
@@ -222,11 +155,6 @@ void testApp::mousePressed(int x, int y, int button){
   
   //--------- Check the blocks in the comp area
   blocks.clickDown(x, y);
-  
-  //--------- Run upload function if the upload button is pressed
-  if(upBut.clickDown(x, y)){
-    upload();
-  }
 }
 
 //--------------------------------------------------------------
@@ -235,10 +163,7 @@ void testApp::mouseReleased(int x, int y, int button){
 	if(controls.mouseLockout(button)){
     //--------- do a bunch of clickups
     blocks.newClickUp(x, y);
-    upBut.clickUp();
-    sets.clickUp();
   }
-  skipBut.clickUp();
   controls.setAvailableButtons();
 }
 

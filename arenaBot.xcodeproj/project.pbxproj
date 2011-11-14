@@ -16,10 +16,13 @@
 		AA7A3107146862F400D95060 /* demoAnim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7A3106146862F400D95060 /* demoAnim.cpp */; };
 		AA7A37F4146ADDDE00D95060 /* baseBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7A37F3146ADDDE00D95060 /* baseBlock.cpp */; };
 		AA7A3CB9146C2FF000D95060 /* uploadModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7A3CB8146C2FF000D95060 /* uploadModule.cpp */; };
+		AA7A408C146D662800D95060 /* screenTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7A4087146D662800D95060 /* screenTest.cpp */; };
+		AA7A408D146D662800D95060 /* turtle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7A408A146D662800D95060 /* turtle.cpp */; };
+		AA7A40E5146D86BA00D95060 /* turtleAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7A40E3146D86BA00D95060 /* turtleAction.cpp */; };
+		AA7A40E8146D8A4B00D95060 /* evaluate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7A40E7146D8A4B00D95060 /* evaluate.cpp */; };
 		AA82B56613BE184300054749 /* block_MouseFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA82B56513BE184300054749 /* block_MouseFuncs.cpp */; };
 		AA8D7719132806D0000F0763 /* block_DrawingFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8D7718132806D0000F0763 /* block_DrawingFuncs.cpp */; };
 		AA8D772213280768000F0763 /* block_WriteOutFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8D772113280768000F0763 /* block_WriteOutFuncs.cpp */; };
-		AA949D8313B384F1009141B0 /* testApp_auxDrawing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA949D8213B384F1009141B0 /* testApp_auxDrawing.cpp */; };
 		AA949DB013B390B7009141B0 /* ofxDirList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA949DAE13B390B7009141B0 /* ofxDirList.cpp */; };
 		AA949E5913B3D944009141B0 /* blockLoad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA949E5813B3D944009141B0 /* blockLoad.cpp */; };
 		AA9C32641338E09B00CB0F81 /* ofxThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA9C32621338E09B00CB0F81 /* ofxThread.cpp */; };
@@ -32,7 +35,6 @@
 		AAB4E81E1461815900276A4D /* sideBar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB4E81D1461815900276A4D /* sideBar.cpp */; };
 		AAB4E8A11461984200276A4D /* serialCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB4E8A01461984200276A4D /* serialCheck.cpp */; };
 		AAE2293C13CE3FF40068AA76 /* block_ActionFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAE2293B13CE3FF40068AA76 /* block_ActionFuncs.cpp */; };
-		AAE2DC7013D5D05A0067C46A /* turtle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAE2DC6F13D5D05A0067C46A /* turtle.cpp */; };
 		E45BE0AA0E8CC67C009D7055 /* GLee.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE0A90E8CC67C009D7055 /* GLee.a */; };
 		E45BE2E40E8CC69C009D7055 /* rtAudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE2E30E8CC69C009D7055 /* rtAudio.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -191,6 +193,14 @@
 		AA7A37F3146ADDDE00D95060 /* baseBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = baseBlock.cpp; path = baseBlock/baseBlock.cpp; sourceTree = "<group>"; };
 		AA7A3CB7146C2FF000D95060 /* uploadModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = uploadModule.h; path = uploadModule/uploadModule.h; sourceTree = "<group>"; };
 		AA7A3CB8146C2FF000D95060 /* uploadModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = uploadModule.cpp; path = uploadModule/uploadModule.cpp; sourceTree = "<group>"; };
+		AA7A4087146D662800D95060 /* screenTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = screenTest.cpp; sourceTree = "<group>"; };
+		AA7A4088146D662800D95060 /* screenTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = screenTest.h; sourceTree = "<group>"; };
+		AA7A408A146D662800D95060 /* turtle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = turtle.cpp; sourceTree = "<group>"; };
+		AA7A408B146D662800D95060 /* turtle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = turtle.h; sourceTree = "<group>"; };
+		AA7A40E3146D86BA00D95060 /* turtleAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = turtleAction.cpp; sourceTree = "<group>"; };
+		AA7A40E4146D86BA00D95060 /* turtleAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = turtleAction.h; sourceTree = "<group>"; };
+		AA7A40E6146D8A4B00D95060 /* evaluate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = evaluate.h; path = evaluateExpression/evaluate.h; sourceTree = "<group>"; };
+		AA7A40E7146D8A4B00D95060 /* evaluate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = evaluate.cpp; path = evaluateExpression/evaluate.cpp; sourceTree = "<group>"; };
 		AA82B56513BE184300054749 /* block_MouseFuncs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = block_MouseFuncs.cpp; sourceTree = "<group>"; };
 		AA89D384137B07F00055C130 /* blink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blink.h; sourceTree = "<group>"; };
 		AA89D385137B080F0055C130 /* crabEyes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crabEyes.h; sourceTree = "<group>"; };
@@ -198,7 +208,6 @@
 		AA8B5F1B13816E7A0086AE3D /* rbTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rbTimer.h; sourceTree = "<group>"; };
 		AA8D7718132806D0000F0763 /* block_DrawingFuncs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = block_DrawingFuncs.cpp; sourceTree = "<group>"; };
 		AA8D772113280768000F0763 /* block_WriteOutFuncs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = block_WriteOutFuncs.cpp; sourceTree = "<group>"; };
-		AA949D8213B384F1009141B0 /* testApp_auxDrawing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testApp_auxDrawing.cpp; sourceTree = "<group>"; };
 		AA949DAB13B390B7009141B0 /* Instructions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Instructions.txt; sourceTree = "<group>"; };
 		AA949DAC13B390B7009141B0 /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
 		AA949DAE13B390B7009141B0 /* ofxDirList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxDirList.cpp; sourceTree = "<group>"; };
@@ -257,8 +266,6 @@
 		AAE228BE13CDDAC30068AA76 /* stepForward.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stepForward.blk; sourceTree = "<group>"; };
 		AAE228D413CDDCCD0068AA76 /* pathBlocked.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pathBlocked.blk; sourceTree = "<group>"; };
 		AAE2293B13CE3FF40068AA76 /* block_ActionFuncs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = block_ActionFuncs.cpp; sourceTree = "<group>"; };
-		AAE2DC6E13D5D05A0067C46A /* turtle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = turtle.h; path = turtle/turtle.h; sourceTree = "<group>"; };
-		AAE2DC6F13D5D05A0067C46A /* turtle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = turtle.cpp; path = turtle/turtle.cpp; sourceTree = "<group>"; };
 		AAEFB3961360DBFF0096BC26 /* repeatWrapper.wrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = repeatWrapper.wrp; path = bin/data/arduino_make/repeatWrapper.wrp; sourceTree = "<group>"; };
 		E45BE0390E8CC647009D7055 /* FreeImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FreeImage.h; path = ../../../libs/freeimage/include/FreeImage.h; sourceTree = SOURCE_ROOT; };
 		E45BE03F0E8CC650009D7055 /* fmod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fmod.h; path = ../../../libs/fmodex/include/fmod.h; sourceTree = SOURCE_ROOT; };
@@ -617,6 +624,7 @@
 		AA7A312F14687EF400D95060 /* control */ = {
 			isa = PBXGroup;
 			children = (
+				AA7A4086146D662800D95060 /* screenTest */,
 				AA7A3CB6146C2FB100D95060 /* uploadModule */,
 				AA7A313014687F0A00D95060 /* dirLoad */,
 				AAB4E89E1461982000276A4D /* serialChecker */,
@@ -653,6 +661,45 @@
 			name = uploadModule;
 			sourceTree = "<group>";
 		};
+		AA7A4086146D662800D95060 /* screenTest */ = {
+			isa = PBXGroup;
+			children = (
+				AA7A40E2146D86BA00D95060 /* turtleAction */,
+				AA7A408E146D677000D95060 /* evaluateExpression */,
+				AA7A4087146D662800D95060 /* screenTest.cpp */,
+				AA7A4088146D662800D95060 /* screenTest.h */,
+				AA7A4089146D662800D95060 /* turtle */,
+			);
+			path = screenTest;
+			sourceTree = "<group>";
+		};
+		AA7A4089146D662800D95060 /* turtle */ = {
+			isa = PBXGroup;
+			children = (
+				AA7A408A146D662800D95060 /* turtle.cpp */,
+				AA7A408B146D662800D95060 /* turtle.h */,
+			);
+			path = turtle;
+			sourceTree = "<group>";
+		};
+		AA7A408E146D677000D95060 /* evaluateExpression */ = {
+			isa = PBXGroup;
+			children = (
+				AA7A40E6146D8A4B00D95060 /* evaluate.h */,
+				AA7A40E7146D8A4B00D95060 /* evaluate.cpp */,
+			);
+			name = evaluateExpression;
+			sourceTree = "<group>";
+		};
+		AA7A40E2146D86BA00D95060 /* turtleAction */ = {
+			isa = PBXGroup;
+			children = (
+				AA7A40E3146D86BA00D95060 /* turtleAction.cpp */,
+				AA7A40E4146D86BA00D95060 /* turtleAction.h */,
+			);
+			path = turtleAction;
+			sourceTree = "<group>";
+		};
 		AA89D383137B07F00055C130 /* Blocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -677,7 +724,6 @@
 				AA7A30811468275C00D95060 /* bracketBlock */,
 				AAB4E7161460793500276A4D /* sideBar */,
 				AAB4E7031460741A00276A4D /* Block Group */,
-				AAE2DC6D13D5CFF10067C46A /* onScreen Test */,
 				AA4B132612F7546700C962B4 /* blocks.h */,
 				AA4B11FC12F70C3200C962B4 /* blockDraw.h */,
 				AA4B11FD12F70C3200C962B4 /* blockDraw.cpp */,
@@ -832,15 +878,6 @@
 			);
 			name = 002_Automatic;
 			path = arena/002_Automatic;
-			sourceTree = "<group>";
-		};
-		AAE2DC6D13D5CFF10067C46A /* onScreen Test */ = {
-			isa = PBXGroup;
-			children = (
-				AAE2DC6E13D5D05A0067C46A /* turtle.h */,
-				AAE2DC6F13D5D05A0067C46A /* turtle.cpp */,
-			);
-			name = "onScreen Test";
 			sourceTree = "<group>";
 		};
 		BB4B014C10F69532006C3DED /* addons */ = {
@@ -1052,7 +1089,6 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
-				AA949D8213B384F1009141B0 /* testApp_auxDrawing.cpp */,
 				AA16D5B013B92DB1009A0843 /* README.txt */,
 			);
 			path = src;
@@ -1227,13 +1263,11 @@
 				AA8D7719132806D0000F0763 /* block_DrawingFuncs.cpp in Sources */,
 				AA8D772213280768000F0763 /* block_WriteOutFuncs.cpp in Sources */,
 				AA9C32641338E09B00CB0F81 /* ofxThread.cpp in Sources */,
-				AA949D8313B384F1009141B0 /* testApp_auxDrawing.cpp in Sources */,
 				AA949DB013B390B7009141B0 /* ofxDirList.cpp in Sources */,
 				AA949E5913B3D944009141B0 /* blockLoad.cpp in Sources */,
 				AA82B56613BE184300054749 /* block_MouseFuncs.cpp in Sources */,
 				AA02168213C63D5D008E0DDE /* newSizeAndPositionFunctions.cpp in Sources */,
 				AAE2293C13CE3FF40068AA76 /* block_ActionFuncs.cpp in Sources */,
-				AAE2DC7013D5D05A0067C46A /* turtle.cpp in Sources */,
 				AAB4E7061460744600276A4D /* group_SetupFuncs.cpp in Sources */,
 				AAB4E70E146076A400276A4D /* group_MouseFuncts.cpp in Sources */,
 				AAB4E711146076D100276A4D /* group_DrawFuncs.cpp in Sources */,
@@ -1248,6 +1282,10 @@
 				AA7A3107146862F400D95060 /* demoAnim.cpp in Sources */,
 				AA7A37F4146ADDDE00D95060 /* baseBlock.cpp in Sources */,
 				AA7A3CB9146C2FF000D95060 /* uploadModule.cpp in Sources */,
+				AA7A408C146D662800D95060 /* screenTest.cpp in Sources */,
+				AA7A408D146D662800D95060 /* turtle.cpp in Sources */,
+				AA7A40E5146D86BA00D95060 /* turtleAction.cpp in Sources */,
+				AA7A40E8146D8A4B00D95060 /* evaluate.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -3,13 +3,10 @@
 
 #include "ofMain.h"
 #include "ofExtended.h"
-#if defined( TARGET_OSX ) || defined( TARGET_LINUX )
-#endif
-#include "ofxShapes.h"
 #include "sideBar/sideBar.h"
-#include "serialCheck.h"
 
 #include "controlBar/controlBar.h"
+#include "turtle.h"
 
 /*****************************************************************
  * class testApp : public ofBaseApp
@@ -75,15 +72,6 @@ class testApp : public ofBaseApp{
   titleBar topTitle;
 
 	ofImage background;
-	
-	ofButton upBut;
-	
-	ofButton skipBut;
-	
-	ofFont	titleFont;
-  ofFont  label;
-	ofSystemCall systemCall;
-	ofProgressSpinner spinner;
 	
   rootGroup sets;
   

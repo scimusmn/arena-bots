@@ -33,7 +33,7 @@ struct evalData {
   }
 };
 
-evalData operate(evalData & first, evalData & second)
+evalData operat(evalData & first, evalData & second)
 {
   evalData ret;
   switch (first.nextOperator) {
@@ -60,7 +60,7 @@ evalData operate(evalData & first, evalData & second)
   return ret;
 }
 
-int getNumDelimited(string exp, string delims)
+int getNumDelim(string exp, string delims)
 {
   int ret=0;
   for (unsigned int i=0; i<exp.length(); i++) {
@@ -71,14 +71,14 @@ int getNumDelimited(string exp, string delims)
   return ret+1;
 }
 
-evalData getSubExpression(string exp, int j)
+evalData getSubExp(string exp, int j)
 {
   evalData ret;
   string delims="+-/*";
   string expr;
   int strt=0, end=0;
   int expNum=0;
-  int numDeltd=getNumDelimited(exp, delims);
+  int numDeltd=getNumDelim(exp, delims);
   if(j>numDeltd) j=numDeltd;
   for (unsigned int i=0; i<exp.length(); i++) {
     if (isDelim(exp[i],delims)) {
@@ -109,23 +109,23 @@ evalData getSubExpression(string exp, int j)
   return ret;
 }
 
-vector<evalData> breakIntoEvaluable(string exp)
+vector<evalData> breakIntoEval(string exp)
 {
   vector<evalData> ret;
-  for (int i=0; i<getNumDelimited(exp, "+-/*"); i++) {
-    ret.push_back(getSubExpression(exp, i));
+  for (int i=0; i<getNumDelim(exp, "+-/*"); i++) {
+    ret.push_back(getSubExp(exp, i));
   }
   return ret;
 }
 
-vector<evalData> evaluateNumbers(string exp)
+vector<evalData> evalNumbers(string exp)
 {
   vector<evalData> ret;
-  vector<evalData> eval=breakIntoEvaluable(exp);
+  vector<evalData> eval=breakIntoEval(exp);
   for (unsigned int i=0; i<eval.size(); i++) {
     if(i<eval.size()-1&&eval[i].isNumber&&eval[i+1].isNumber){
       if((eval[i+1].nextOperator!='*'&&eval[i+1].nextOperator!='/')||(eval[i].nextOperator=='*'||eval[i].nextOperator=='/')){
-        evalData newData=operate(eval[i], eval[i+1]);
+        evalData newData=operat(eval[i], eval[i+1]);
         eval[i]=newData;
         eval.erase(eval.begin()+i+1);
       }
@@ -133,7 +133,7 @@ vector<evalData> evaluateNumbers(string exp)
   }
   for (unsigned int i=0; i<eval.size(); i++) {
     if(i<eval.size()-1&&eval[i].isNumber&&eval[i+1].isNumber){
-      evalData newData=operate(eval[i], eval[i+1]);
+      evalData newData=operat(eval[i], eval[i+1]);
       eval[i]=newData;
       eval.erase(eval.begin()+i+1);
     }
@@ -168,13 +168,13 @@ double block::evalVar(string str)
 
 double block::parseNumber(string str)
 {
-  vector<evalData> eval=evaluateNumbers(action.dataStr);
+  vector<evalData> eval=evalNumbers(action.dataStr);
   string t;
   for (unsigned int i=0; i<eval.size(); i++) {
     if(!eval[i].isNumber) eval[i].number=evalVar(eval[i].varName),eval[i].varName=ofToString(eval[i].number,0), eval[i].isNumber=true;
     t+=eval[i].varName+eval[i].nextOperator;
   }
-  eval=evaluateNumbers(t);
+  eval=evalNumbers(t);
   return eval[0].number;
 }
 
