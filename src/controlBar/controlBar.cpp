@@ -26,6 +26,19 @@ buttonHolder::buttonHolder()
   area.height=0;
 }
 
+buttonHolder::buttonHolder(int numObj, ...)
+{
+  area.height=0;
+  va_list vl;
+	va_start(vl,numObj);
+  
+  for (int i=0; i<numObj; i++) {
+    addObj(*va_arg(vl,ofInterObj *));
+  }
+  
+  va_end(vl);
+}
+
 void buttonHolder::addObj(ofInterObj & obj)
 {
   objs.push_back(&obj);
@@ -65,10 +78,66 @@ void buttonHolder::draw(int _x, int _y)
   }
 }
 
+buttonHolder & barOfButtons::operator[](int i){
+  return *static_cast<buttonHolder *>(objs[i]);
+}
 
+void barOfButtons::addSection()
+{
+  objs.push_back(new buttonHolder());
+}
+
+void barOfButtons::addSection(int numObjs, ...)
+{
+  va_list vl;
+	va_start(vl,numObjs);
+  
+  objs.push_back(new buttonHolder(numObjs, vl));
+  va_end(vl);
+}
+
+buttonHolder & barOfButtons::lastSection()
+{
+  return (*this)[objs.size()-1];
+}
 
 //_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_
 //_-_-_-_-_//_-_-_-_-_control Bar//_-_-_-_-_//_-_-_-_-_
+
+void controlBar::barSpacing()
+{
+  //_-_-_-_-_//_-_-_-_-_ spacing setup //_-_-_-_-_//_-_-_-_-_
+  for(int i=0; i<4;i++)
+    bHldr.push_back(buttonHolder());
+  
+  bHldr[0].addObj(demo);
+  
+  for (unsigned int i=0; i<sets.size(); i++) bHldr[1].addObj(sets(i));
+  bHldr[1].internalSpace(20);
+  
+  bHldr[2].addObj(undoBut);
+  bHldr[2].addObj(redoBut);
+  bHldr[2].internalSpace(20);
+  
+  bHldr[3].addObj(clearBut);
+  
+  double maxH=0;
+  int pad=ofGetWidth();
+  
+  for (unsigned int i=0; i<bHldr.size(); i++) {
+    maxH=max(maxH,bHldr[i].maxHeight());
+    pad-=bHldr[i].area.width;
+  }
+  buttonBar=ofRectangle(x,y,ofGetWidth(),maxH*1.2);
+  
+  for (unsigned int i=0; i<bHldr.size(); i++) {
+    bHldr[i].area.height=bHldr[i].h=buttonBar.height;
+    bHldr[i].padding(pad/bHldr.size());
+  }
+  
+  h=subBar.height+buttonBar.height;
+  w=ofGetWidth();
+}
 
 void controlBar::setup(bGroup * bG, sbGroup * sbG)
 {
@@ -99,32 +168,9 @@ void controlBar::setup(bGroup * bG, sbGroup * sbG)
   
   upload.setup(blocks);
   
-  //_-_-_-_-_//_-_-_-_-_ spacing setup //_-_-_-_-_//_-_-_-_-_
-  demoHldr.addObj(demo);
+  testbed.setup();
   
-  for (unsigned int i=0; i<sets.size(); i++) setsHldr.addObj(sets(i));
-  setsHldr.internalSpace(20);
-  
-  
-  undoHldr.addObj(undoBut);
-  undoHldr.addObj(redoBut);
-  undoHldr.internalSpace(20);
-  
-  clearHldr.addObj(clearBut);
-  
-  double maxH=max(demoHldr.maxHeight(),max(setsHldr.maxHeight(),undoHldr.maxHeight()));
-  buttonBar=ofRectangle(x,y,ofGetWidth(),maxH*1.2);
-  
-  demoHldr.area.height=setsHldr.area.height=undoHldr.area.height=clearHldr.area.height=buttonBar.height;
-  
-  int pad=(buttonBar.width-(demoHldr.area.width+setsHldr.area.width+undoHldr.area.width+clearHldr.area.width))/4;
-  demoHldr.padding(pad);
-  setsHldr.padding(pad);
-  undoHldr.padding(pad);
-  clearHldr.padding(pad);
-  
-  h=subBar.height+buttonBar.height;
-  w=ofGetWidth();
+  barSpacing();
   
   loadBlocks(sets[0]);
   setAvailableButtons();
@@ -160,10 +206,10 @@ void controlBar::draw(int _x, int _y)
   ofSetColor(gray);
   drawHatching(buttonBar.x, buttonBar.y, buttonBar.width, buttonBar.height, 85,80);
   
-  demoHldr.draw(buttonBar.x,buttonBar.y);
-  setsHldr.draw(demoHldr.x+demoHldr.area.width,buttonBar.y);
-  undoHldr.draw(setsHldr.x+setsHldr.area.width,buttonBar.y);
-  clearHldr.draw(undoHldr.x+undoHldr.area.width,buttonBar.y);
+  bHldr[0].draw(buttonBar.x,buttonBar.y);
+  for (unsigned int i=1; i<bHldr.size(); i++) {
+    bHldr[i].draw(bHldr[i-1].area.x+bHldr[i-1].area.width,buttonBar.y);
+  }
   
   //_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_
   //_-_-_-_-_//_-_-_-_-_//subTitle //_-_-_-_-_//_-_-_-_-_
@@ -189,9 +235,11 @@ void controlBar::draw(int _x, int _y)
     subtitle.drawString(sets.getSelected()->subtitle, 50, subBar.y+(subBar.height-subtitle.stringHeight(sets.getSelected()->subtitle))/2);
   }
   
-  //_-_-_-_-_//_-_-_-_-_ shadow below bar //_-_-_-_-_//_-_-_-_-_
-  //ofSetShadowDarkness(.5);
-  //ofShade(x, y+h, 10, w, OF_DOWN);
+  if(testbed.isTesting()){
+    testbed.draw(50,150,ofGetHeight()-200,ofGetHeight()-200);
+    blocks->base.draw(ofGetHeight(), 150);
+    testbed.drawCurrentBlock();
+  }
 }
 
 void controlBar::drawForeground(){
@@ -219,7 +267,10 @@ void controlBar::update()
   }
   if(serChk.justFoundDevice()){
     blocks->loadFile("programs/"+ofToString(CURRENT_ROBOT_NUMBER)+"/program.xml");
-    blocks->updatePositions();
+  }
+  
+  if(testbed.turtleIsRunning()){
+    testbed.idleTurtle();
   }
 }
 
@@ -238,7 +289,9 @@ bool controlBar::clickDown(int _x, int _y, int button)
   }
   
   if(demo.clickDown(_x, _y)){
-    anim.play();
+    //anim.play();
+    testbed.startTesting(&blocks->base);
+    testbed.startTurtle();
   }
   
   //--------- if we press the undo button, roll back the state of the blockGroup

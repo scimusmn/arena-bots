@@ -1,48 +1,44 @@
 <base robot_number="101">
-	<block name="if path in front is blocked" color="0x65c270">
+	<block name="forever" color="1291754.0000000">
 		<bracket>1</bracket>
-		<file>pathBlocked.blk</file>
-		<action>if:!$front(4)</action>
+		<file>forever.blk</file>
+		<action>repeat:$forever</action>
 		<blocksIn>
-			<block name="go backward %d inches" color="0xde8c3a">
-				<dropdown>
-					<ddlow>0</ddlow>
-					<ddhigh>12</ddhigh>
-					<ddsteps>7</ddsteps>
-					<selected>6</selected>
-				</dropdown>
-				<file>backward.blk</file>
-				<action>move:-$dd[0].num()*$ppi</action>
+			<block name="step forward" color="0xde8c3a">
+				<file>stepForward.blk</file>
+				<action>move:1</action>
 			</block>
-			<block name="go backward %d inches" color="0xde8c3a">
-				<dropdown>
-					<ddlow>0</ddlow>
-					<ddhigh>12</ddhigh>
-					<ddsteps>7</ddsteps>
-					<selected>8</selected>
-				</dropdown>
-				<file>backward.blk</file>
-				<action>move:-$dd[0].num()*$ppi</action>
+			<block name="if path on left is clear" color="0x65c270">
+				<bracket>1</bracket>
+				<file>leftPathClear.blk</file>
+				<action>if:$leftPath(2)</action>
+				<blocksIn>
+					<block name="step forward" color="0xde8c3a">
+						<file>stepForward.blk</file>
+						<action>move:1</action>
+					</block>
+					<block name="turn left one step" color="0xde8c3a">
+						<action>turn:-1</action>
+						<file>leftStep.blk</file>
+					</block>
+				</blocksIn>
 			</block>
-			<block name="go forward %d inches" color="0xde8c3a">
-				<dropdown>
-					<ddlow>0</ddlow>
-					<ddhigh>12</ddhigh>
-					<ddsteps>7</ddsteps>
-					<selected>8</selected>
-				</dropdown>
-				<action>move:$dd[0].num()*$ppi</action>
-				<file>forward.blk</file>
-			</block>
-			<block name="go forward %d inches" color="0xde8c3a">
-				<dropdown>
-					<ddlow>0</ddlow>
-					<ddhigh>12</ddhigh>
-					<ddsteps>7</ddsteps>
-					<selected>4</selected>
-				</dropdown>
-				<action>move:$dd[0].num()*$ppi</action>
-				<file>forward.blk</file>
+			<block name="if path in front is blocked" color="0x65c270">
+				<bracket>1</bracket>
+				<file>pathBlocked.blk</file>
+				<action>if:!$front(4)</action>
+				<blocksIn>
+					<block name="turn right %d degrees" color="0xde8c3a">
+						<dropdown>
+							<ddlow>0</ddlow>
+							<ddhigh>180</ddhigh>
+							<ddsteps>5</ddsteps>
+							<selected>45</selected>
+						</dropdown>
+						<action>turn:$dd[0].num()</action>
+						<file>rightTurn.blk</file>
+					</block>
+				</blocksIn>
 			</block>
 		</blocksIn>
 	</block>

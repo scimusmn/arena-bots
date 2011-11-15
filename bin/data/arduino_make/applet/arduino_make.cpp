@@ -6,16 +6,20 @@ void loop();
 
   #include "AFMotor.h"
 #include "arenaRobot.h"
+  #include <AFMotor.h>
+#include "arenaRobot.h"
   
 
-  #include "AFMotor.h"
-#include "arenaRobot.h"
   #include <AFMotor.h>
 #include "arenaRobot.h"
-  #include "AFMotor.h"
-#include "arenaRobot.h"
-  #include <AFMotor.h>
-#include "arenaRobot.h"
+  
+
+  
+
+  
+
+  
+
 
 
 bool thru=false;
@@ -32,32 +36,37 @@ void setup(){
   attachInterrupt(0, changeRun, RISING);
   Serial.begin(9600);
 	robot.setup();
+	robot.setup();
 	
 	robot.setup();
-	robot.setup();
-	robot.setup();
-	robot.setup();
+	
+	
+	
+	
 
 }
 
 void loop(){
   Serial.print(IS_ROBOT,BYTE);
   Serial.print(ROBOT_NUMBER,BYTE);
-  Serial.print(101,BYTE);
+  Serial.print(102,BYTE);
   Serial.print("\n");
   
   if(running&&!thru){
-    while(robot.isRunning()){ 	robot.doubleStep(1,BACKWARD,SINGLE);
-	robot.doubleStep(1,BACKWARD,SINGLE);
-	if(!robot.leftSensor(400)){
-	  		robot.leftTurn(1);
-	  }
-	if(robot.frontSensor(400)){
-	  		robot.rightTurn(90 );
-	  }
-}
+    robot.forward(8 );
+robot.rightTurn(90 );
+robot.forward(8 );
+robot.leftTurn(90 );
+robot.forward(12 );
+robot.leftTurn(90 );
+robot.forward(12 );
+robot.rightTurn(90 );
 
   }
+    robot.end();
   
+  
+  
+
   thru=true;
 }

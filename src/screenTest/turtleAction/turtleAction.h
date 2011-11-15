@@ -43,18 +43,21 @@ enum action_word {
 };*/
 
 class turtleAction {
+protected:
   vector<turtleAction> inside;
-  actionType type;
-  action_word guard;
+  
   ofTurtle * turtle;
   block * parentBlock;
-  double nGoal,nCurrent;
   bool bData;
   double data[2];
   bool bNegate;
   string dataStr;
   bool bExecuted;
   bool bParsed;
+public:
+  actionType type;
+  action_word guard;
+  double nGoal,nCurrent;
   turtleAction(block * prnt, ofTurtle * bdy);
   
   bool execute();

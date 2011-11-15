@@ -16,6 +16,7 @@
 
 #include "serialCheck.h"
 #include "uploadModule.h"
+#include "../screenTest/screenTest.h"
 #include "../../../dallasEng/dallasEng.h"
 
 class buttonHolder : public ofInterObj {
@@ -24,6 +25,7 @@ protected:
   double pad;
 public:
   buttonHolder();
+  buttonHolder(int numberOfObjs, ...);
   ofRectangle area;
   vector<ofInterObj *> objs;
   void addObj(ofInterObj & obj);
@@ -33,6 +35,18 @@ public:
   void draw(int x, int y); 
 };
 
+class barOfButtons : public buttonHolder {
+  ~barOfButtons(){
+    for (unsigned int i=0; i<objs.size(); i++) {
+      delete objs[i];
+    }
+  }
+  buttonHolder & operator[](int i);
+  void addSection();
+  void addSection(int numObjs, ...);
+  buttonHolder & lastSection();
+};
+
 class controlBar {
 protected:
   bGroup * blocks;
@@ -40,15 +54,14 @@ protected:
   
   demoAnim anim;
   
+  robotTest testbed;
+  
   dallasButton clearBut;
 	ofButton redoBut;
 	ofButton undoBut;
   dallasButton  demo;
   
-  buttonHolder demoHldr;
-  buttonHolder setsHldr;
-  buttonHolder undoHldr;
-  buttonHolder clearHldr;
+  vector<buttonHolder> bHldr;
   
   ofRectangle buttonBar;
   ofRectangle subBar;
@@ -67,6 +80,7 @@ public:
   //controlBar();
   void loadBlocks(blockGroup & bg);
   void setup(bGroup * bG, sbGroup * sbG);
+  void barSpacing();
   void draw(int x, int y);
   void drawForeground();
   void update();

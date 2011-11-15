@@ -347,7 +347,6 @@ void sbGroup::update()
 		for (unsigned int j=0; j<bars[i].size(); j++) {
 			if(bars[i][j].newUpdateHeight())
 				updateHeight();
-			bars[i][j].newUpdatePositions();
 		}
 	}
 }

@@ -18,15 +18,15 @@ class ofTurtle {
   deque<ofPoint> lines;
   int numLineStored;
   bool bTurnSinceRecord;
-  
-  ofImage map;
 public:
+  ofImage map;
   ofPoint start,pos;
   int w,h;
   ofVector bearing;
   bool bMoving;
   ofTurtle();
   void setup(int _x, int _y, int _w, int _h);
+  void setup(string filename);
   void move(int pixels);
   void turn(int degrees);
   void clear(){ lines.clear();}

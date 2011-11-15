@@ -7,32 +7,44 @@
  *
  */
 
-#include "turtle.h"
+#include "turtle/turtle.h"
+#include "turtleAction/turtleAction.h"
+
+class block;
+
+enum ofBlockActions {
+  OF_BLOCK_NULL_ACT,OF_BLOCK_MOVE, OF_BLOCK_TURN, OF_BLOCK_WHILE, OF_BLOCK_IF,OF_BLOCK_REPEAT
+};
 
 class robotTest {
 protected:
+  vector<turtleAction> actions;
+  bool bTesting;
+  bool bRunning;
+  ofTurtle turtle;
+  block * base;
 public:
-  /*void parseActions();
+  void setup();
   
-  void startTesting();
+  void parseActions(block * t);
+  
+  void startTesting(block * t);
   
   void stopTesting();
   
-  void startSequence();
-  
-  bool idleSequence(block * search);
-  
-  bool checkAgainstImage();
-  
-  void pauseSequence();
-  
   bool isTesting();
   
-  block * currentTest;
+  void startTurtle();
+  
+  bool idleTurtle();
+  
+  void pauseTurtle();
+  
+  void resetTurtle();
+  
+  bool turtleIsRunning();
   
   void drawCurrentBlock();
   
-  bool interpretDataStr(string str);
-  
-  block * nextActionBlock(block & b,bool skip=false);*/
+  void draw(int x, int y, int w, int h);
 };

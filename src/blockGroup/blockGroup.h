@@ -72,8 +72,6 @@ class bGroup: public ofInterObj {
   bool bSequencePlay;
   bool bTesting;
 public:
-  ofImage mapp;
-  ofTurtle turtle;
   
   vector<block> blocks;
 	baseBlock base;
@@ -105,32 +103,6 @@ public:
 	block operator[](int i);
   
   
-  
-  void parseActions();
-  
-  void startTesting();
-  
-  void stopTesting();
-  
-  void startSequence();
-  
-  bool idleSequence(block * search);
-  
-  bool checkAgainstImage();
-  
-  void pauseSequence();
-  
-  bool isTesting();
-  
-  block * currentTest;
-  
-  void drawCurrentBlock();
-  
-  bool interpretDataStr(string str);
-  
-  block * nextActionBlock(block & b,bool skip=false);
-  
-  
   void saveXML(string filename);
   
   void loadFile(string filename);
@@ -154,8 +126,6 @@ public:
 	void drawIndicators(block & grab,block & k);
 	
 	void update();
-  
-  void updatePositions();
 	
 	void addNum(block & holder, block & held);
 	

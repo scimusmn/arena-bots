@@ -48,28 +48,6 @@ int block::newUpdateHeight()
   return h+insertSpace;
 }
 
-void alignBlocks(vector<block> & t)
-{
-  for (unsigned i=1; i<t.size(); i++) {
-    t[i].move(t[i-1].x,t[i-1].y+t[i-1].h+t[i-1].insertSpace);
-    t[i].newUpdatePositions();
-  }
-}
-
-void block::newUpdatePositions()
-{
-  if(blocksIn.size()){
-    blocksIn[0].move(x+interior.x,y+interior.y+insertSpace);
-    blocksIn[0].newUpdatePositions();
-  }
-  alignBlocks(blocksIn);
-  if(blocksOn.size()){
-    blocksOn[0].move(x,y+h+insertSpace);
-    blocksOn[0].newUpdatePositions();
-  }
-  alignBlocks(blocksOn);
-}
-
 //********************* position boolean functions ********************
 
 bool block::inside(block & drop)
@@ -78,7 +56,7 @@ bool block::inside(block & drop)
   if(type==BLK_BRACKET){
     int inLine=y+ttlSize.y/2;
     //int bottomSpace=orig.height-(interior.y+interior.height);
-    int inH=ttlSize.y/2+interior.height;
+    int inH=h-((inLine-y)+bottomBar/2);
     if(drop.inBounds(x+interior.x, inLine, w-interior.x, inH))
       ret=true;
   }
@@ -87,14 +65,14 @@ bool block::inside(block & drop)
 
 bool block::beneath(block & chk,signed int blw)
 {
-  if(blw<ttlSize.y/2){
+  if(blw<ttlSize.y/2-5){
     blw=ttlSize.y;
   }
   else blw+=ttlSize.y;
   int midLine=y+h-ttlSize.y/2;
   
   if(type==BLK_BRACKET){
-    midLine=y+(interior.y+interior.height);
+    midLine=y+(interior.y+interior.height+bottomBar/2);
     blw=blw+(y+h)-midLine;
   }
   

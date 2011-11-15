@@ -11,7 +11,7 @@
 #include "blockGroup.h"
 
 
-extern int pixPerInch;
+/*extern int pixPerInch;
 
 block * bGroup::nextActionBlock(block & b, bool skip)
 {
@@ -220,4 +220,4 @@ bool bGroup::isTesting()
 void bGroup::pauseSequence()
 {
   
-}
+}*/

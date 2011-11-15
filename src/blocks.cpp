@@ -102,9 +102,6 @@ block::block(ofTag & cur,ofColor col):ofInterObj(-200,-200,150,TITLE_HEIGHT) {
           w=200;
           titlePos.x=30;
           break;
-        case 4: //actions
-          registerAction(node[1]);
-          break;
         case 5: // file
           //-- definitely not deprecated, used to store value of which file to write from
           filename=node[1];
@@ -338,7 +335,6 @@ void block::operator=(const block &t) {
 	placeHolder=t.placeHolder;
 	color=t.color;
   insertSpace=t.insertSpace;
-  action=t.action;
   
   origTag=t.origTag;
 }

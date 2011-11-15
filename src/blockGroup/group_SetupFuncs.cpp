@@ -58,11 +58,6 @@ void bGroup::setup(double _x, double _y,double wid,double hgt){
 	states.recordState(storageState(blocks,base));
   held.setup(0,0);
   
-  mapp.loadImage("maps/map_2.jpg");
-  turtle.setup(2.5*(mapp.width/12.),mapp.width-1.5*(mapp.width/12.), 25*4.25,4.5*25);
-  actionTime.set(0.01);
-  pixPerInch=mapp.width/48;
-  currentTest=0;
 }
 
 int bGroup::size(){
@@ -137,19 +132,5 @@ void bGroup::addFromSB(block t,int _x,int _y){
 void bGroup::update()
 {
 	
-  if(bTesting){
-    bSequencePlay=idleSequence(&base);
-  }
 }
 
-void bGroup::updatePositions()
-{
-  if(!bTesting){
-    for (unsigned int i=0; i<blocks.size(); i++) {
-      blocks[i].newUpdateHeight();
-      blocks[i].newUpdatePositions();
-    }
-  }
-  base.newUpdateHeight();
-  base.newUpdatePositions();
-}

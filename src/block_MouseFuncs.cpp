@@ -153,9 +153,6 @@ bool block::newClickUp(int _x, int _y)
     blocksOn[i].newClickUp(_x,_y);
   }
   
-  //newUpdateHeight();
-  //newUpdatePositions();
-  
   return false;
 }
 

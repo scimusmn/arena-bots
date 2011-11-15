@@ -85,7 +85,6 @@ void bGroup::drag(double _x, double _y){
 	if(inHand){
     if(held.bGrabbed){
       held.move(_x+dispx, _y+dispy);
-      held.newUpdatePositions();
     }
 	}
 }
@@ -112,8 +111,6 @@ bool bGroup::newClickUp(int _x, int _y)
     recordState();
   }
   bGrabbed=inHand=false;
-  
-  updatePositions();
   
   return ret;
 }

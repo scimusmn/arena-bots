@@ -23,7 +23,6 @@
 #include <fstream>
 #include <algorithm>
 #include <deque>
-#include "turtle.h"
 
 #include "../../dallasEng/dallasEng.h"
 
@@ -36,29 +35,7 @@ enum blkType {
   BLK_DEFAULT,BLK_BRACKET,BLK_SEQ,BLK_VAL,BLK_BASE
 };
 
-enum ofBlockActions {
-  OF_BLOCK_NULL_ACT,OF_BLOCK_MOVE, OF_BLOCK_TURN, OF_BLOCK_WHILE, OF_BLOCK_IF,OF_BLOCK_REPEAT
-};
-
 class bGroup;
-
-struct blockAction {
-  ofBlockActions act;
-  double data[2];
-  double nDone;
-  string dataStr;
-  bool bExecuted;
-  bool bData;
-  bool bParsed;
-  blockAction(){
-    act=OF_BLOCK_NULL_ACT;
-    data[0]=data[1]=0;
-    bData=bParsed=bExecuted=false;
-  }
-  blockAction(ofBlockActions a, double d1, double d2=0){
-    act=a,data[0]=d1,data[1]=d2;
-  }
-};
 
 /*****************************************************************
  * class block: public ofInterObj 
@@ -107,8 +84,6 @@ public:
   
   bGroup * group;
   
-  blockAction action;
-  
   ofPoint titlePos;
   ofPoint ttlSize;
   ofRectangle orig;
@@ -136,18 +111,6 @@ public:
   void setup(double _w, double _h);
 	
 	void operator=(const block &t);
-  
-  //*********** action functions
-  
-  void registerAction(string str);
-  
-  double evalVar(string str);
-  
-  void parseAction();
-  
-  double parseNumber(string str);
-  
-  void executeAction();
   
   //*********** draw functions
 	

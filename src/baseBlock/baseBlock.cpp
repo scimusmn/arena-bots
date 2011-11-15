@@ -57,8 +57,10 @@ void baseBlock::draw(int _x, int _y)
   ofFill();
   
   //-------- Draw the blocks below
+  int hOn=0;
 	for (unsigned int i=0; i<blocksOn.size(); i++) {
-		blocksOn[i].draw();
+		blocksOn[i].draw(x,y+h+hOn);
+    hOn+=blocksOn[i].h;
 	}
 	//-------- draw the blocks inside
 	for (unsigned int i=0; i<blocksIn.size(); i++) {
@@ -113,7 +115,6 @@ baseBlock & baseBlock::operator=(baseBlock & t)
 	placeHolder=t.placeHolder;
 	color=t.color;
   insertSpace=t.insertSpace;
-  action=t.action;
   
   return *this;
 }

@@ -42,26 +42,29 @@ void block::drawShadow(){
 void block::drawSelected(){
 	//-------- if a block is a bracket block, draw a big shadow
 	
-	ofSetColor(0xF4ED47);
+	ofSetColor(yellow);
+  ofNoFill();
+  ofSetLineWidth(8);
 	if (type==BLK_BRACKET) {
-		drawBigBlock(x-5,y-5,w+10,h+10,interior.x+5,interior.y+5,h-bottomBar-5);
+		drawBigBlock(x,y,w,h,interior.x,interior.y,h-bottomBar);
 	}
 	//-------- if a block is a value block, draw the rounded block shadow
 	else if(type==BLK_VAL) {
-		if(bGrabbed) ofSetShadowDarkness(.4),ofShadowRounded(x+5,y+5,w,h,h/2);
+		if(bGrabbed) ofSetShadowDarkness(.4),ofShadowRounded(x,y,w,h,h/2);
 	}
 	//-------- if it's a normal block, draw a regular block shadow
 	else {
-		drawBlock(x-5,y-5,w+10,h+10);
+		drawBlock(x,y,w,h);
 	}
 	//-------- draw shadows for blocks on
 	for (unsigned int i=0; i<blocksOn.size(); i++) {
-		blocksOn[i].drawSelected();
+		//blocksOn[i].drawSelected();
 	}
 	//-------- draw shadows for blocks inside
 	for (unsigned int i=0; i<blocksIn.size(); i++) {
-		blocksIn[i].drawSelected();
+		//blocksIn[i].drawSelected();
 	}
+  ofFill();
 }
 
 void block::drawDD(){
@@ -142,13 +145,19 @@ void block::draw(bool fade){
 			numBlocks[i].draw();
 		}
 	}
-	//-------- Draw the blocks below
-	for (unsigned int i=0; i<blocksOn.size(); i++) {
-		blocksOn[i].draw();
-	}
-	//-------- draw the blocks inside
+  //-------- draw the blocks inside
+  int hIn=interior.y;
 	for (unsigned int i=0; i<blocksIn.size(); i++) {
-		blocksIn[i].draw(fade);
+		blocksIn[i].draw(x+interior.x,y+hIn);
+    hIn+=blocksIn[i].h;
+	}
+  if(hIn+bottomBar>=orig.height) h=hIn+bottomBar, interior.height=hIn-interior.y;
+  else h=orig.height;
+	//-------- Draw the blocks below
+  int hOn=0;
+	for (unsigned int i=0; i<blocksOn.size(); i++) {
+		blocksOn[i].draw(x,y+h+hOn);
+    hOn+=blocksOn[i].h;
 	}
 	
 	//-------- draw all of the drop downs

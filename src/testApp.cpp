@@ -60,69 +60,14 @@ void testApp::draw(){
 	//************************ if we're uploading, draw a fancy "uploading..." on screen
 	
   
-  if(blocks.isTesting()){
-    ofSetColor(0x33, 0x33, 0x33);
-    ofRect(0, 0, ofGetWidth(), ofGetHeight());
-    
-    
-    ofSetColor(black);
-    drawHatching(0, 0, ofGetWidth(), ofGetHeight(), 15,1);
-    
-    blocks.base.draw(ofGetHeight(), 75);
-    blocks.drawCurrentBlock();
-    
-    ofSetColor(0xCFCFCF);
-    ofRect(0,0, ofGetWidth(), 75);
-    ofSetShadowDarkness((0xCF-0xA8)/255.);
-    ofShade(0, 0, 75, ofGetWidth(), OF_DOWN);
-    ofSetShadowDarkness(.15);
-    ofShade(0, 75, 10, ofGetWidth(), OF_UP);
-    ofShade(0, 75, 10, ofGetWidth(), OF_DOWN);
-    
-    ofPushMatrix();
-    ofTranslate(100,100, 0);
-    ofScale(((double)ofGetHeight()-200.)/(double)blocks.mapp.width, (double(ofGetHeight())-200.)/double(blocks.mapp.width), 1);
-    ofSetColor(255, 255, 255);
-    blocks.mapp.draw(0, 0);
-    
-    blocks.turtle.draw(0, 0);
-    
-    if(!blocks.turtle.frontIsClear(4*pixPerInch, blocks.mapp)) ofSetColor(255, 0, 0);
-    else ofSetColor(0, 255, 0);
-    ofPoint ps = blocks.turtle.pos+blocks.turtle.bearing.unit()*4*pixPerInch;
-    ofCircle(ps.x, ps.y, 5);
-    
-    if(!blocks.turtle.leftIsClear(2*pixPerInch, blocks.mapp)) ofSetColor(255, 0, 0);
-    else ofSetColor(0, 255, 0);
-    ps = blocks.turtle.pos+blocks.turtle.bearing.ortho().unit()*blocks.turtle.w/2-blocks.turtle.bearing.unit()*blocks.turtle.w/2+blocks.turtle.bearing.unit().rotate(270)*2*pixPerInch;
-    ofCircle(ps.x, ps.y, 5);
-    ofPopMatrix();
-  }
+  
   
   controls.drawForeground();
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-  if(key=='t'){
-    if (blocks.isTesting()) blocks.stopTesting();
-    else blocks.startTesting();
-  }
-  if(key==OF_KEY_UP){
-    blocks.turtle.move(6);
-  }
-  if(key==OF_KEY_RIGHT){
-    blocks.turtle.turn(6);
-  }
-  if(key==OF_KEY_LEFT){
-    blocks.turtle.turn(-6);
-  }
-  if(key==OF_KEY_DOWN){
-    blocks.turtle.move(-6);
-  }
-  if(key=='P'){
-    blocks.startSequence();
-  }
+  
 }
 
 

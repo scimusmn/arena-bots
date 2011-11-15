@@ -29,12 +29,10 @@
 		AAB4E7061460744600276A4D /* group_SetupFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB4E7051460744600276A4D /* group_SetupFuncs.cpp */; };
 		AAB4E70E146076A400276A4D /* group_MouseFuncts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB4E70D146076A400276A4D /* group_MouseFuncts.cpp */; };
 		AAB4E711146076D100276A4D /* group_DrawFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB4E710146076D100276A4D /* group_DrawFuncs.cpp */; };
-		AAB4E713146077FC00276A4D /* group_ActionFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB4E712146077FC00276A4D /* group_ActionFuncs.cpp */; };
 		AAB4E715146078D400276A4D /* group_WriteFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB4E714146078D400276A4D /* group_WriteFuncs.cpp */; };
 		AAB4E7181460797C00276A4D /* sideBar.h in Sources */ = {isa = PBXBuildFile; fileRef = AAB4E7171460797C00276A4D /* sideBar.h */; };
 		AAB4E81E1461815900276A4D /* sideBar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB4E81D1461815900276A4D /* sideBar.cpp */; };
 		AAB4E8A11461984200276A4D /* serialCheck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB4E8A01461984200276A4D /* serialCheck.cpp */; };
-		AAE2293C13CE3FF40068AA76 /* block_ActionFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAE2293B13CE3FF40068AA76 /* block_ActionFuncs.cpp */; };
 		E45BE0AA0E8CC67C009D7055 /* GLee.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE0A90E8CC67C009D7055 /* GLee.a */; };
 		E45BE2E40E8CC69C009D7055 /* rtAudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE2E30E8CC69C009D7055 /* rtAudio.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -226,7 +224,6 @@
 		AAB4E7051460744600276A4D /* group_SetupFuncs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = group_SetupFuncs.cpp; path = blockGroup/group_SetupFuncs.cpp; sourceTree = "<group>"; };
 		AAB4E70D146076A400276A4D /* group_MouseFuncts.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = group_MouseFuncts.cpp; path = blockGroup/group_MouseFuncts.cpp; sourceTree = "<group>"; };
 		AAB4E710146076D100276A4D /* group_DrawFuncs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = group_DrawFuncs.cpp; path = blockGroup/group_DrawFuncs.cpp; sourceTree = "<group>"; };
-		AAB4E712146077FC00276A4D /* group_ActionFuncs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = group_ActionFuncs.cpp; path = blockGroup/group_ActionFuncs.cpp; sourceTree = "<group>"; };
 		AAB4E714146078D400276A4D /* group_WriteFuncs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = group_WriteFuncs.cpp; path = blockGroup/group_WriteFuncs.cpp; sourceTree = "<group>"; };
 		AAB4E7171460797C00276A4D /* sideBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sideBar.h; path = sideBar/sideBar.h; sourceTree = "<group>"; };
 		AAB4E81D1461815900276A4D /* sideBar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sideBar.cpp; path = sideBar/sideBar.cpp; sourceTree = "<group>"; };
@@ -265,7 +262,6 @@
 		AAE2281513CCD6DE0068AA76 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		AAE228BE13CDDAC30068AA76 /* stepForward.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stepForward.blk; sourceTree = "<group>"; };
 		AAE228D413CDDCCD0068AA76 /* pathBlocked.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pathBlocked.blk; sourceTree = "<group>"; };
-		AAE2293B13CE3FF40068AA76 /* block_ActionFuncs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = block_ActionFuncs.cpp; sourceTree = "<group>"; };
 		AAEFB3961360DBFF0096BC26 /* repeatWrapper.wrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = repeatWrapper.wrp; path = bin/data/arduino_make/repeatWrapper.wrp; sourceTree = "<group>"; };
 		E45BE0390E8CC647009D7055 /* FreeImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FreeImage.h; path = ../../../libs/freeimage/include/FreeImage.h; sourceTree = SOURCE_ROOT; };
 		E45BE03F0E8CC650009D7055 /* fmod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fmod.h; path = ../../../libs/fmodex/include/fmod.h; sourceTree = SOURCE_ROOT; };
@@ -731,7 +727,6 @@
 				AA82B56513BE184300054749 /* block_MouseFuncs.cpp */,
 				AA8D7718132806D0000F0763 /* block_DrawingFuncs.cpp */,
 				AA8D772113280768000F0763 /* block_WriteOutFuncs.cpp */,
-				AAE2293B13CE3FF40068AA76 /* block_ActionFuncs.cpp */,
 				AA02168113C63D5D008E0DDE /* newSizeAndPositionFunctions.cpp */,
 			);
 			name = Blocks;
@@ -791,7 +786,6 @@
 				AAB4E7051460744600276A4D /* group_SetupFuncs.cpp */,
 				AAB4E70D146076A400276A4D /* group_MouseFuncts.cpp */,
 				AAB4E710146076D100276A4D /* group_DrawFuncs.cpp */,
-				AAB4E712146077FC00276A4D /* group_ActionFuncs.cpp */,
 				AAB4E714146078D400276A4D /* group_WriteFuncs.cpp */,
 			);
 			name = "Block Group";
@@ -1267,11 +1261,9 @@
 				AA949E5913B3D944009141B0 /* blockLoad.cpp in Sources */,
 				AA82B56613BE184300054749 /* block_MouseFuncs.cpp in Sources */,
 				AA02168213C63D5D008E0DDE /* newSizeAndPositionFunctions.cpp in Sources */,
-				AAE2293C13CE3FF40068AA76 /* block_ActionFuncs.cpp in Sources */,
 				AAB4E7061460744600276A4D /* group_SetupFuncs.cpp in Sources */,
 				AAB4E70E146076A400276A4D /* group_MouseFuncts.cpp in Sources */,
 				AAB4E711146076D100276A4D /* group_DrawFuncs.cpp in Sources */,
-				AAB4E713146077FC00276A4D /* group_ActionFuncs.cpp in Sources */,
 				AAB4E715146078D400276A4D /* group_WriteFuncs.cpp in Sources */,
 				AAB4E7181460797C00276A4D /* sideBar.h in Sources */,
 				AAB4E81E1461815900276A4D /* sideBar.cpp in Sources */,

@@ -16,14 +16,24 @@
 
 extern int pixPerInch;
 
+extern ofTimer actionTimer;
+
+extern block * currentBlock;
+
+extern 
 
 turtleAction::turtleAction(block * prnt, ofTurtle * bdy)
 {
   parentBlock=prnt;
   turtle=bdy;
+  bParsed=bExecuted=false;
+  bNegate=false;
+  guard=ACT_NORMAL;
+  nCurrent=0;
   parse(parentBlock->origTag.getNode("action", 0).getValue());
-  for (unsigned int i=0; parentBlock->blocksIn.size(); i++) {
-    inside.push_back(turtleAction(&parentBlock->blocksIn[i], turtle));
+  for (unsigned int i=0; i<parentBlock->blocksIn.size(); i++) {
+    cout << parentBlock->blocksIn[i].title << endl;
+    inside.push_back(turtleAction(&(parentBlock->blocksIn[i]), turtle));
   }
 }
 
@@ -45,7 +55,7 @@ bool turtleAction::assess()
       if(turtle->leftIsClear(nGoal)) ret=true;
       break;
     case FRNT_SNS:
-      if(turtle->leftIsClear(nGoal)) ret=true;
+      if(turtle->frontIsClear(nGoal)) ret=true;
       break;
     case ACT_FOREVER:
       ret=true;
@@ -53,6 +63,7 @@ bool turtleAction::assess()
     default:
       break;
   }
+  if(bNegate) ret=!ret;
   return ret;
 }
 
@@ -60,6 +71,7 @@ void turtleAction::reset()
 {
   bExecuted=false;
   nCurrent=0;
+  resetGuardedActions();
 }
 
 bool turtleAction::executeGuardedAction()
@@ -71,86 +83,71 @@ bool turtleAction::executeGuardedAction()
   return ret;
 }
 
-bool turtleAction::resetGuardedActions()
+void turtleAction::resetGuardedActions()
 {
-  bool ret=0;
   for (unsigned int i=0; i<inside.size(); i++) {
     inside[i].reset();
   }
-  return ret;
 }
 
 bool turtleAction::execute()
 {
-  bool ret=true;
+  bool ret=false;
   if(!bExecuted){
-  switch (type) {
-    case OF_BLOCK_MOVE:
-      if(assess()){
-        turtle->move(direction());
-        nCurrent+=direction();
-      }
-      else bExecuted=true;
-      //actionTime.set(0.01);
-      break;
-    case OF_BLOCK_TURN:
-      if(assess()){
-        turtle->turn(direction());
-        nCurrent+=direction();
-      }
-      else bExecuted=true;
-      //actionTime.set(0.01);
-      break;
-    case OF_BLOCK_WHILE:
-      if(assess()){
-        if(!(ret=executeGuardedAction())){
-          resetGuardedActions();
-        }
-      }
-      else bExecuted=true;
-      break;
-      
-      
-    case OF_BLOCK_IF:
-      if(assess()||bData){
-        bData=true;
-        if(!(ret=executeGuardedAction()))
-          bExecuted=true,bData=false;
-      }
-      else bExecuted=true;
-      break;
-      
-      
-    case OF_BLOCK_REPEAT:
-      /*if(!dataStr.compare("$forever")){
-        if(interpretDataStr(bA.dataStr)){
-          if(!idleSequence(&nxt))
-            resetActions(nxt,true);
+    switch (type) {
+      case TURTLE_MOVE:
+        if(assess()){
+          turtle->move(direction());
+          nCurrent+=direction();
+          currentBlock=parentBlock;
           ret=true;
+          actionTimer.reset();
         }
-        else resetActions(nxt);
-      }
-      else{
-        if(bA.data[0]>bA.data[1]){
-          if(!idleSequence(&nxt)){
-            bA.data[1]++;
-            resetActions(nxt,true);
+        if(!assess()) bExecuted=true, ret=false,actionTimer.setPercent(.5);
+        break;
+      case TURTLE_TURN:
+        if(assess()){
+          turtle->turn(direction());
+          nCurrent+=direction();
+          currentBlock=parentBlock;
+          ret=true;
+          actionTimer.reset();
+        }
+        if(!assess()) bExecuted=true, ret=false,actionTimer.setPercent(.5);
+        break;
+      case TURTLE_WHILE:
+        if(assess()){
+          if(!(ret=executeGuardedAction()))
+            resetGuardedActions(),ret=true;
+        }
+        else bExecuted=true;
+        break;
+        
+        
+      case TURTLE_IF:
+        if(assess()||bData){
+          bData=true;
+          if(!(ret=executeGuardedAction()))
+            bExecuted=true,bData=false;
+        }
+        else bExecuted=true;
+        break;
+        
+        
+      case TURTLE_REPEAT:
+        if(assess()){
+          if(!(ret=executeGuardedAction())){
+            nCurrent++;
+            resetGuardedActions(),ret=true;
           }
         }
-        else bA.bExecuted=true,resetActions(nxt,true);
-      }*/
-      if(assess()){
-        if(!(ret=executeGuardedAction())){
-          nCurrent++;
-          resetGuardedActions();
-        }
-      }
-      else bExecuted=true,resetGuardedActions();
-      break;
-    default:
-      ret=false;
-      break;
+        else bExecuted=true,resetGuardedActions();
+        break;
+      default:
+        break;
+    }
   }
+  return ret;
 }
 
 void turtleAction::parse(string str)
@@ -158,6 +155,7 @@ void turtleAction::parse(string str)
   registerAction(str);
   parseAction();
   handleWord();
+  bParsed=true;
 }
 
 void turtleAction::registerAction(string str)
@@ -223,11 +221,11 @@ void turtleAction::parseAction()
 {
   if(!bParsed){
     switch (type) {
-      case OF_BLOCK_MOVE:
-        data[0]=parseNumber(dataStr);
+      case TURTLE_MOVE:
+        nGoal=parseNumber(dataStr);
         break;
-      case OF_BLOCK_TURN:
-        data[0]=parseNumber(dataStr);
+      case TURTLE_TURN:
+        nGoal=parseNumber(dataStr);
         break;
         /*case OF_BLOCK_WHILE:
          action.data[0]=parseNumber(action.dataStr);
@@ -235,9 +233,9 @@ void turtleAction::parseAction()
          case OF_BLOCK_IF:
          action.data[0]=parseNumber(action.dataStr);
          break;*/
-      case OF_BLOCK_REPEAT:
+      case TURTLE_REPEAT:
         if(dataStr!="$forever")
-          data[0]=parseNumber(dataStr);
+          nGoal=parseNumber(dataStr);
         break;
       default:
         break;
