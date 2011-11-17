@@ -22,28 +22,16 @@ public:
     justChk=false;
   }
   void setup(){
-    Serial.begin(9600);
     roboMotors::setup();
     roboSense::setup();
-    Serial.println("Hello!");
-    //Wire.requestFrom(0x50 >> 1,1);
   }
   void start(){
     roboMotors::start();
   }
   void end(){
-    running=false;
     roboMotors::end();
-  }
-  /*void followLine(){
-    while(!readLinePosition()){
-      Wire.requestFrom(0x50 >> 1,1);
-      leftMotor.step(1, BACKWARD, SINGLE); 
-      rightMotor.step(1, BACKWARD, SINGLE); 
-    }
-    if(dirScore<0) leftStep(-dirScore*2,SINGLE);
-    else if(dirScore>0) rightStep(dirScore*2,SINGLE);
-  }*/   
+    running=false;
+  } 
   
 } robot;
 

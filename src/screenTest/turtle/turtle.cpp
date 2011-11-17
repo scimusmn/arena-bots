@@ -27,13 +27,51 @@ void ofTurtle::setup(int _x, int _y, int _w, int _h)
   whlHgt=h/2;
   whlWid=w/8;
   bearing=ofVector(0,-1);
+  bCrashed=false;
 }
 
 void ofTurtle::setup(string filename)
 {
   map.loadImage(filename);
-  pixPerInch=map.width/48;
+  int ppi=pixPerInch=map.width/48;
+  ofPoint wheel(.25*ppi,(2+3/8)*ppi);
+  ofPoint rWheel(1.125*ppi,1.875*ppi);
   setup(2.5*(map.width/12.),map.height-2.5*(map.height/12.), pixPerInch*5,7.25*pixPerInch);
+  ofRectangle body(-3.25*ppi/2,-wheel.y/2,ppi*3.25,ppi*4.5);
+  bdy.push_back(ofVector(body.x,body.y));
+  bdy.push_back(ofVector(body.x+body.width,body.y));
+  bdy.push_back(ofVector(body.x,body.y+body.height));
+  bdy.push_back(ofVector(body.x+body.width,body.y+body.height));
+  bdy.push_back(ofVector(body.x+(body.width-rWheel.x)/2,body.y+body.height+rWheel.y));
+  bdy.push_back(ofVector(body.x+(body.width+rWheel.x)/2,body.y+body.height+rWheel.y));
+  //ofRect(body.x+(body.width-ppi*1.375)/2+.125*ppi, body.y+body.height+.5*ppi, .875*ppi, 1.5*ppi);
+}
+
+void ofTurtle::reset()
+{
+  clear();
+  pos=start;
+  bCrashed=false;
+  bearing=ofVector(0,-1);
+}
+
+bool ofTurtle::checkPoints()
+{
+  bool ret=0;
+  unsigned char * k=map.getPixels();
+  if(!bCrashed){
+    for (unsigned int i=0; i<bdy.size(); i++) {
+      ofVector t=bdy[i];
+      ofPoint ps=pos+t.rotate(360-bearing.absoluteAngle());
+      if(ps.x>0&&ps.x<map.width&&ps.y>0&&ps.y<map.height){
+        if(k[int(ps.y)*map.width*3+int(ps.x)*3+1]>200){
+          ret=bCrashed=true;
+        }
+      }
+      else ret=bCrashed=true;
+    }
+  }
+  return ret;
 }
 
 void ofTurtle::move(int pixels)
@@ -72,12 +110,13 @@ bool ofTurtle::sensorIsClear(ofPoint strtPnt,int pixels, ofImage & walls, int di
 
 bool ofTurtle::frontIsClear(int pixels, ofImage & walls)
 {
-  
+  frontCheckDist=pixels;
   return sensorIsClear(pos, pixels, walls);
 }
 
 bool ofTurtle::leftIsClear(int pixels, ofImage & walls)
 {
+  leftCheckDist=pixels;
   ofPoint ps=pos+bearing.ortho().unit()*w/2-bearing.unit()*h/2;
   return sensorIsClear(ps, pixels, walls,270);
 }
@@ -113,6 +152,7 @@ void ofTurtle::draw(int _x, int _y)
   ofTranslate(pos.x, pos.y, 0);
   ofRotate(360-bearing.absoluteAngle());
   
+  ofEnableSmoothing();
   ofSetColor(black.opacity(.5));
   ofRect(body);
   ofSetColor(white);
@@ -132,14 +172,21 @@ void ofTurtle::draw(int _x, int _y)
   ofRect(body.x+(body.width-ppi*1.375)/2+.125*ppi, body.y+body.height+(2.-.4375)*ppi, .375*ppi, .4375*ppi);
   ofRect(body.x+(body.width-ppi*1.375)/2+(1-.375)*ppi, body.y+body.height+(.5+(1.5-.4375)/2)*ppi, .375*ppi, .4375*ppi);
   ofPopMatrix();
+  ofDisableSmoothing();
   
-  if(!frontIsClear(4*pixPerInch)) ofSetColor(255, 0, 0);
+  if(!frontIsClear(frontCheckDist)) ofSetColor(255, 0, 0);
   else ofSetColor(0, 255, 0);
-  ofPoint ps = pointAlongBearing(4*pixPerInch);
+  ofPoint ps = pointAlongBearing(frontCheckDist);
   ofCircle(ps.x, ps.y, 5);
   
-  if(!leftIsClear(2*pixPerInch)) ofSetColor(255, 0, 0);
+  if(!leftIsClear(leftCheckDist)) ofSetColor(255, 0, 0);
   else ofSetColor(0, 255, 0);
-  ps = pos+bearing.ortho().unit()*w/2-bearing.unit()*w/2+bearing.unit().rotate(270)*2*pixPerInch;
+  ps = pos+bearing.ortho().unit()*w/2-bearing.unit()*w/2+bearing.unit().rotate(270)*leftCheckDist;
   ofCircle(ps.x, ps.y, 5);
+  
+  for (unsigned int i=0; i<bdy.size(); i++) {
+    ofSetColor(yellow);
+    ofVector t=bdy[i];
+    ofLine(pos, pos+t.rotate(360-bearing.absoluteAngle()));
+  }
 }

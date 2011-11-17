@@ -14,6 +14,11 @@
 #include "ofxDirList.h"
 
 #include "ofxThread.h"
+#include "RFID_reader.h"
+
+#define IS_ROBOT 0x06
+#define ROBOT_NUMBER 0x0C
+#define REQUEST_IDENT 0xff
 
 enum deviceType {
   NOT_USB_SERIAL, ARD_UNO, ARD_DUEM
@@ -47,6 +52,8 @@ protected:
 	int			waitForData;
 	unsigned char		data[3];
   
+  RFIDreader rfid;
+  
   vector<serialDevice> devices;
   
   ofFont report;
@@ -61,7 +68,7 @@ public:
   void checkAvailability();
   void threadCheckAvailability();
   bool getDeviceNumber();
-  int deviceNumber();
+  string deviceNumber();
   
   void drawWaitScreen();
   

@@ -68,7 +68,7 @@ void buttonHolder::padding(int pd)
 
 void buttonHolder::draw(int _x, int _y)
 {
-  drawShadowsAroundRect(area,10);
+  drawBorder(area);
   area.x=x=_x;
   area.y=y=_y;
   int xPos=pad/2;
@@ -144,10 +144,10 @@ void controlBar::setup(bGroup * bG, sbGroup * sbG)
   blocks=bG;
   sideBar=sbG;
   
-  clearBut.setup("Clear blocks", "fonts/HelveticaBold.otf", 19);
+  clearBut.setup("Clear blocks", 19);
   redoBut.setup(64, 64, "images/redo.png");
 	undoBut.setup(64, 64, "images/undo.png");
-  demo.setup("View Demo", "fonts/HelveticaBold.otf", 19);
+  demo.setup("View Demo", 19);
   skipBut.setup(300, 100, "images/skipBut.png");
   
   anim.setup(blocks, sideBar);
@@ -216,7 +216,7 @@ void controlBar::draw(int _x, int _y)
   
   ofSetColor(gray);
   ofRect(subBar);
-  drawShadowsAroundRect(subBar, 10);
+  drawBorder(subBar);
   
   ofSetColor(yellow);
   ofRect(subBar.x, subBar.y, subBar.width, 1);
@@ -236,14 +236,22 @@ void controlBar::draw(int _x, int _y)
   }
   
   if(testbed.isTesting()){
-    testbed.draw(50,150,ofGetHeight()-200,ofGetHeight()-200);
-    blocks->base.draw(ofGetHeight(), 150);
+    ofRectangle & cBar=testbed.controlBar;
+    
+    ofSetColor(0x33, 0x33, 0x33);
+    ofRect(0, 0, ofGetWidth(), ofGetHeight());
+    ofSetColor(black);
+    drawHatching(0, 0, ofGetWidth(), ofGetHeight(), 15,1);
+    
+    testbed.draw(0,cBar.y+cBar.height,ofGetHeight()-(cBar.y+cBar.height),ofGetHeight()-(cBar.y+cBar.height));
+    blocks->base.draw(ofGetHeight(), cBar.y+cBar.height);
     testbed.drawCurrentBlock();
+    
+    testbed.drawControlBar(x, y);
   }
 }
 
 void controlBar::drawForeground(){
-  anim.drawCursor();
   
   if(anim.isPlaying()){
     ofSetColor(0, 0, 0,128);
@@ -253,6 +261,9 @@ void controlBar::drawForeground(){
   
   serChk.drawWaitScreen();
   upload.drawUploadWait();
+  testbed.drawForeground();
+  
+  anim.drawCursor();
 }
 
 void controlBar::update()
@@ -262,11 +273,17 @@ void controlBar::update()
   
   if(serChk.justLostDevice()){
     cout << "lost it\n";
-    blocks->saveXML("programs/"+ofToString(CURRENT_ROBOT_NUMBER)+"/program.xml");
+    blocks->saveXML("programs/"+serChk.deviceNumber()+"/program.xml");
     blocks->clear();
+    if (testbed.isTesting()) {
+      testbed.stopTesting();
+    }
+    if(upload.isUploading()){
+      upload.stopUpload();
+    }
   }
   if(serChk.justFoundDevice()){
-    blocks->loadFile("programs/"+ofToString(CURRENT_ROBOT_NUMBER)+"/program.xml");
+    blocks->loadFile("programs/"+serChk.deviceNumber()+"/program.xml");
   }
   
   if(testbed.turtleIsRunning()){
@@ -279,35 +296,39 @@ void controlBar::update()
 
 bool controlBar::clickDown(int _x, int _y, int button)
 {
-  if(sets.clickDown(_x,_y)&&!anim.isPlaying()){
-    if(sets.getSelected())
-      loadBlocks((*sets.getSelected()));
+  if(!testbed.mouseLockout()){
+    if(sets.clickDown(_x,_y)&&!anim.isPlaying()){
+      if(sets.getSelected())
+        loadBlocks((*sets.getSelected()));
+    }
+    
+    if (clearBut.clickDown(_x, _y)) {
+      blocks->clear();
+    }
+    
+    if(demo.clickDown(_x, _y)){
+      //anim.play();
+      testbed.startTesting(&blocks->base);
+      testbed.startTurtle();
+    }
+    
+    //--------- if we press the undo button, roll back the state of the blockGroup
+    if (undoBut.clickDown(_x, _y)) {
+      blocks->undoState();
+    }
+    
+    //--------- if we press the redo button, push the state forward
+    if (redoBut.clickDown(_x, _y)) {
+      blocks->redoState();
+    }
+    
+    //--------- if we press the skip button while the anim is running, stop anim
+    if(anim.isPlaying()&&skipBut.clickDown(_x, _y)){
+      anim.stop();
+    }
   }
-  
-  if (clearBut.clickDown(_x, _y)) {
-    blocks->clear();
-  }
-  
-  if(demo.clickDown(_x, _y)){
-    //anim.play();
-    testbed.startTesting(&blocks->base);
-    testbed.startTurtle();
-  }
-  
-  //--------- if we press the undo button, roll back the state of the blockGroup
-  if (undoBut.clickDown(_x, _y)) {
-    blocks->undoState();
-  }
-  
-  //--------- if we press the redo button, push the state forward
-  if (redoBut.clickDown(_x, _y)) {
-    blocks->redoState();
-  }
-  
-  //--------- if we press the skip button while the anim is running, stop anim
-  if(anim.isPlaying()&&skipBut.clickDown(_x, _y)){
-    anim.stop();
-  }
+  else testbed.clickDown(_x, _y);
+
   
   upload.clickDown(_x, _y);
 }
@@ -320,6 +341,7 @@ bool controlBar::clickUp()
   undoBut.clickUp();
   redoBut.clickUp();
   skipBut.clickUp();
+  testbed.clickUp();
 }
 
 bool controlBar::mouseLockout(int button)

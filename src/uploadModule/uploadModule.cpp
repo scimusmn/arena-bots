@@ -44,6 +44,10 @@ void uploadModule::drawUploadWait()
 	}
 }
 
+void uploadModule::stopUpload(){
+  command.stop();
+}
+
 bool uploadModule::isUploading()
 {
   return command.isRunning();
@@ -52,7 +56,7 @@ bool uploadModule::isUploading()
 bool uploadModule::clickDown(int _x, int _y)
 {
   bool ret=0;
-  if(blocks->base.uploadBut.clickDown(_x, _y)){
+  if(blocks->base.uploadBut.clickDown(_x, _y)&&!isUploading()){
     ret=true;
     upload();
   }

@@ -26,6 +26,8 @@
 		AA949DB013B390B7009141B0 /* ofxDirList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA949DAE13B390B7009141B0 /* ofxDirList.cpp */; };
 		AA949E5913B3D944009141B0 /* blockLoad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA949E5813B3D944009141B0 /* blockLoad.cpp */; };
 		AA9C32641338E09B00CB0F81 /* ofxThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA9C32621338E09B00CB0F81 /* ofxThread.cpp */; };
+		AAAD6A0E1475AC83009E0379 /* RFID_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAAD6A0D1475AC83009E0379 /* RFID_reader.cpp */; };
+		AAAD6A521475B4B2009E0379 /* Phidget21.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAAD6A511475B4B2009E0379 /* Phidget21.framework */; };
 		AAB4E7061460744600276A4D /* group_SetupFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB4E7051460744600276A4D /* group_SetupFuncs.cpp */; };
 		AAB4E70E146076A400276A4D /* group_MouseFuncts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB4E70D146076A400276A4D /* group_MouseFuncts.cpp */; };
 		AAB4E711146076D100276A4D /* group_DrawFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAB4E710146076D100276A4D /* group_DrawFuncs.cpp */; };
@@ -220,6 +222,9 @@
 		AA9C32621338E09B00CB0F81 /* ofxThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxThread.cpp; sourceTree = "<group>"; };
 		AA9C32631338E09B00CB0F81 /* ofxThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxThread.h; sourceTree = "<group>"; };
 		AAA628811371E11800999580 /* config.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = config.cfg; path = bin/data/config.cfg; sourceTree = "<group>"; };
+		AAAD6A0C1475AC83009E0379 /* RFID_reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RFID_reader.h; path = RFID_reader/RFID_reader.h; sourceTree = "<group>"; };
+		AAAD6A0D1475AC83009E0379 /* RFID_reader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RFID_reader.cpp; path = RFID_reader/RFID_reader.cpp; sourceTree = "<group>"; };
+		AAAD6A511475B4B2009E0379 /* Phidget21.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Phidget21.framework; path = /Library/Frameworks/Phidget21.framework; sourceTree = "<absolute>"; };
 		AAB4E7041460744600276A4D /* blockGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = blockGroup.h; path = blockGroup/blockGroup.h; sourceTree = "<group>"; };
 		AAB4E7051460744600276A4D /* group_SetupFuncs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = group_SetupFuncs.cpp; path = blockGroup/group_SetupFuncs.cpp; sourceTree = "<group>"; };
 		AAB4E70D146076A400276A4D /* group_MouseFuncts.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = group_MouseFuncts.cpp; path = blockGroup/group_MouseFuncts.cpp; sourceTree = "<group>"; };
@@ -333,6 +338,7 @@
 				E4C2429410CC5C38004149E2 /* freetype.a in Frameworks */,
 				E4C242CD10CC650E004149E2 /* libfmodex.dylib in Frameworks */,
 				E4C246DA10CCAE22004149E2 /* freeimage.a in Frameworks */,
+				AAAD6A521475B4B2009E0379 /* Phidget21.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,6 +626,7 @@
 		AA7A312F14687EF400D95060 /* control */ = {
 			isa = PBXGroup;
 			children = (
+				AAAD6A0B1475AC42009E0379 /* RFID_reader */,
 				AA7A4086146D662800D95060 /* screenTest */,
 				AA7A3CB6146C2FB100D95060 /* uploadModule */,
 				AA7A313014687F0A00D95060 /* dirLoad */,
@@ -777,6 +784,16 @@
 				AA9C32631338E09B00CB0F81 /* ofxThread.h */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		AAAD6A0B1475AC42009E0379 /* RFID_reader */ = {
+			isa = PBXGroup;
+			children = (
+				AAAD6A0C1475AC83009E0379 /* RFID_reader.h */,
+				AAAD6A0D1475AC83009E0379 /* RFID_reader.cpp */,
+				AAAD6A511475B4B2009E0379 /* Phidget21.framework */,
+			);
+			name = RFID_reader;
 			sourceTree = "<group>";
 		};
 		AAB4E7031460741A00276A4D /* Block Group */ = {
@@ -1278,6 +1295,7 @@
 				AA7A408D146D662800D95060 /* turtle.cpp in Sources */,
 				AA7A40E5146D86BA00D95060 /* turtleAction.cpp in Sources */,
 				AA7A40E8146D8A4B00D95060 /* evaluate.cpp in Sources */,
+				AAAD6A0E1475AC83009E0379 /* RFID_reader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1409,6 +1427,7 @@
 					../../../libs/freetype/include/freetype2,
 					../../../libs/poco/include,
 					../../../addons/,
+					/Library/Frameworks/Phidget21.framework/Headers/,
 				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"-D__MACOSX_CORE__",

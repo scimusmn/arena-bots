@@ -10,6 +10,8 @@
 #include "turtle/turtle.h"
 #include "turtleAction/turtleAction.h"
 
+#include "../../../dallasEng/dallasEng.h"
+
 class block;
 
 enum ofBlockActions {
@@ -23,7 +25,17 @@ protected:
   bool bRunning;
   ofTurtle turtle;
   block * base;
+  
+  bool bFinished;
+  
+  dallasButton resetBut;
+  dallasButton endBut;
+  
+  ofFont display;
 public:
+  ofRectangle controlBar;
+  ofRectangle mapArea;
+  
   void setup();
   
   void parseActions(block * t);
@@ -44,7 +56,23 @@ public:
   
   bool turtleIsRunning();
   
+  bool turtleCrashed();
+  
+  bool finishedActions();
+  
   void drawCurrentBlock();
   
   void draw(int x, int y, int w, int h);
+  
+  void drawMap(int x, int y, int w, int h);
+  
+  void drawControlBar(int x, int y);
+  
+  void drawForeground();
+  
+  bool mouseLockout();
+  
+  bool clickDown(int _x, int _y);
+  
+  bool clickUp();
 };

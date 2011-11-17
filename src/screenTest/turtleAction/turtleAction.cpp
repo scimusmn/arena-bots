@@ -184,6 +184,7 @@ void turtleAction::handleWord()
       else if(spl[i]=="leftPath"){
         guard=LFT_SNS;
         nGoal=ofToFloat(spl[i+1])*pixPerInch;
+        cout << nGoal << endl;
       }
       else if(spl[i]=="forever") guard=ACT_FOREVER;
     }

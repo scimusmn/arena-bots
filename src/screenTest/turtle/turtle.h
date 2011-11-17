@@ -18,6 +18,12 @@ class ofTurtle {
   deque<ofPoint> lines;
   int numLineStored;
   bool bTurnSinceRecord;
+  
+  bool bCrashed;
+  vector<ofVector> bdy;
+  
+  double frontCheckDist;
+  double leftCheckDist;
 public:
   ofImage map;
   ofPoint start,pos;
@@ -30,6 +36,7 @@ public:
   void move(int pixels);
   void turn(int degrees);
   void clear(){ lines.clear();}
+  bool checkPoints();
   bool sensorIsClear(ofPoint strtPnt,int pixels, ofImage & walls, int direction=0);
   bool frontIsClear(int pixels, ofImage & walls);
   bool frontLeftIsClear(int pixels, ofImage & walls);
@@ -38,6 +45,8 @@ public:
   bool leftIsClear(int pixels, ofImage & walls);
   bool frontIsClear(int distance);
   bool leftIsClear(int distance);
+  bool crashed(){ return bCrashed;}
   ofPoint pointAlongBearing(int pix);
   void draw(int _x, int _y);
+  void reset();
 };

@@ -18,6 +18,7 @@
 #include "uploadModule.h"
 #include "../screenTest/screenTest.h"
 #include "../../../dallasEng/dallasEng.h"
+#include "RFID_reader.h"
 
 class buttonHolder : public ofInterObj {
 protected:

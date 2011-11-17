@@ -1,10 +1,14 @@
 #define IS_ROBOT 0x06
 #define ROBOT_NUMBER 0x0C
+#define REQUEST_IDENT 0xff
 
 $blocks.global()
 
 bool thru=false;
 bool running=false;
+bool bInit=false;
+
+bool change=false;
 
 void changeRun(){
   robot.toggleRun();
@@ -20,11 +24,14 @@ void setup(){
 }
 
 void loop(){
-  Serial.print(IS_ROBOT,BYTE);
-  Serial.print(ROBOT_NUMBER,BYTE);
-  Serial.print($deviceNumber.,BYTE);
-  Serial.print("\n");
+  if(Serial.available()&&Serial.read()==REQUEST_IDENT){
+    Serial.print(IS_ROBOT,BYTE);
+    Serial.print(ROBOT_NUMBER,BYTE);
+    Serial.print($deviceNumber.,BYTE);
+    Serial.print("\n");
+  }
   $blocks.start()
+  delay(500);
   if(running&&!thru){
     $blocks.loop()
   }

@@ -23,5 +23,6 @@ public:
   void upload();
   void drawUploadWait();
   bool isUploading();
+  void stopUpload();
   bool clickDown(int _x, int _y);
 };

@@ -9,10 +9,6 @@
 
 #include "serialCheck.h"
 
-#define IS_ROBOT 0x06
-#define ROBOT_NUMBER 0x0C
-#define REQUEST_IDENT 0x04
-
 int CURRENT_ROBOT_NUMBER=0;
 
 //_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_
@@ -62,7 +58,7 @@ bool serialCheck::isAvailable()
 {
   bool ret=0;
   if(lock()){
-    ret=bAvailable;
+    ret=bAvailable&&rfid.available();
     unlock();
   }
   return ret;
@@ -74,6 +70,7 @@ void serialCheck::drawWaitScreen()
     ofSetColor(0, 0, 0,196);
     ofRect(0, 0, ofGetWidth(), ofGetHeight());
     string printOut="Connect the robot to begin";
+    if(bAvailable) printOut="Place robot on platform";
     if(bIdent) printOut="Identifying: Do not unplug";
     ofSetColor(255, 255, 255);
     report.drawString(printOut, ofGetWidth()/2, ofGetHeight()/2);
@@ -91,7 +88,9 @@ void serialCheck::checkAvailability()
   #if defined( TARGET_OSX )
         for (int i=0; i<serial.numDevices(); i++) {
           if(serial.deviceNameByNumber(i).substr(0,7) == "tty.usb" ){
-            bIdent=true;
+            bAvailable=true;
+            bJustFound=true;
+            /*bIdent=true;
             ofTimer delay;
             delay.set(.5);
             delay.run();
@@ -103,7 +102,8 @@ void serialCheck::checkAvailability()
               bJustFound=true;
             }
             bIdent=false;
-            serial.close();
+            serial.flush();
+            serial.close();*/
           }
         }
   #elif defined( TARGET_WIN32 )
@@ -125,16 +125,16 @@ void serialCheck::checkAvailability()
         numDevices=serial.numDevices();
         bAvailable=false;
         bJustLost=true;
-        for (int i=0; i<serial.numDevices(); i++)
-          cout << serial.deviceNameByNumber(i) << endl;
+        //for (int i=0; i<serial.numDevices(); i++)
+          //cout << serial.deviceNameByNumber(i) << endl;
       }
       else if(numDevices>serial.numDevices()&&!bAvailable){
         nCurrentDevice=-1;
         numDevices=serial.numDevices();
         bAvailable=false;
         bJustLost=true;
-        for (int i=0; i<serial.numDevices(); i++)
-          cout << serial.deviceNameByNumber(i) << endl;
+        //for (int i=0; i<serial.numDevices(); i++)
+          //cout << serial.deviceNameByNumber(i) << endl;
       }
     }
     checkTimer.reset();
@@ -147,31 +147,34 @@ bool serialCheck::getDeviceNumber()
   ofTimer timeout;
   timeout.set(.5);
   timeout.run();
-  serial.flush();
+  //serial.flush();
   cout << "waiting for data from serial\n";
+  serial.writeByte(REQUEST_IDENT);
   while(timeout.running());
-  serial.writeByte('a');
-  timeout.set(.5);
-  while (!timeout.expired()&&!ret) {
-    if(!serial.available()) serial.writeByte('a');
+  timeout.set(1);
+  waitForData=3;
+  MODE=0;
+  while (timeout.running()&&!ret) {
+    if(!serial.available()) serial.writeByte(REQUEST_IDENT);
     else if(serial.available()){
       byteRead=serial.readByte();
-      cout << int(byteRead) << "here" << endl;
-      if(byteRead==IS_ROBOT) cout << "serial device is a robot\n";
+      cout << int(byteRead) << " is the next serial byte" << endl;
+      //if(byteRead==IS_ROBOT) cout << "serial device is a robot\n";
       switch (MODE) {
         case IS_ROBOT:
           data[2-waitForData--]=byteRead;
           break;
         case 0:
           if (byteRead==IS_ROBOT) {
-            MODE=byteRead;
+            cout << "serial device is a robot\n";
+            MODE=IS_ROBOT;
             waitForData=2;
           }
           break;
         default:
           break;
       }
-      if(waitForData==0) {
+      if(MODE&&waitForData==0) {
         switch (data[0]) {
           case ROBOT_NUMBER:{
             lock();
@@ -203,14 +206,15 @@ void serialCheck::deviceRemoved()
   
 }
 
-int serialCheck::deviceNumber()
+string serialCheck::deviceNumber()
 {
-  int ret=0;
+  /*int ret=0;
   if(!isThreadRunning()||lock()){
     ret=CURRENT_ROBOT_NUMBER;
     if(isThreadRunning()) unlock();
   }
-  return ret;
+  return ret;*/
+  return rfid.getSerialNumber();
 }
 
 void serialCheck::threadCheckAvailability()
@@ -222,8 +226,8 @@ void serialCheck::threadCheckAvailability()
 
 bool serialCheck::justFoundDevice()
 {
-  bool ret=bJustFound;
-  bJustFound=false;
+  bool ret=bJustFound&&rfid.available();
+  if(rfid.available()) bJustFound=false;
   return ret;
 }
 

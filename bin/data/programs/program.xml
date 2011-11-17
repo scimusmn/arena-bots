@@ -1,4 +1,4 @@
-<base robot_number="101">
+<base robot_number="0">
 	<block name="go forward %d inches" color="0xde8c3a">
 		<dropdown>
 			<ddlow>0</ddlow>

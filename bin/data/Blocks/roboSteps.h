@@ -33,8 +33,8 @@ public:
     stepsPerRot=200;
     leftMotor.init(stepsPerRot,left);
     rightMotor.init(stepsPerRot,right);
-    robutDiameter=4.28;
-    wheelDiameter=2.375;
+    robutDiameter=4.0;
+    wheelDiameter=2.335;
     rCirc=robutDiameter*M_PI;
     wCirc=wheelDiameter*M_PI;
     inchesPerStep=wCirc/((float)stepsPerRot);

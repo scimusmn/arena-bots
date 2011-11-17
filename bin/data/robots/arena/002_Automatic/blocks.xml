@@ -57,17 +57,17 @@
 		<block name="while path in front is clear" color="0x65c270">
       <bracket>1</bracket>
       <file>pathClear.blk</file>
-      <action>while:$front(4)</action>
+      <action>while:$front(6)</action>
     </block>
     <block name="if path on left is clear" color="0x65c270">
       <bracket>1</bracket>
       <file>leftPathClear.blk</file>
-      <action>if:$leftPath(2)</action>
+      <action>if:$leftPath(12)</action>
     </block>
     <block name="if path in front is blocked" color="0x65c270">
       <bracket>1</bracket>
       <file>pathBlocked.blk</file>
-      <action>if:!$front(4)</action>
+      <action>if:!$front(6)</action>
     </block>
 	</bar>
   <bar name="Timing blocks" color="0x13b5ea">

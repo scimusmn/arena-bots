@@ -64,6 +64,7 @@ void block::drawSelected(){
 	for (unsigned int i=0; i<blocksIn.size(); i++) {
 		//blocksIn[i].drawSelected();
 	}
+  ofSetLineWidth(2);
   ofFill();
 }
 
