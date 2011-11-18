@@ -200,7 +200,7 @@ bool searchUnderBlock(dropBlock & foundBlock,block & strt, block & drpd, blkVect
     }
     //------- if we're checking blocksIn, check immediately inside
     else {
-      if (drpd.inBounds(strt.x+strt.interior.x,strt.y+strt.ttlSize.y/2, strt.w-strt.interior.x, ((strt.blocksIn.size())?strt.ttlSize.y:strt.interior.height))) {
+      if (drpd.inBounds(strt.x+strt.interior.x,strt.y+strt.ttlSize.y/2, strt.w,((strt.blocksIn.size())?strt.ttlSize.y:strt.h-(strt.bottomBar)))) {
         tmp=true;
         //------- set the foundBlock to the 0 Position of the vector
         foundBlock.set(strt,t,0);
@@ -215,7 +215,7 @@ bool searchUnderBlock(dropBlock & foundBlock,block & strt, block & drpd, blkVect
       //------- find the halfway point on the next block
       if(i<bV.size()-1) nxt=&(bV[i+1]);
       if(nxt) spc=nxt->ttlSize.y/2;
-      if (bV[i].beneath(drpd,spc)&&!bV[i].inside(drpd)) {
+      if (bV[i].beneath(drpd)&&!bV[i].inside(drpd)) {
         tmp=true;
         foundBlock.set(strt,t,i+1);
       }

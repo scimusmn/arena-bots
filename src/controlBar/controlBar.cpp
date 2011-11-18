@@ -168,7 +168,7 @@ void controlBar::setup(bGroup * bG, sbGroup * sbG)
   
   upload.setup(blocks);
   
-  testbed.setup();
+  testbed.setup(&blocks->base);
   
   barSpacing();
   
@@ -244,7 +244,7 @@ void controlBar::draw(int _x, int _y)
     drawHatching(0, 0, ofGetWidth(), ofGetHeight(), 15,1);
     
     testbed.draw(0,cBar.y+cBar.height,ofGetHeight()-(cBar.y+cBar.height),ofGetHeight()-(cBar.y+cBar.height));
-    blocks->base.draw(ofGetHeight(), cBar.y+cBar.height);
+    blocks->base.draw(ofGetHeight(), y);
     testbed.drawCurrentBlock();
     
     testbed.drawControlBar(x, y);
@@ -273,17 +273,23 @@ void controlBar::update()
   
   if(serChk.justLostDevice()){
     cout << "lost it\n";
-    blocks->saveXML("programs/"+serChk.deviceNumber()+"/program.xml");
+    blocks->saveXML("programs/"+serChk.deviceNumber()+".xml");
     blocks->clear();
     if (testbed.isTesting()) {
       testbed.stopTesting();
     }
     if(upload.isUploading()){
-      upload.stopUpload();
     }
   }
   if(serChk.justFoundDevice()){
-    blocks->loadFile("programs/"+serChk.deviceNumber()+"/program.xml");
+    ofxDirList dir;
+    int nDir=0;
+    nDir = dir.listDir("programs");
+    //you can now iterate through the files as you like
+    for(int i = 0; i < nDir; i++){
+      if(serChk.deviceNumber()+".xml"==ofGetFilename(dir.getPath(i)))
+        blocks->loadFile(dir.getPath(i));
+    }
   }
   
   if(testbed.turtleIsRunning()){
@@ -307,9 +313,7 @@ bool controlBar::clickDown(int _x, int _y, int button)
     }
     
     if(demo.clickDown(_x, _y)){
-      //anim.play();
-      testbed.startTesting(&blocks->base);
-      testbed.startTurtle();
+      anim.play();
     }
     
     //--------- if we press the undo button, roll back the state of the blockGroup
@@ -327,10 +331,11 @@ bool controlBar::clickDown(int _x, int _y, int button)
       anim.stop();
     }
   }
-  else testbed.clickDown(_x, _y);
-
   
-  upload.clickDown(_x, _y);
+  testbed.clickDown(_x, _y);
+
+  if(upload.clickDown(_x, _y))
+    blocks->saveXML("programs/"+serChk.deviceNumber()+".xml");
 }
 
 bool controlBar::clickUp()

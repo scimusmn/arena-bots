@@ -4,7 +4,7 @@
 			<ddlow>0</ddlow>
 			<ddhigh>12</ddhigh>
 			<ddsteps>7</ddsteps>
-			<selected>4</selected>
+			<selected>6</selected>
 		</dropdown>
 		<action>move:$dd[0].num()*$ppi</action>
 		<file>forward.blk</file>

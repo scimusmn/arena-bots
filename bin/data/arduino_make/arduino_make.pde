@@ -4,6 +4,18 @@
 
   #include "AFMotor.h"
 #include "arenaRobot.h"
+  #include <AFMotor.h>
+#include "arenaRobot.h"
+  #include "AFMotor.h"
+#include "arenaRobot.h"
+  
+
+  #include <AFMotor.h>
+#include "arenaRobot.h"
+  #include "AFMotor.h"
+#include "arenaRobot.h"
+  #include <AFMotor.h>
+#include "arenaRobot.h"
 
 
 bool thru=false;
@@ -21,25 +33,32 @@ void changeRun(){
 
 void setup(){
   attachInterrupt(0, changeRun, RISING);
-  Serial.begin(9600);
+	robot.setup();
+	robot.setup();
+	robot.setup();
+	
+	robot.setup();
+	robot.setup();
 	robot.setup();
 
 }
 
 void loop(){
-  if(Serial.available()&&Serial.read()==REQUEST_IDENT){
-    Serial.print(IS_ROBOT,BYTE);
-    Serial.print(ROBOT_NUMBER,BYTE);
-    Serial.print(101,BYTE);
-    Serial.print("\n");
-  }
   
   delay(500);
   if(running&&!thru){
-    robot.forward(4 );
+    while(robot.isRunning()){ 	robot.doubleStep(1,BACKWARD,SINGLE);
+	robot.leftTurn(1);
+	if(!robot.leftSensor(400)){
+	  		robot.doubleStep(1,BACKWARD,SINGLE);
+		robot.leftTurn(1);
+	  }
+	if(robot.frontSensor(400)){
+	  		robot.rightTurn(45 );
+	  }
+}
 
   }
-    robot.end();
-
+  
   thru=true;
 }

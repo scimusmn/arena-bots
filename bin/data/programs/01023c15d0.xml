@@ -1,0 +1,12 @@
+<base robot_number="0">
+	<block name="go backward %d inches" color="0xde8c3a">
+		<dropdown>
+			<ddlow>0</ddlow>
+			<ddhigh>12</ddhigh>
+			<ddsteps>7</ddsteps>
+			<selected>12</selected>
+		</dropdown>
+		<file>backward.blk</file>
+		<action>move:-$dd[0].num()*$ppi</action>
+	</block>
+</base>

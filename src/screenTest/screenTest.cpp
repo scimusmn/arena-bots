@@ -8,7 +8,7 @@
  */
 
 #include "screenTest.h"
-#include "blocks.h"
+#include "../baseBlock/baseBlock.h"
 
 extern ofColor black, white, blue, red, orange, yellow, gray;
 
@@ -16,9 +16,9 @@ ofTimer actionTimer;
 
 block * currentBlock=0;
 
-void robotTest::setup()
+void robotTest::setup(baseBlock * t)
 {
-  turtle.setup("maps/map_2.jpg");
+  turtle.setup("maps/map_3.jpg");
   bTesting=false;
   bRunning=false;
   bFinished=false;
@@ -32,9 +32,10 @@ void robotTest::setup()
   
   controlBar.height=endBut.h*2;
   controlBar.width=ofGetWidth();
+  base=t;
 }
 
-void robotTest::parseActions(block * t)
+void robotTest::parseActions(baseBlock * t)
 {
   actions.clear();
   for (unsigned int i=0; i<t->blocksOn.size(); i++) {
@@ -43,12 +44,11 @@ void robotTest::parseActions(block * t)
 }
 
 
-void robotTest::startTesting(block * t)
+void robotTest::startTesting(baseBlock * t)
 {
   parseActions(t);
   resetTurtle();
   resetBut.setTitle("Reset virtual robot");
-  base=t;
   bTesting=true;
 }
 
@@ -106,7 +106,7 @@ bool robotTest::turtleIsRunning()
 
 bool robotTest::turtleCrashed()
 {
-  return turtle.crashed();;
+  return turtle.crashed();
 }
 
 bool robotTest::finishedActions(){
@@ -157,7 +157,7 @@ void robotTest::drawForeground()
     ofSetColor(black.opacity(.75));
     ofRect(0, 0, ofGetWidth(), ofGetHeight());
     ofSetColor(white);
-    display.drawString("Virtual robot has crashed", ofGetWidth()/2, ofGetHeight()/2);
+    display.drawString("You screwed up.", ofGetWidth()/2, ofGetHeight()/2);
     endBut.setTextSize(50);
     resetBut.setTextSize(50);
     endBut.draw((ofGetWidth()/2-endBut.w)/2, 3*ofGetHeight()/4);
@@ -168,12 +168,13 @@ void robotTest::drawForeground()
 void robotTest::drawControlBar(int x, int y)
 {
   ofRectangle & cBar=controlBar;
+  cBar.width=mapArea.width;
   cBar.x=x,cBar.y=y;
   ofSetColor(black);
   ofRect(cBar);
   
   ofSetColor(gray);
-  drawHatching(cBar.x, cBar.y, cBar.width, cBar.height, 85,80);
+  //drawHatching(cBar.x, cBar.y, cBar.width, cBar.height, 85,80);
   drawBorder(cBar);
   
   ofSetColor(yellow);
@@ -181,6 +182,7 @@ void robotTest::drawControlBar(int x, int y)
   
   endBut.setTextSize(19);
   resetBut.setTextSize(19);
+  if(!turtleIsRunning()&&!turtleCrashed()&&(ofGetElapsedTimeMillis()/500)%2) trimmedRect(resetBut.x-5, resetBut.y-5, resetBut.w+10, resetBut.h+10, .33);
   endBut.draw(cBar.x+(cBar.width/2-endBut.w)/2, cBar.y+(cBar.height-endBut.h)/2);
   resetBut.draw(cBar.x+(3*cBar.width/2-resetBut.w)/2, cBar.y+(cBar.height-resetBut.h)/2);
 }
@@ -195,7 +197,7 @@ bool robotTest::clickDown(int _x, int _y)
 {
   if (isTesting()) {
     if(endBut.clickDown(_x, _y))
-      pauseTurtle(),resetTurtle(),stopTesting();
+      pauseTurtle(),resetTurtle(),stopTesting(),base->setDrawTest(true);
     if(resetBut.clickDown(_x, _y)){
       if(turtleCrashed()||turtleIsRunning()||finishedActions()){
         resetTurtle();
@@ -207,6 +209,13 @@ bool robotTest::clickDown(int _x, int _y)
       }
     }
   }
+  else{
+    if(base->testBut.clickDown(_x,_y)){
+      startTesting(base);
+      startTurtle();
+      base->setDrawTest(false);
+    }
+  }
 }
 
 
@@ -214,5 +223,6 @@ bool robotTest::clickUp()
 {
   endBut.clickUp();
   resetBut.clickUp();
+  base->testBut.clickUp();
 }
 

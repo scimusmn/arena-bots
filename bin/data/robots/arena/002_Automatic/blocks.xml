@@ -62,7 +62,7 @@
     <block name="if path on left is clear" color="0x65c270">
       <bracket>1</bracket>
       <file>leftPathClear.blk</file>
-      <action>if:$leftPath(12)</action>
+      <action>if:$leftPath(3)</action>
     </block>
     <block name="if path in front is blocked" color="0x65c270">
       <bracket>1</bracket>

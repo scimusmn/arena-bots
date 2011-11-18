@@ -15,6 +15,7 @@ extern ofColor white, black, blue, yellow, gray;
 extern int TITLE_HEIGHT;
 
 baseBlock::baseBlock():block(){
+  bDrawtest=true;
   w=530, h=90;
   orig.width=w;
   orig.height=h;
@@ -36,10 +37,18 @@ baseBlock::baseBlock():block(){
   ttlSize.y=TITLE_HEIGHT;
   ttlSize.x=w;
   
-  uploadBut.setup( 128,128,"images/upload2.png");
+  //uploadBut.setup( 128,128,"images/upload2.png");
+  testBut.setup("Test program", 20);
+  uploadBut.setup("Upload program",20);
   
-  butArea.x=uploadBut.w;
-  butArea.y=uploadBut.h;
+  pad=15;
+  
+  butArea.x=max(uploadBut.w,testBut.w)+pad*2;
+  butArea.y=pad+uploadBut.h+pad+testBut.h+pad;
+}
+
+void baseBlock::setDrawTest(bool btest){
+  bDrawtest=btest;
 }
 
 void baseBlock::draw(int _x, int _y)
@@ -47,12 +56,14 @@ void baseBlock::draw(int _x, int _y)
   x=_x, y=_y;
   
   ofSetColor(color*.9);
-  drawBaseBlock(x, y, w, h,butArea.x,butArea.y);
+  if(bDrawtest) drawBaseBlock(x, y, w, h,butArea.x,butArea.y);
+  else drawBaseBlock(x, y, w, h,0,h);
   
   ofSetColor(black);
   ofNoFill();
   ofSetLineWidth(2);
-  drawBaseBlock(x, y, w, h,butArea.x,butArea.y);
+  if(bDrawtest) drawBaseBlock(x, y, w, h,butArea.x,butArea.y);
+  else drawBaseBlock(x, y, w, h,0,h);
   ofSetLineWidth(1);
   ofFill();
   
@@ -67,7 +78,12 @@ void baseBlock::draw(int _x, int _y)
 		blocksIn[i].draw();
 	}
   
-  uploadBut.draw(x+w-butArea.x,y+10);
+  if(bDrawtest){
+    testBut.draw(x+w-butArea.x+(butArea.x-testBut.w)/2, y+pad);
+    uploadBut.draw(x+w-butArea.x+(butArea.x-uploadBut.w)/2,testBut.y+testBut.h+pad);
+  }
+  else uploadBut.draw(x+w-butArea.x+(butArea.x-uploadBut.w)/2,y+(h-uploadBut.h)/2);
+  
   
   drawOpenDD();
 }

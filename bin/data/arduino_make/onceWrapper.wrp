@@ -19,17 +19,10 @@ void changeRun(){
 
 void setup(){
   attachInterrupt(0, changeRun, RISING);
-  Serial.begin(9600);
 	$blocks.setup()
 }
 
 void loop(){
-  if(Serial.available()&&Serial.read()==REQUEST_IDENT){
-    Serial.print(IS_ROBOT,BYTE);
-    Serial.print(ROBOT_NUMBER,BYTE);
-    Serial.print($deviceNumber.,BYTE);
-    Serial.print("\n");
-  }
   $blocks.start()
   delay(500);
   if(running&&!thru){

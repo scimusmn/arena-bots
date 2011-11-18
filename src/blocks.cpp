@@ -70,6 +70,8 @@ block::block(ofTag & cur,ofColor col):ofInterObj(-200,-200,150,TITLE_HEIGHT) {
 	title=cur.getAttribute("name");
   ttlSize.x=w;
   ttlSize.y=TITLE_HEIGHT;
+  ddSelected=false;
+  
 	//cout << title << endl;
 	
 	//-------- init some variables, to prevent garbage from happening
@@ -332,6 +334,7 @@ void block::operator=(const block &t) {
 	blocksOn=t.blocksOn;
 	blocksIn=t.blocksIn;
 	ddOpen=t.ddOpen;
+  ddSelected=t.ddSelected;
 	placeHolder=t.placeHolder;
 	color=t.color;
   insertSpace=t.insertSpace;

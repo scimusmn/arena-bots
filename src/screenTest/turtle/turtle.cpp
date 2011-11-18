@@ -70,6 +70,9 @@ bool ofTurtle::checkPoints()
       }
       else ret=bCrashed=true;
     }
+    if(!ret&&k[int(pos.y)*map.width*3+int(pos.x)*3+2]>200){
+      cout << "Reached destination" << endl;
+    }
   }
   return ret;
 }

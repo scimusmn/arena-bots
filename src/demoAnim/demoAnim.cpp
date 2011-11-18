@@ -144,8 +144,11 @@ ofInterObj * demoAnim::searchForObject(ofTag & tag, int & _x, int & _y)
     else if(whSplit.size()>=2) ret=searchBlock(whSplit,blocks->base.blocksOn[ofToInt(whSplit[1])],2);
   }
   else if(whSplit[0]=="upload"){
-    //ret=&upBut;
+    ret=&blocks->base.uploadBut;
     //TODO: update the base block to include the upload button.
+  }
+  else if(whSplit[0]=="test"){
+    ret=&blocks->base.testBut;
   }
   vector<string> xSpl = ofSplitString(xTemp, "+-/*");
   if(xSpl.size()==1) _x=ofToInt(xSpl[0]);

@@ -66,7 +66,7 @@ int CCONV TagLostHandler(CPhidgetRFIDHandle RFID, void *usrptr, unsigned char *T
 	//turn off the Onboard LED
 	CPhidgetRFID_setLEDOn(RFID, 0);
   
-  tagVal="";
+  //tagVal="";
   tagAvailable=false;
 	return 0;
 }

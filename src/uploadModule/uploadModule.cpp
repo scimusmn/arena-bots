@@ -40,7 +40,7 @@ void uploadModule::drawUploadWait()
     ofRect(0, 0, ofGetWidth(), ofGetHeight());
 		ofSetColor(255, 255, 255);
 		spinner.draw((ofGetWidth())/2,ofGetHeight()/2, 300);
-		label.drawString("Uploading: do not uplug", ofGetWidth()/2, ofGetHeight()/4);
+		label.drawString("Uploading: do not unplug", ofGetWidth()/2, ofGetHeight()/4);
 	}
 }
 

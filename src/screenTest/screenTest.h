@@ -12,7 +12,7 @@
 
 #include "../../../dallasEng/dallasEng.h"
 
-class block;
+class baseBlock;
 
 enum ofBlockActions {
   OF_BLOCK_NULL_ACT,OF_BLOCK_MOVE, OF_BLOCK_TURN, OF_BLOCK_WHILE, OF_BLOCK_IF,OF_BLOCK_REPEAT
@@ -24,7 +24,7 @@ protected:
   bool bTesting;
   bool bRunning;
   ofTurtle turtle;
-  block * base;
+  baseBlock * base;
   
   bool bFinished;
   
@@ -36,11 +36,11 @@ public:
   ofRectangle controlBar;
   ofRectangle mapArea;
   
-  void setup();
+  void setup(baseBlock * t);
   
-  void parseActions(block * t);
+  void parseActions(baseBlock * t);
   
-  void startTesting(block * t);
+  void startTesting(baseBlock * t);
   
   void stopTesting();
   

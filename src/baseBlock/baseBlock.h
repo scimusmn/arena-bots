@@ -17,12 +17,16 @@ class baseBlock : public block {
 protected:
   ofPoint butArea;
   bGroup * group;
+  int pad;
+  bool bDrawtest;
 public:
-  ofButton uploadBut;
+  dallasButton uploadBut;
+  dallasButton testBut;
   baseBlock();
   baseBlock & operator=(baseBlock &t);
   void draw(int _x, int _y);
   bool clickDown(int _x, int _y);
   bool newClickUp( int _x, int _y);
   void setup(bGroup * grp);
+  void setDrawTest(bool bDraw);
 };

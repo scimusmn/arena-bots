@@ -57,7 +57,7 @@ bool block::inside(block & drop)
     int inLine=y+ttlSize.y/2;
     //int bottomSpace=orig.height-(interior.y+interior.height);
     int inH=h-((inLine-y)+bottomBar/2);
-    if(drop.inBounds(x+interior.x, inLine, w-interior.x, inH))
+    if(drop.inBounds(x+interior.x, inLine, fullWidth()-interior.x, inH))
       ret=true;
   }
   return ret;
@@ -76,7 +76,7 @@ bool block::beneath(block & chk,signed int blw)
     blw=blw+(y+h)-midLine;
   }
   
-  return (chk.inBounds(x, midLine, w, blw));
+  return (chk.inBounds(x, midLine, fullWidth(), blw));
 }
 
 bool block::inBounds(int xX, int yX, int wX, int hX)
@@ -100,7 +100,7 @@ int block::onBlockOn(int _x,int _y){
 
 bool block::inOrOn(int _x, int _y)
 {
-  return (_x>x&&_x<x+w&&_y>y&&_y<y+h+newHeightOn());
+  return (_x>x&&_x<x+fullWidth()&&_y>y&&_y<y+h+newHeightOn());
 }
 
 /*****************************************************************
@@ -126,7 +126,7 @@ double block::fullWidth()
     ret+=blocksIn[0].x-x;
     double maximum=0;
     for (unsigned int i=0; i<blocksIn.size(); i++) {
-      maximum=max(maximum,blocksIn[i].w);
+      maximum=max(maximum,interior.x+blocksIn[i].fullWidth());
     }
     ret+=maximum;
   }
