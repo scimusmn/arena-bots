@@ -10,6 +10,7 @@
 
 #include "blockGroup.h"
 
+extern bool bCopy;
 
 /*************************** Mouse Functions ***************************
  ***********************************************************************/
@@ -26,13 +27,21 @@ void bGroup::motion(double _x, double _y){
 bool bGroup::clickDown(int _x, int _y)
 {
   bool ret=false;
-  for (unsigned int i=0; i<blocks.size()&&!ret; i++) {
-    if(!ret) ret=newHandleClick(blocks,i,_x,_y,true);
+  if(current){
+    if(current->newClickDD(_x, _y, ddopen)) ret=1;
+    loseFocus();
   }
-  for (unsigned int i=0; i<base.blocksOn.size()&&!ret; i++) {
-    if(!ret) ret=newHandleClick(base.blocksOn,i,_x,_y);
+  else{
+    ret=bar.clickDown(_x, _y);
+    for (unsigned int i=0; i<blocks.size()&&!ret; i++) {
+      if(!ret) ret=newHandleClick(blocks,i,_x,_y,true);
+    }
+    for (unsigned int i=0; i<base.blocksOn.size()&&!ret; i++) {
+      if(!ret) 
+        if(ret=newHandleClick(base.blocksOn,i,_x,_y)) bChanged=true;
+    }
+    if(!ret) ret=base.clickDown(_x, _y);
   }
-  if(!ret) ret=base.clickDown(_x, _y);
   return ret;
 }
 
@@ -40,6 +49,7 @@ bool bGroup::newHandleClick(vector<block> & chk, int i, int _x, int _y, bool top
 {
   bool ret=false;
   if(!chk[i].ddPassingClick(_x,_y)){
+    setFocus(&chk[i]);
     if(chk[i].newClickDD(_x,_y,ddopen))
       ret=true;
   }
@@ -48,6 +58,7 @@ bool bGroup::newHandleClick(vector<block> & chk, int i, int _x, int _y, bool top
     dispx = chk[i].x-_x;
     dispy = chk[i].y-_y;
     if(!top) pullBlocks(chk, i);
+    else if(bCopy) held = chk[i];
     else held = chk[i],chk.erase(chk.begin()+i);
   }
   else if(chk[i].inOrOn(_x,_y)){
@@ -65,7 +76,7 @@ void bGroup::pullBlocks(vector<block> & chk, int i)
 {
   held=chk[i];
   held.blocksOn.assign(chk.begin()+(i+1),chk.end());
-  chk.erase(chk.begin()+i,chk.end());
+  if(!bCopy) chk.erase(chk.begin()+i,chk.end());
 }
 
 //_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_
@@ -87,6 +98,7 @@ void bGroup::drag(double _x, double _y){
       held.move(_x+dispx, _y+dispy);
     }
 	}
+  bar.mouseMotion(_x, _y);
 }
 
 bool bGroup::newClickUp(int _x, int _y)
@@ -100,7 +112,7 @@ bool bGroup::newClickUp(int _x, int _y)
   if(held.bGrabbed){
     held.newClickUp(_x,_y);
     if(!(held.x<x||held.x>x+w||held.y<y||held.y>y+h)){
-      if(processBlockDrop(held, base)) ret=true;
+      if(processBlockDrop(held, base)) ret=true,bChanged=true;
       for (unsigned int i=0; i<blocks.size()&&!ret; i++){
         ret=processBlockDrop(held, blocks[i]);
         if(!ret && (ret=processBlockDrop(blocks[i],held,true)))
@@ -111,7 +123,15 @@ bool bGroup::newClickUp(int _x, int _y)
     recordState();
   }
   bGrabbed=inHand=false;
-  
+  if(base.newHeightOn()+base.h+50!=bar.getFullSize()){
+    bar.setup(40, h, OF_VERT);
+    bar.registerArea(h,base.newHeightOn()+base.h+50);
+    bar.changePadding();
+  }
+  if(base.widthOn()+base.butArea.x!=base.w){
+    //base.w=base.widthOn()+base.butArea.x;
+  }
+  bar.clickUp();
   return ret;
 }
 

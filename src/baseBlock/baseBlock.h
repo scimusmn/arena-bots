@@ -15,11 +15,11 @@ class bGroup;
 
 class baseBlock : public block {
 protected:
-  ofPoint butArea;
   bGroup * group;
   int pad;
   bool bDrawtest;
 public:
+  ofPoint butArea;
   dallasButton uploadBut;
   dallasButton testBut;
   baseBlock();
@@ -29,4 +29,5 @@ public:
   bool newClickUp( int _x, int _y);
   void setup(bGroup * grp);
   void setDrawTest(bool bDraw);
+  int widthOn();
 };

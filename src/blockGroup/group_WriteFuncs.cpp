@@ -180,6 +180,12 @@ void bGroup::saveXML(string filename){
     top.addNode(base.blocksOn[i].saveTag());
   }
   save.writeFile(filename);
+  bChanged=false;
+}
+
+bool bGroup::changedSinceSave()
+{
+  return bChanged;
 }
 
 void bGroup::loadFile(string filename)

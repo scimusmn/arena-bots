@@ -24,6 +24,7 @@ protected:
 public:
   void setup(bGroup * bG, sbGroup * sbG);
   void animationStepRequested();
+  void handleAnimStep(ofTag tag);
   ofInterObj * searchForObject(ofTag & tag, int & _x, int & _y);
   ofInterObj * searchBlock(vector<string> spl, block & b, int offset);
   void changeAnimXML(ofXML & newXML);

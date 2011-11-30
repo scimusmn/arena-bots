@@ -76,6 +76,8 @@ protected:
   serialCheck serChk;
   
   rootGroup sets;
+  
+  ofTimer changed;
 public:
   double x,y,w,h;
   //controlBar();

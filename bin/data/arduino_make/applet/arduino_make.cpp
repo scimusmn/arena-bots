@@ -7,15 +7,11 @@ void loop();
 
   #include "AFMotor.h"
 #include "arenaRobot.h"
-  #include <AFMotor.h>
+  #include "AFMotor.h"
 #include "arenaRobot.h"
   #include "AFMotor.h"
 #include "arenaRobot.h"
-  
-
   #include <AFMotor.h>
-#include "arenaRobot.h"
-  #include "AFMotor.h"
 #include "arenaRobot.h"
   #include <AFMotor.h>
 #include "arenaRobot.h"
@@ -39,8 +35,6 @@ void setup(){
 	robot.setup();
 	robot.setup();
 	robot.setup();
-	
-	robot.setup();
 	robot.setup();
 	robot.setup();
 
@@ -50,14 +44,12 @@ void loop(){
   
   delay(500);
   if(running&&!thru){
-    while(robot.isRunning()){ 	robot.doubleStep(1,BACKWARD,SINGLE);
-	robot.leftTurn(1);
-	if(!robot.leftSensor(400)){
-	  		robot.doubleStep(1,BACKWARD,SINGLE);
-		robot.leftTurn(1);
-	  }
-	if(robot.frontSensor(400)){
-	  		robot.rightTurn(45 );
+    while(robot.isRunning()){ 	robot.doubleStep(2,BACKWARD,SINGLE);
+	if(robot.frontSensor(500)){
+	  		if(!robot.leftSensor(300)){
+		  			robot.leftTurn(180 );
+		  }
+		robot.rightTurn(90 );
 	  }
 }
 

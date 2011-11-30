@@ -232,6 +232,8 @@ void controlBar::draw(int _x, int _y)
     t.draw(t.x,t.y);
     
     ofSetColor(yellow);
+    subtitle.setSize(22);
+    subtitle.setMode(OF_FONT_LEFT);
     subtitle.drawString(sets.getSelected()->subtitle, 50, subBar.y+(subBar.height-subtitle.stringHeight(sets.getSelected()->subtitle))/2);
   }
   
@@ -259,9 +261,18 @@ void controlBar::drawForeground(){
     skipBut.draw((ofGetWidth()-skipBut.w)/2, ofGetHeight()*3./4);
   }
   
-  serChk.drawWaitScreen();
-  upload.drawUploadWait();
-  testbed.drawForeground();
+  if(changed.running()){
+    ofSetColor(0, 0, 0,192);
+    ofRect(0, 0, ofGetWidth(), ofGetHeight());
+    subtitle.setSize(70);
+    subtitle.setMode(OF_FONT_CENTER);
+    ofSetColor(white);
+    subtitle.drawString("Program changes not uploaded", ofGetWidth()/2, ofGetHeight()/3);
+    subtitle.drawString("Reconnect robot to upload.", ofGetWidth()/2, ofGetHeight()*2/3.);
+  }
+  else if(serChk.drawForeground());
+  else if(upload.drawForeground());
+  else testbed.drawForeground();
   
   anim.drawCursor();
 }
@@ -273,12 +284,12 @@ void controlBar::update()
   
   if(serChk.justLostDevice()){
     cout << "lost it\n";
+    if(blocks->changedSinceSave()) changed.set(3),changed.run();
     blocks->saveXML("programs/"+serChk.deviceNumber()+".xml");
     blocks->clear();
     if (testbed.isTesting()) {
       testbed.stopTesting();
-    }
-    if(upload.isUploading()){
+      testbed.resetTurtle();
     }
   }
   if(serChk.justFoundDevice()){
@@ -334,8 +345,11 @@ bool controlBar::clickDown(int _x, int _y, int button)
   
   testbed.clickDown(_x, _y);
 
-  if(upload.clickDown(_x, _y))
+  if(upload.clickDown(_x, _y)){
     blocks->saveXML("programs/"+serChk.deviceNumber()+".xml");
+    testbed.resetTurtle();
+    testbed.stopTesting();
+  }
 }
 
 bool controlBar::clickUp()

@@ -12,7 +12,7 @@
     </block>
     <block name="step forward" color="0xde8c3a">
       <file>stepForward.blk</file>
-      <action>move:1</action>
+      <action>move:2</action>
     </block>
     <block name="go backward %d inches" color="0xde8c3a">
       <dropdown>
@@ -34,15 +34,7 @@
       <action>turn:$dd[0].num()</action>
       <file>rightTurn.blk</file>
     </block>
-    <block name="turn right one step" color="0xde8c3a">
-      <action>turn:1</action>
-      <file>leftStep.blk</file>
-    </block>
-    <block name="turn left one step" color="0xde8c3a">
-      <action>turn:-1</action>
-      <file>leftStep.blk</file>
-    </block>
-		<block name="turn left %d degrees" color="0xde8c3a">
+    <block name="turn left %d degrees" color="0xde8c3a">
       <dropdown>
           <ddlow>0</ddlow>
           <ddhigh>180</ddhigh>
@@ -52,22 +44,35 @@
       <action>turn:-$dd[0].num()</action>
       <file>leftTurn.blk</file>
     </block>
+    <block name="turn right one step" color="0xde8c3a">
+      <action>turn:1</action>
+      <file>leftStep.blk</file>
+    </block>
+    <block name="turn left one step" color="0xde8c3a">
+      <action>turn:-1</action>
+      <file>leftStep.blk</file>
+    </block>
 	</bar>
   <bar name="Automatic blocks" color="0x65c270">
 		<block name="while path in front is clear" color="0x65c270">
       <bracket>1</bracket>
       <file>pathClear.blk</file>
-      <action>while:$front(6)</action>
+      <action>while:$front(5)</action>
     </block>
     <block name="if path on left is clear" color="0x65c270">
       <bracket>1</bracket>
       <file>leftPathClear.blk</file>
-      <action>if:$leftPath(3)</action>
+      <action>if:$leftPath(5)</action>
     </block>
     <block name="if path in front is blocked" color="0x65c270">
       <bracket>1</bracket>
       <file>pathBlocked.blk</file>
-      <action>if:!$front(6)</action>
+      <action>if:!$front(5)</action>
+    </block>
+    <block name="if path on left is blocked" color="0x65c270">
+      <bracket>1</bracket>
+      <file>leftPathClear.blk</file>
+      <action>if:!$leftPath(5)</action>
     </block>
 	</bar>
   <bar name="Timing blocks" color="0x13b5ea">

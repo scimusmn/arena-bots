@@ -9,6 +9,8 @@
 
 #include "uploadModule.h"
 
+extern ofColor gray,orange,red,white;
+
 void uploadModule::setup(bGroup * blks)
 {
   blocks=blks;
@@ -19,6 +21,7 @@ void uploadModule::setup(bGroup * blks)
 
 void uploadModule::upload()
 {
+  prog.reset();
   //--------- Generate the file which we will compile and upload to the arduino
   blocks->writeFile("arduino_make/arduino_make.pde");
   
@@ -33,15 +36,33 @@ void uploadModule::upload()
   blocks->base.uploadBut.clickUp();
 }
 
-void uploadModule::drawUploadWait()
+bool uploadModule::drawForeground()
 {
-  if (command.isRunning()) {
-    ofSetColor(0, 0, 0,128);
+  bool ret=0;
+  if (isUploading()) {
+    ofSetColor(0, 0, 0,192);
     ofRect(0, 0, ofGetWidth(), ofGetHeight());
 		ofSetColor(255, 255, 255);
 		spinner.draw((ofGetWidth())/2,ofGetHeight()/2, 300);
+    ofSetColor(white);
 		label.drawString("Uploading: do not unplug", ofGetWidth()/2, ofGetHeight()/4);
+    ofSetColor(gray);
+    ofRect(ofGetWidth()/4, ofGetHeight()*7/8., ofGetWidth()/2, 30);
+    ofSetColor(orange);
+    ofRect(ofGetWidth()/4+5, ofGetHeight()*7/8.+5, (ofGetWidth()/2-10)*prog.percentDone(), 20);
+    ret=true;
+    label.setSize(20);
+    label.drawString(prog.report(), ofGetWidth()/2, ofGetHeight()*7/8.+60);
+    label.setSize(70);
 	}
+  else if(uploaded.running()){
+    ret=true;
+    ofSetColor(0, 0, 0,192);
+    ofRect(0, 0, ofGetWidth(), ofGetHeight());
+    ofSetColor(white);
+		label.drawString("You may now unplug the robot.", ofGetWidth()/2, ofGetHeight()/2);
+  }
+  return ret;
 }
 
 void uploadModule::stopUpload(){
@@ -50,7 +71,13 @@ void uploadModule::stopUpload(){
 
 bool uploadModule::isUploading()
 {
-  return command.isRunning();
+  if(!command.isRunning()&&bRunning){
+    prog.stop();
+    uploaded.set(3);
+    uploaded.run();
+  }
+  bRunning=command.isRunning();
+  return bRunning;
 }
 
 bool uploadModule::clickDown(int _x, int _y)

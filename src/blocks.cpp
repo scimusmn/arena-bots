@@ -166,6 +166,7 @@ void block::parseTitle()
 	for (unsigned int i=0; i<ddGroup.size(); i++) {
 		ddGroup[i].relPos.x=0;
     ddGroup[i].relPos.y=(ttlSize.y-ddGroup[i].h)/2;
+    ddGroup[i].setMode(false);
 	}
 	
 	//-------- change the font size if it is a statement block

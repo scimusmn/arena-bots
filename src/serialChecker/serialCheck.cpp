@@ -64,8 +64,9 @@ bool serialCheck::isAvailable()
   return ret;
 }
 
-void serialCheck::drawWaitScreen()
+bool serialCheck::drawForeground()
 {
+  bool ret=0;
   if(!isAvailable()){
     ofSetColor(0, 0, 0,196);
     ofRect(0, 0, ofGetWidth(), ofGetHeight());
@@ -74,7 +75,9 @@ void serialCheck::drawWaitScreen()
     if(bIdent) printOut="Identifying: Do not unplug";
     ofSetColor(255, 255, 255);
     report.drawString(printOut, ofGetWidth()/2, ofGetHeight()/2);
+    ret=1;
   }
+  return ret;
 }
 
 void serialCheck::checkAvailability()

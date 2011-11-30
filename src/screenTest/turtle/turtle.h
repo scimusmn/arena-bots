@@ -19,6 +19,7 @@ class ofTurtle {
   int numLineStored;
   bool bTurnSinceRecord;
   
+  bool bCompleted;
   bool bCrashed;
   vector<ofVector> bdy;
   
@@ -46,6 +47,7 @@ public:
   bool frontIsClear(int distance);
   bool leftIsClear(int distance);
   bool crashed(){ return bCrashed;}
+  bool completedMaze(){ return bCompleted;}
   ofPoint pointAlongBearing(int pix);
   void draw(int _x, int _y);
   void reset();

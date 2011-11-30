@@ -11,7 +11,7 @@ start(){
 }
 
 loop(){
-	if(robot.frontSensor(400)){
+	if(robot.frontSensor(500)){
     $blockIn;
   }
 }

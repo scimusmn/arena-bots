@@ -50,7 +50,7 @@ bGroup::~bGroup(){
 void bGroup::setup(double _x, double _y,double wid,double hgt){
 	//blocks.reserve(100);
   bSequencePlay=bTesting=false;
-	bGrabbed=inHand=ddopen=false;
+	bGrabbed=inHand=ddopen=bChanged=false;
 	cSetup(_x,_y,wid,hgt);
 	used[""]=false;
   base.setup(this);
@@ -58,6 +58,12 @@ void bGroup::setup(double _x, double _y,double wid,double hgt){
 	states.recordState(storageState(blocks,base));
   held.setup(0,0);
   
+  bar.setup(40, h, OF_VERT);
+  bar.registerArea(h,base.newHeightOn()+base.h);
+  bar.changePadding();
+  bar.setScrollPosition(0);
+  
+  current=0;
 }
 
 int bGroup::size(){
@@ -131,6 +137,19 @@ void bGroup::addFromSB(block t,int _x,int _y){
 
 void bGroup::update()
 {
-	
+	//bar.update();
 }
 
+void bGroup::resize(int _x, int _y, int _w ,int _h){
+  bar.setup(40, h, OF_VERT);
+  bar.registerArea(h,base.newHeightOn()+base.h);
+  bar.changePadding();
+}
+
+void bGroup::setFocus(block * cur){
+  current = cur;
+}
+
+void bGroup::loseFocus(){
+  current=0;
+}

@@ -11,7 +11,7 @@ start(){
 }
 
 loop(){
-	if(!robot.leftSensor(400)){
+	if(!robot.leftSensor(300)){
     $blockIn;
   }
 }

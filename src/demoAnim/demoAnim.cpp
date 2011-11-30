@@ -25,6 +25,88 @@ void demoAnim::changeAnimXML(ofXML & newXML)
   animXML=newXML;
 }
 
+ofTag moveTag(string speed,string obj="", string x="", string y=""){
+  ofTag ret("step");
+  ret.addAttribute("type", obj);
+  ret.addAttribute("x", x);
+  ret.addAttribute("y", y);
+}
+
+ofTag clickDownTag(){
+  ofTag ret("step");
+  ret.addAttribute("type","clickDown");
+  ret.addAttribute("time", ".25");
+}
+
+ofTag clickUpTag(){
+  ofTag ret("step");
+  ret.addAttribute("type","clickUp");
+  ret.addAttribute("time", ".25");
+}
+
+void demoAnim::handleAnimStep(ofTag tag)
+{
+  //------- set the default event type to "end"
+  vMouseType vType=OF_VMOUSE_END;
+  //------- variable declarations
+  ofInterObj * object=0;
+  double duration=0;
+  double speed=0;
+  int xint=0, yint=0;
+  
+  string type=tag.getAttribute("type");
+  if(type.length()){
+    if(type=="move") vType=OF_VMOUSE_MOVE_TO;
+    else if(type=="clickDown") vType=OF_VMOUSE_CLICK_DOWN,xint=anim.x,yint=anim.y;
+    else if(type=="clickUp") vType=OF_VMOUSE_CLICK_UP,xint=anim.x,yint=anim.y;
+    else if(type=="compound"){
+      
+    }
+  }
+  
+  //------- if we have a time attribute, set the duration var to that attribute
+  string time=tag.getAttribute("time");
+  if(time.length()){
+    duration=ofToFloat(time);
+  }
+  //-------otherwise, we need to look for the speed at which we want to move, to be used later to determine time
+  else {
+    string spd=tag.getAttribute("speed");
+    if(spd.length()){
+      speed=ofToFloat(spd);
+    }
+  }
+  //------- if there is a pos tag inside the current tag, push into it
+  if(tag.getNumTags("pos")){
+    ofTag & tg=tag.getNode("pos");
+    //------- and look at the type of position tag it is 
+    string typ=tg.getAttribute("type");
+    if(typ=="obj") //-- if it is an object tag, search for the specified object using the searchForObject function
+      object = searchForObject(tg,xint,yint);
+    else if(typ=="coord"){
+      //-------if it is a coordinate, set xint and yint to the x and y attributes.
+      xint=ofToInt(tg.getAttribute("x"));
+      yint=ofToInt(tg.getAttribute("y"));
+    }
+    //-------if it is a mouse tag, set the xint and yint to the mouse coordinates
+    else if(typ=="mouse") xint=ofGetAppPtr()->mouseX,yint=ofGetAppPtr()->mouseY;
+    
+    if(!duration){ //-- if we haven't yet set the duration, use the speed to determine duration
+      int xtmp=((object)?object->x+xint:xint);
+      int ytmp=((object)?object->y+yint:yint);
+      double dist= sqrt((xtmp-anim.x)*(xtmp-anim.x)+(ytmp-anim.y)*(ytmp-anim.y));
+      duration=dist/speed;
+    }
+    
+    //-- if we are following an object, the next event is called, referencing that object
+    if(object) anim.nextEvent(vType,(*object),xint, yint,duration);
+    else anim.nextEvent(vType,xint, yint,duration);  //-- otherwise, it is called using only x and y
+  }
+  else { //-- if there is not a position tag inside, the next event takes place where the vMouse is currently located
+    anim.nextEvent(vType,xint, yint,duration);
+  }
+}
+
 /**
  *  animationStepRequested(ofXML & animXML)- handles next step of an animation 
  *
@@ -42,66 +124,11 @@ void demoAnim::animationStepRequested()
 {
   //------- try to set the current tag for the current animation XML file
   if(animXML.setCurrentTag(";animation")){
-    //------- set the default event type to "end"
-    vMouseType vType=OF_VMOUSE_END;
-    //------- variable declarations
-    ofInterObj * object=0;
-    double duration=0;
-    double speed=0;
-    int xint=0, yint=0;
     //------- if the current animation step is less than the total number of steps
     if(animStep<animXML.getNumTag("step")){
       //------- push into the tag and fetch the event Type
       animXML.pushTag("step",animStep);
-      string type=animXML.getAttribute("type");
-      if(type.length()){
-        if(type=="move") vType=OF_VMOUSE_MOVE_TO;
-        else if(type=="clickDown") vType=OF_VMOUSE_CLICK_DOWN,xint=anim.x,yint=anim.y;
-        else if(type=="clickUp") vType=OF_VMOUSE_CLICK_UP,xint=anim.x,yint=anim.y;
-      }
-      
-      //------- if we have a time attribute, set the duration var to that attribute
-      string time=animXML.getAttribute("time");
-      if(time.length()){
-        duration=ofToFloat(time);
-      }
-      //-------otherwise, we need to look for the speed at which we want to move, to be used later to determine time
-      else {
-        string spd=animXML.getAttribute("speed");
-        if(spd.length()){
-          speed=ofToFloat(spd);
-        }
-      }
-      //------- if there is a pos tag inside the current tag, push into it
-      if(animXML.getNumTag("pos")){
-        animXML.pushTag("pos");
-        //------- and look at the type of position tag it is 
-        string typ=animXML.getAttribute("type");
-        if(typ=="obj") //-- if it is an object tag, search for the specified object using the searchForObject function
-          object = searchForObject(animXML.getCurrentTag(),xint,yint);
-        else if(typ=="coord"){
-          //-------if it is a coordinate, set xint and yint to the x and y attributes.
-          xint=ofToInt(animXML.getAttribute("x"));
-          yint=ofToInt(animXML.getAttribute("y"));
-        }
-        //-------if it is a mouse tag, set the xint and yint to the mouse coordinates
-        else if(typ=="mouse") xint=ofGetAppPtr()->mouseX,yint=ofGetAppPtr()->mouseY;
-        
-        if(!duration){ //-- if we haven't yet set the duration, use the speed to determine duration
-          int xtmp=((object)?object->x+xint:xint);
-          int ytmp=((object)?object->y+yint:yint);
-          double dist= sqrt((xtmp-anim.x)*(xtmp-anim.x)+(ytmp-anim.y)*(ytmp-anim.y));
-          duration=dist/speed;
-        }
-        
-        //-- if we are following an object, the next event is called, referencing that object
-        if(object) anim.nextEvent(vType,(*object),xint, yint,duration);
-        else anim.nextEvent(vType,xint, yint,duration);  //-- otherwise, it is called using only x and y
-        animXML.popTag();
-      }
-      else { //-- if there is not a position tag inside, the next event takes place where the vMouse is currently located
-        anim.nextEvent(vType,xint, yint,duration);
-      }
+      handleAnimStep(animXML.getCurrentTag());
     }
     //-- if the animStep is greater than the current number of steps in the xml, end the animation
     else anim.nextEvent(OF_VMOUSE_END,ofGetAppPtr()->mouseX,ofGetAppPtr()->mouseY,0);
@@ -141,6 +168,7 @@ ofInterObj * demoAnim::searchForObject(ofTag & tag, int & _x, int & _y)
   }
   else if(whSplit[0]=="base"){
     if(whSplit.size()==1) ret=&(blocks->base);
+    else if(whSplit.size()>=2&&whSplit[1]=="last") ret=searchBlock(whSplit,blocks->base.blocksOn[blocks->base.blocksOn.size()-1],2);
     else if(whSplit.size()>=2) ret=searchBlock(whSplit,blocks->base.blocksOn[ofToInt(whSplit[1])],2);
   }
   else if(whSplit[0]=="upload"){
@@ -204,6 +232,6 @@ bool demoAnim::isPlaying()
 
 void demoAnim::stop()
 {
-  anim.pause();
+  anim.stop();
 }
 

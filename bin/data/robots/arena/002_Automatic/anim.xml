@@ -9,7 +9,7 @@
   <step type="clickDown" time=".25" />
   <step type="clickUp" time=".25" />
 #pickup the second block in the second sidebar
-  <step type="move" speed="200">
+  <step type="move" speed="2000">
     <pos type="obj" where="sidebar[2][1]" x="20" y="20"/>
   </step>
   <step type="clickDown" time=".25" />
@@ -18,12 +18,22 @@
     <pos type="obj" where="base" x="20" y="h+30" />
   </step>
   <step type="clickUp" time=".25" />
-#move to the second bar of the sidebar
+#move to the conditions sidebar
   <step type="move" speed="2000">
     <pos type="obj" where="sidebar[1]" x="20" y="20" />
   </step>
 #click the bar
   <step type="clickDown" time=".25" />
+  <step type="clickUp" time=".25" />
+#move to the first block
+  <step type="move" speed="2000">
+    <pos type="obj" where="sidebar[1][2]" x="20" y="20"/>
+  </step>
+#click and drag to the inside of the forever block
+  <step type="clickDown" time=".25" />
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[0]" x="20" y="h-30" />
+  </step>
   <step type="clickUp" time=".25" />
 #move to the second block
   <step type="move" speed="2000">
@@ -32,7 +42,7 @@
 #click and drag to the inside of the forever block
   <step type="clickDown" time=".25" />
   <step type="move" speed="2000">
-    <pos type="obj" where="base[0]" x="20" y="h-30" />
+    <pos type="obj" where="base[0][i0]" x="20" y="h-30" />
   </step>
   <step type="clickUp" time=".25" />
 #click open the first sidebar
@@ -46,50 +56,29 @@
     <pos type="obj" where="sidebar[0][1]" x="20" y="20"/>
   </step>
   <step type="clickDown" time=".25" />
-#drop it inside the first block on the base
+#drop it below the first block on the base
   <step type="move" speed="2000">
     <pos type="obj" where="base[0][i0]" x="20" y="20" />
   </step>
   <step type="clickUp" time=".25" />
-#grab a step forward block
-  <step type="move" speed="2000">
-    <pos type="obj" where="sidebar[0][1]" x="20" y="20"/>
-  </step>
-  <step type="clickDown" time=".25" />
-#drop it below the first block on the base
-  <step type="move" speed="2000">
-    <pos type="obj" where="base[0][i0]" x="20" y="h-30" />
-  </step>
-  <step type="clickUp" time=".25" />
-#grab a action block
+#grab a left turn block
   <step type="move" speed="2000">
     <pos type="obj" where="sidebar[0][4]" x="20" y="20"/>
   </step>
   <step type="clickDown" time=".25" />
 #drop it inside the "if left path is clear" on the base
   <step type="move" speed="2000">
-    <pos type="obj" where="base[0][i2]" x="20" y="h-30" />
+    <pos type="obj" where="base[0][i1][i0]" x="20" y="h-20" />
   </step>
   <step type="clickUp" time=".25" />
-#click open the auto sidebar
+#click the dropdown of the left turn block
   <step type="move" speed="2000">
-    <pos type="obj" where="sidebar[1]" x="20" y="20" />
+    <pos type="obj" where="base[0][i1][i0][i0][d0]" x="w/2" y="h/2"/>
   </step>
   <step type="clickDown" time=".25" />
   <step type="clickUp" time=".25" />
-#grab a if path is blocked block
-  <step type="move" speed="2000">
-    <pos type="obj" where="sidebar[1][2]" x="20" y="20"/>
-  </step>
-  <step type="clickDown" time=".25" />
-#drop it below the first block on the base
-  <step type="move" speed="2000">
-    <pos type="obj" where="base[0][i2]" x="20" y="h+10" />
-  </step>
-  <step type="clickUp" time=".25" />
-#click open the auto sidebar
-  <step type="move" speed="2000">
-    <pos type="obj" where="sidebar[0]" x="20" y="20" />
+  <step type="move" speed="500">
+    <pos type="obj" where="base[0][i1][i0][i0][d0]" x="w/2" y="h*4.5"/>
   </step>
   <step type="clickDown" time=".25" />
   <step type="clickUp" time=".25" />
@@ -98,9 +87,9 @@
     <pos type="obj" where="sidebar[0][3]" x="20" y="20"/>
   </step>
   <step type="clickDown" time=".25" />
-#drop it below the first block on the base
+#drop it inside the third block on the base
   <step type="move" speed="2000">
-    <pos type="obj" where="base[0][i3]" x="20" y="h-30" />
+    <pos type="obj" where="base[0][i1]" x="20" y="h-0" />
   </step>
   <step type="clickUp" time=".25" />
 #move to the upload button and click it.

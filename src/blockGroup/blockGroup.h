@@ -71,6 +71,8 @@ class bGroup: public ofInterObj {
   ofTimer actionTime;
   bool bSequencePlay;
   bool bTesting;
+  bool bChanged;
+  dallasScroll bar;
 public:
   
   vector<block> blocks;
@@ -106,6 +108,9 @@ public:
   void saveXML(string filename);
   
   void loadFile(string filename);
+  
+  bool changedSinceSave();
+  
 	
 	void addFromSB(block t,int x,int y);
 	
@@ -123,7 +128,7 @@ public:
 	
 	void drawBase(int _x, int _y);
 	
-	void drawIndicators(block & grab,block & k);
+	bool drawIndicators(block & grab,block & k);
 	
 	void update();
 	
@@ -158,5 +163,11 @@ public:
   bool pushBlocks(block & dropped, vector<block> & into, int i, bool top=false);
   
   void pullBlocks(vector<block> & chk, int i);
+  
+  void resize(int x, int y, int w, int h);
+  
+  void setFocus(block * cur);
+  
+  void loseFocus();
   
 };

@@ -11,7 +11,7 @@ start(){
 }
 
 loop(){
-	robot.doubleStep(1,BACKWARD,SINGLE);
+	robot.doubleStep(2,BACKWARD,SINGLE);
 }
 
 end(){

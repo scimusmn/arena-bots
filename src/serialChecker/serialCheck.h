@@ -70,7 +70,7 @@ public:
   bool getDeviceNumber();
   string deviceNumber();
   
-  void drawWaitScreen();
+  bool drawForeground();
   
   void start(){
     startThread(true, false);   // blocking, verbose

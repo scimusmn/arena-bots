@@ -18,7 +18,7 @@ block * currentBlock=0;
 
 void robotTest::setup(baseBlock * t)
 {
-  turtle.setup("maps/map_3.jpg");
+  turtle.setup("maps/map_end.jpg");
   bTesting=false;
   bRunning=false;
   bFinished=false;
@@ -55,6 +55,7 @@ void robotTest::startTesting(baseBlock * t)
 void robotTest::stopTesting()
 {
   bTesting=false;
+  base->setDrawTest(true);
   actions.clear();
 }
 
@@ -79,6 +80,7 @@ bool robotTest::idleTurtle()
     }
     if(!ret) pauseTurtle(),bFinished=true;;
     if(turtle.checkPoints()) pauseTurtle();
+    if(turtle.completedMaze()) pauseTurtle();
   }
   return ret;
 }
@@ -163,6 +165,18 @@ void robotTest::drawForeground()
     endBut.draw((ofGetWidth()/2-endBut.w)/2, 3*ofGetHeight()/4);
     resetBut.draw((3*ofGetWidth()/2-resetBut.w)/2, 3*ofGetHeight()/4);
   }
+  if (turtle.completedMaze()) {
+    ofSetColor(black.opacity(.75));
+    ofRect(0, 0, ofGetWidth(), ofGetHeight());
+    ofSetColor(white);
+    display.drawString("You made it!", ofGetWidth()/2, ofGetHeight()/2);
+    endBut.setTextSize(50);
+    resetBut.setTextSize(50);
+    base->uploadBut.setTextSize(50);
+    endBut.draw((ofGetWidth()/2-endBut.w)/2, 5*ofGetHeight()/8);
+    resetBut.draw((3*ofGetWidth()/2-resetBut.w)/2, 5*ofGetHeight()/8);
+    base->uploadBut.draw((ofGetWidth()-base->uploadBut.w)/2,3*ofGetHeight()/4);
+  }
 }
 
 void robotTest::drawControlBar(int x, int y)
@@ -182,7 +196,8 @@ void robotTest::drawControlBar(int x, int y)
   
   endBut.setTextSize(19);
   resetBut.setTextSize(19);
-  if(!turtleIsRunning()&&!turtleCrashed()&&(ofGetElapsedTimeMillis()/500)%2) trimmedRect(resetBut.x-5, resetBut.y-5, resetBut.w+10, resetBut.h+10, .33);
+  if(!turtleIsRunning()&&!turtle.completedMaze()&&!turtleCrashed()&&(ofGetElapsedTimeMillis()/250)%2) 
+    trimmedRect(resetBut.x-5, resetBut.y-5, resetBut.w+10, resetBut.h+10, .33);
   endBut.draw(cBar.x+(cBar.width/2-endBut.w)/2, cBar.y+(cBar.height-endBut.h)/2);
   resetBut.draw(cBar.x+(3*cBar.width/2-resetBut.w)/2, cBar.y+(cBar.height-resetBut.h)/2);
 }
@@ -199,7 +214,7 @@ bool robotTest::clickDown(int _x, int _y)
     if(endBut.clickDown(_x, _y))
       pauseTurtle(),resetTurtle(),stopTesting(),base->setDrawTest(true);
     if(resetBut.clickDown(_x, _y)){
-      if(turtleCrashed()||turtleIsRunning()||finishedActions()){
+      if(turtleCrashed()||turtle.completedMaze()||turtleIsRunning()||finishedActions()){
         resetTurtle();
         resetBut.setTitle("Start virtual robot");
       }

@@ -2,127 +2,190 @@
   <step type="move" time="0">
     <pos type="mouse" />
   </step>
-#pickup the fourth block in the second sidebar
-  <step type="move" speed="500">
-    <pos type="obj" where="sidebar[0][0]" x="20" y="20"/>
+#pickup a right turn inches block
+  <step type="move" speed="2000">
+    <pos type="obj" where="sidebar[0][2]" x="20" y="20"/>
   </step>
   <step type="clickDown" time=".25" />
 #drop it below the base
-  <step type="move" speed="1000">
-    <pos type="obj" where="base" x="20" y="h+30" />
+  <step type="move" speed="2000">
+    <pos type="obj" where="base" x="20" y="h+20" />
   </step>
   <step type="clickUp" time=".25" />
-#move to the first bar of the sidebar
-  <step type="move" speed="1000">
-    <pos type="obj" where="sidebar[0]" x="20" y="20" />
-  </step>
-#click the bar
-  <step type="clickDown" time=".25" />
-  <step type="clickUp" time=".25" />
-#move to the first block
-  <step type="move" speed="500">
-    <pos type="obj" where="sidebar[0][2]" x="20" y="20"/>
-  </step>
-#click and drag to the inside of the repeat block
-  <step type="clickDown" time=".25" />
-  <step type="move" speed="1000">
-    <pos type="obj" where="base[0]" x="20" y="h-30" />
-  </step>
-  <step type="clickUp" time=".25" />
-#move to the dropdown on the first block on the base
-  <step type="move" speed="500">
-    <pos type="obj" where="base[0][i0][d0]" x="w/2" y="h/2"/>
+#move to the dropdown on the last block on the base
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last][d0]" x="w/2" y="h/2"/>
   </step>
   <step type="clickDown" time=".25" />
   <step type="clickUp" time=".25" />
-  <step type="move" speed="500">
-    <pos type="obj" where="base[0][i0][d0]" x="w/2" y="h*1.5"/>
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last][d0]" x="w/2" y="h*2.5"/>
   </step>
   <step type="clickDown" time=".5" />
   <step type="clickUp" time=".5" />
-#click open the third sidebar
-  <step type="move" speed="1000">
-    <pos type="obj" where="sidebar[2]" x="20" y="20" />
+#grab a forward x inches block and drag to last position
+  <step type="move" speed="2000">
+    <pos type="obj" where="sidebar[0][0]" x="20" y="20"/>
+  </step>
+  <step type="clickDown" time=".25" />
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last]" x="20" y="h+10" />
+  </step>
+  <step type="clickUp" time=".25" />
+#move to the dropdown on the last block on the base
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last][d0]" x="w/2" y="h/2"/>
   </step>
   <step type="clickDown" time=".25" />
   <step type="clickUp" time=".25" />
-#grab a bracket block
-  <step type="move" speed="500">
-    <pos type="obj" where="sidebar[2][0]" x="20" y="20"/>
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last][d0]" x="w/2" y="h*4.5"/>
   </step>
-  <step type="clickDown" time=".25" />
-#drop it below the first block on the base
-  <step type="move" speed="1000">
-    <pos type="obj" where="base[0][i0]" x="20" y="h+10" />
-  </step>
-  <step type="clickUp" time=".25" />
-#click open the first sidebar
-  <step type="move" speed="1000">
-    <pos type="obj" where="sidebar[0]" x="20" y="20" />
-  </step>
-  <step type="clickDown" time=".25" />
-  <step type="clickUp" time=".25" />
-#grab a action block
-  <step type="move" speed="500">
+  <step type="clickDown" time=".5" />
+  <step type="clickUp" time=".5" />
+#grab a right turn block and drag to last position
+  <step type="move" speed="2000">
     <pos type="obj" where="sidebar[0][2]" x="20" y="20"/>
   </step>
   <step type="clickDown" time=".25" />
-#drop it below the first block on the base
-  <step type="move" speed="1000">
-    <pos type="obj" where="base[0][i1]" x="20" y="h-30" />
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last]" x="20" y="h+10" />
   </step>
   <step type="clickUp" time=".25" />
-#grab a action block
-  <step type="move" speed="1000">
+#move to the dropdown on the last block on the base
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last][d0]" x="w/2" y="h/2"/>
+  </step>
+  <step type="clickDown" time=".25" />
+  <step type="clickUp" time=".25" />
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last][d0]" x="w/2" y="h*2.5"/>
+  </step>
+  <step type="clickDown" time=".5" />
+  <step type="clickUp" time=".5" />
+#grab a forward x inches block and drag to last position
+  <step type="move" speed="2000">
+    <pos type="obj" where="sidebar[0][0]" x="20" y="20"/>
+  </step>
+  <step type="clickDown" time=".25" />
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last]" x="20" y="h+10" />
+  </step>
+  <step type="clickUp" time=".25" />
+#move to the dropdown on the last block on the base
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last][d0]" x="w/2" y="h/2"/>
+  </step>
+  <step type="clickDown" time=".25" />
+  <step type="clickUp" time=".25" />
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last][d0]" x="w/2" y="h*2.5"/>
+  </step>
+  <step type="clickDown" time=".5" />
+  <step type="clickUp" time=".5" />
+#grab a left turn block and drag to last position
+  <step type="move" speed="2000">
     <pos type="obj" where="sidebar[0][3]" x="20" y="20"/>
   </step>
   <step type="clickDown" time=".25" />
-#drop it below the first block on the base
   <step type="move" speed="1000">
-    <pos type="obj" where="base[0][i1][i0]" x="20" y="h+10" />
+    <pos type="obj" where="base[last]" x="20" y="h+10" />
   </step>
   <step type="clickUp" time=".25" />
-#move to the dropdown on the first block on the base
-  <step type="move" speed="500">
-    <pos type="obj" where="base[0][i1][i1][d0]" x="w/2" y="h/2"/>
-  </step>
-  <step type="clickDown" time=".25" />
-  <step type="clickUp" time=".25" />
-  <step type="move" speed="500">
-    <pos type="obj" where="base[0][i1][i1][d0]" x="w/2" y="h*1.5"/>
+#move to the dropdown on the last block on the base
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last][d0]" x="w/2" y="h/2"/>
   </step>
   <step type="clickDown" time=".25" />
   <step type="clickUp" time=".25" />
-#click open the timing sidebar
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last][d0]" x="w/2" y="h*2.5"/>
+  </step>
+  <step type="clickDown" time=".5" />
+  <step type="clickUp" time=".5" />
+#grab a forward x inches block and drag to last position
+  <step type="move" speed="2000">
+    <pos type="obj" where="sidebar[0][0]" x="20" y="20"/>
+  </step>
+  <step type="clickDown" time=".25" />
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last]" x="20" y="h+10" />
+  </step>
+  <step type="clickUp" time=".25" />
+#move to the dropdown on the last block on the base
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last][d0]" x="w/2" y="h/2"/>
+  </step>
+  <step type="clickDown" time=".25" />
+  <step type="clickUp" time=".25" />
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last][d0]" x="w/2" y="h*6.5"/>
+  </step>
+  <step type="clickDown" time=".5" />
+  <step type="clickUp" time=".5" />
+#grab a forward x inches block and drag to last position
+  <step type="move" speed="2000">
+    <pos type="obj" where="sidebar[0][0]" x="20" y="20"/>
+  </step>
+  <step type="clickDown" time=".25" />
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last]" x="20" y="h+10" />
+  </step>
+  <step type="clickUp" time=".25" />
+#move to the dropdown on the last block on the base
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last][d0]" x="w/2" y="h/2"/>
+  </step>
+  <step type="clickDown" time=".25" />
+  <step type="clickUp" time=".25" />
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last][d0]" x="w/2" y="h*6.5"/>
+  </step>
+  <step type="clickDown" time=".5" />
+  <step type="clickUp" time=".5" />
+#grab a left turn block and drag to last position
+  <step type="move" speed="2000">
+    <pos type="obj" where="sidebar[0][3]" x="20" y="20"/>
+  </step>
+  <step type="clickDown" time=".25" />
   <step type="move" speed="1000">
-    <pos type="obj" where="sidebar[1]" x="20" y="20" />
+    <pos type="obj" where="base[last]" x="20" y="h+10" />
+  </step>
+  <step type="clickUp" time=".25" />
+#move to the dropdown on the last block on the base
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last][d0]" x="w/2" y="h/2"/>
   </step>
   <step type="clickDown" time=".25" />
   <step type="clickUp" time=".25" />
-#grab a wait x seconds block
-  <step type="move" speed="500">
-    <pos type="obj" where="sidebar[1][1]" x="20" y="20"/>
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last][d0]" x="w/2" y="h*2.5"/>
+  </step>
+  <step type="clickDown" time=".5" />
+  <step type="clickUp" time=".5" />
+  #grab a forward x inches block and drag to last position
+  <step type="move" speed="2000">
+    <pos type="obj" where="sidebar[0][0]" x="20" y="20"/>
   </step>
   <step type="clickDown" time=".25" />
-#drop it below the first block on the base
-  <step type="move" speed="1000">
-    <pos type="obj" where="base[0][i1][i1]" x="20" y="h+10" />
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last]" x="20" y="h+10" />
   </step>
   <step type="clickUp" time=".25" />
-#move to the dropdown on the wait block in the bracket block
-  <step type="move" speed="500">
-    <pos type="obj" where="base[0][i1][i2][d0]" x="w/2" y="h/2"/>
-  </step>
-  <step type="clickDown" time=".25" />
-  <step type="clickUp" time=".25" />
-  <step type="move" speed="500">
-    <pos type="obj" where="base[0][i1][i2][d0]" x="w/2" y="h*4.5"/>
+#move to the dropdown on the last block on the base
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last][d0]" x="w/2" y="h/2"/>
   </step>
   <step type="clickDown" time=".25" />
   <step type="clickUp" time=".25" />
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last][d0]" x="w/2" y="h*4.5"/>
+  </step>
+  <step type="clickDown" time=".5" />
+  <step type="clickUp" time=".5" />
 #move to the upload button and click it.
-  <step type="move" speed="1000">
-    <pos type="obj" where="upload" x="w/2" y="h/2" />
+  <step type="move" speed="2000">
+    <pos type="obj" where="test" x="w/2" y="h/2" />
   </step>
   <step type="clickDown" time=".25" />
   <step type="clickUp" time=".25" />

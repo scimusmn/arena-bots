@@ -45,25 +45,31 @@ void indicate(dropBlock & db)
   }
 }
 
-void bGroup::drawIndicators(block & held, block & k)
+bool bGroup::drawIndicators(block & held, block & k)
 {
+  bool ret=0;
   dropBlock db=underWhich(k, held);
   if(db.found()){
     indicate(db);
+    ret=1;
   }
   if(!db.found()){
     db=underWhich(held, k);
     if(db.found()&&db.index==db.inThis->size()){
       indicate(db);
+      ret=1;
     }
   }
+  return ret;
 }
 
 void bGroup::draw(int _x, int _y, int _w, int _h)
 {
   x=_x,y=_y,w=_w,h=_h;
   draw();
-  base.draw(x+(w-base.w)/2, y);
+  base.draw(x+(w-base.w)/2, y-bar.getScrollPosition());
+  ofSetColor(0, 0, 0,128);
+  bar.draw(x+w-bar.w,y);
 }
 
 void bGroup::drawBase(int _x, int _y)
@@ -123,9 +129,10 @@ void bGroup::drawForeground(){
   }
   
   if(inHand&&held.bGrabbed){
-    drawIndicators(held, base);
-    for (unsigned int i=0; i<size(); i++) {
-      drawIndicators(held,blocks[i]);
+    bool drawnInd=0;
+    drawnInd=drawIndicators(held, base);
+    for (unsigned int i=0; i<size()&&!drawnInd; i++) {
+      drawnInd=drawIndicators(held,blocks[i]);
     }
   }
   

@@ -1,12 +1,61 @@
 <base robot_number="0">
-	<block name="go backward %d inches" color="0xde8c3a">
+	<block name="repeat %d times" color="1291754.0000000">
+		<bracket>1</bracket>
 		<dropdown>
 			<ddlow>0</ddlow>
-			<ddhigh>12</ddhigh>
-			<ddsteps>7</ddsteps>
-			<selected>12</selected>
+			<ddhigh>10</ddhigh>
+			<ddsteps>11</ddsteps>
+			<selected>3</selected>
 		</dropdown>
-		<file>backward.blk</file>
-		<action>move:-$dd[0].num()*$ppi</action>
+		<file>repeat.blk</file>
+		<action>repeat:$dd[0].num()</action>
+		<blocksIn>
+			<block name="repeat %d times" color="1291754.0000000">
+				<bracket>1</bracket>
+				<dropdown>
+					<ddlow>0</ddlow>
+					<ddhigh>10</ddhigh>
+					<ddsteps>11</ddsteps>
+					<selected>2</selected>
+				</dropdown>
+				<file>repeat.blk</file>
+				<action>repeat:$dd[0].num()</action>
+				<blocksIn>
+					<block name="turn right %d degrees" color="0xde8c3a">
+						<dropdown>
+							<ddlow>0</ddlow>
+							<ddhigh>180</ddhigh>
+							<ddsteps>5</ddsteps>
+							<selected>180</selected>
+						</dropdown>
+						<action>turn:$dd[0].num()</action>
+						<file>rightTurn.blk</file>
+					</block>
+				</blocksIn>
+			</block>
+			<block name="repeat %d times" color="1291754.0000000">
+				<bracket>1</bracket>
+				<dropdown>
+					<ddlow>0</ddlow>
+					<ddhigh>10</ddhigh>
+					<ddsteps>11</ddsteps>
+					<selected>2</selected>
+				</dropdown>
+				<file>repeat.blk</file>
+				<action>repeat:$dd[0].num()</action>
+				<blocksIn>
+					<block name="turn left %d degrees" color="0xde8c3a">
+						<dropdown>
+							<ddlow>0</ddlow>
+							<ddhigh>180</ddhigh>
+							<ddsteps>5</ddsteps>
+							<selected>180</selected>
+						</dropdown>
+						<action>turn:-$dd[0].num()</action>
+						<file>leftTurn.blk</file>
+					</block>
+				</blocksIn>
+			</block>
+		</blocksIn>
 	</block>
 </base>

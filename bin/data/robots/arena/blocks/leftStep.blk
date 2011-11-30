@@ -11,7 +11,7 @@ start(){
 }
 
 loop(){
-	robot.leftTurn(1);
+	robot.leftTurn(4);
 }
 
 end(){

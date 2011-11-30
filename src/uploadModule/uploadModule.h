@@ -11,6 +11,7 @@
 
 #include "blockGroup.h"
 #include "ofxSystemCall.h"
+#include "progressReader.h"
 
 class uploadModule {
 protected:
@@ -18,10 +19,13 @@ protected:
   ofSystemCall command;
 	ofProgressSpinner spinner;
   ofFont label;
+  progRead prog;
+  bool bRunning;
+  ofTimer uploaded;
 public:
   void setup(bGroup * blks);
   void upload();
-  void drawUploadWait();
+  bool drawForeground();
   bool isUploading();
   void stopUpload();
   bool clickDown(int _x, int _y);

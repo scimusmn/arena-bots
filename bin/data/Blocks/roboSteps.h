@@ -33,8 +33,8 @@ public:
     stepsPerRot=200;
     leftMotor.init(stepsPerRot,left);
     rightMotor.init(stepsPerRot,right);
-    robutDiameter=4.0;
-    wheelDiameter=2.335;
+    robutDiameter=4;
+    wheelDiameter=2.35;
     rCirc=robutDiameter*M_PI;
     wCirc=wheelDiameter*M_PI;
     inchesPerStep=wCirc/((float)stepsPerRot);
@@ -55,17 +55,19 @@ public:
   }
   void doubleStep(int steps, int direction, int style) {
     while (running&&steps--) {
-      leftMotor.step(1, direction, style); 
       rightMotor.step(1, direction, style); 
+      leftMotor.step(1, direction, style); 
     }
   }
   void forward(float inches) {
     int steps=inches/inchesPerStep;
     doubleStep(steps,BACKWARD,DOUBLE);
+    delay(100);
   }
   void backward(float inches) {
     int steps=inches/inchesPerStep;
     doubleStep(steps,FORWARD,DOUBLE);
+    delay(100);
   }
   void leftStep(int steps, int style) {
     while (running&&steps--) {
@@ -76,6 +78,7 @@ public:
   void leftTurn(float degrees) {
     int steps=(rCirc*(degrees/360))/inchesPerStep;
     leftStep(steps,DOUBLE);
+    delay(100);
   }
   void rightStep(int steps, int style) {
     while (running&&steps--) {
@@ -86,6 +89,7 @@ public:
   void rightTurn(float degrees) {
     int steps=(rCirc*(degrees/360))/inchesPerStep;
     rightStep(steps,DOUBLE);
+    delay(100);
   }
   void toggleRun(){
     running=!running;

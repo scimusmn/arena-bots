@@ -21,6 +21,8 @@
 		AA7A40E5146D86BA00D95060 /* turtleAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7A40E3146D86BA00D95060 /* turtleAction.cpp */; };
 		AA7A40E8146D8A4B00D95060 /* evaluate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7A40E7146D8A4B00D95060 /* evaluate.cpp */; };
 		AA82B56613BE184300054749 /* block_MouseFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA82B56513BE184300054749 /* block_MouseFuncs.cpp */; };
+		AA84AA7F14853E37004E12B3 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = AA84AA7E14853E37004E12B3 /* Makefile */; };
+		AA84AA84148544CF004E12B3 /* progressReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA84AA83148544CF004E12B3 /* progressReader.cpp */; };
 		AA8D7719132806D0000F0763 /* block_DrawingFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8D7718132806D0000F0763 /* block_DrawingFuncs.cpp */; };
 		AA8D772213280768000F0763 /* block_WriteOutFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA8D772113280768000F0763 /* block_WriteOutFuncs.cpp */; };
 		AA949DB013B390B7009141B0 /* ofxDirList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA949DAE13B390B7009141B0 /* ofxDirList.cpp */; };
@@ -202,6 +204,9 @@
 		AA7A40E6146D8A4B00D95060 /* evaluate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = evaluate.h; path = evaluateExpression/evaluate.h; sourceTree = "<group>"; };
 		AA7A40E7146D8A4B00D95060 /* evaluate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = evaluate.cpp; path = evaluateExpression/evaluate.cpp; sourceTree = "<group>"; };
 		AA82B56513BE184300054749 /* block_MouseFuncs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = block_MouseFuncs.cpp; sourceTree = "<group>"; };
+		AA84AA7E14853E37004E12B3 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = bin/data/arduino_make/Makefile; sourceTree = "<group>"; };
+		AA84AA82148544CF004E12B3 /* progressReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = progressReader.h; path = uploadModule/progressReader.h; sourceTree = "<group>"; };
+		AA84AA83148544CF004E12B3 /* progressReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = progressReader.cpp; path = uploadModule/progressReader.cpp; sourceTree = "<group>"; };
 		AA89D384137B07F00055C130 /* blink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blink.h; sourceTree = "<group>"; };
 		AA89D385137B080F0055C130 /* crabEyes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crabEyes.h; sourceTree = "<group>"; };
 		AA89D433137B33960055C130 /* claws.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = claws.h; sourceTree = "<group>"; };
@@ -357,6 +362,7 @@
 		AA16D59E13B929F8009A0843 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				AA84AA7E14853E37004E12B3 /* Makefile */,
 				AA16D59D13B9292F009A0843 /* README.txt */,
 				AAEFB3961360DBFF0096BC26 /* repeatWrapper.wrp */,
 				AAD17B5913AA8DB600FE62FD /* onceWrapper.wrp */,
@@ -660,6 +666,8 @@
 			children = (
 				AA7A3CB7146C2FF000D95060 /* uploadModule.h */,
 				AA7A3CB8146C2FF000D95060 /* uploadModule.cpp */,
+				AA84AA82148544CF004E12B3 /* progressReader.h */,
+				AA84AA83148544CF004E12B3 /* progressReader.cpp */,
 			);
 			name = uploadModule;
 			sourceTree = "<group>";
@@ -1296,6 +1304,8 @@
 				AA7A40E5146D86BA00D95060 /* turtleAction.cpp in Sources */,
 				AA7A40E8146D8A4B00D95060 /* evaluate.cpp in Sources */,
 				AAAD6A0E1475AC83009E0379 /* RFID_reader.cpp in Sources */,
+				AA84AA7F14853E37004E12B3 /* Makefile in Sources */,
+				AA84AA84148544CF004E12B3 /* progressReader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

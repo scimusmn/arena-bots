@@ -27,12 +27,11 @@ turtleAction::turtleAction(block * prnt, ofTurtle * bdy)
   parentBlock=prnt;
   turtle=bdy;
   bParsed=bExecuted=false;
-  bNegate=false;
+  bNegate=bData=false;
   guard=ACT_NORMAL;
   nCurrent=0;
   parse(parentBlock->origTag.getNode("action", 0).getValue());
   for (unsigned int i=0; i<parentBlock->blocksIn.size(); i++) {
-    cout << parentBlock->blocksIn[i].title << endl;
     inside.push_back(turtleAction(&(parentBlock->blocksIn[i]), turtle));
   }
 }
@@ -41,6 +40,8 @@ int turtleAction::direction()
 {
   return nGoal/abs(nGoal);
 }
+
+bool checkd=false;
 
 bool turtleAction::assess()
 {
@@ -71,6 +72,7 @@ void turtleAction::reset()
 {
   bExecuted=false;
   nCurrent=0;
+  //bData=false;
   resetGuardedActions();
 }
 
@@ -128,9 +130,9 @@ bool turtleAction::execute()
         if(assess()||bData){
           bData=true;
           if(!(ret=executeGuardedAction()))
-            bExecuted=true,bData=false;
+            bExecuted=true,bData=false,ret=true;
         }
-        else bExecuted=true;
+        else bExecuted=true,bData=false;
         break;
         
         
@@ -184,7 +186,6 @@ void turtleAction::handleWord()
       else if(spl[i]=="leftPath"){
         guard=LFT_SNS;
         nGoal=ofToFloat(spl[i+1])*pixPerInch;
-        cout << nGoal << endl;
       }
       else if(spl[i]=="forever") guard=ACT_FOREVER;
     }

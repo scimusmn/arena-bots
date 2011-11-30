@@ -176,7 +176,6 @@ applet/$(TARGET).cpp: $(TARGET).pde
 	# Then the .cpp file will be compiled. Errors during compile will
 	# refer to this new, automatically generated, file.
 	# Not the original .pde file you actually edit...
-	echo '$(CXXINCS)'
 	test -d applet || mkdir applet
 	echo '#include "WProgram.h"' > applet/$(TARGET).cpp
 	echo 'void setup();' >> applet/$(TARGET).cpp
@@ -191,7 +190,8 @@ sym: applet/$(TARGET).sym
 
 # Program the device.  
 upload: applet/$(TARGET).hex
-	$(AVRDUDE) $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH)
+	echo Contacting programmer... 1> progress
+	$(AVRDUDE) $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH) 2> progress
 
 
 # Display size of file.

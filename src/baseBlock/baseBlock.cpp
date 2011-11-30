@@ -55,13 +55,14 @@ void baseBlock::draw(int _x, int _y)
 {
   x=_x, y=_y;
   
-  ofSetColor(color*.9);
+  ofSetColor(black);
   if(bDrawtest) drawBaseBlock(x, y, w, h,butArea.x,butArea.y);
   else drawBaseBlock(x, y, w, h,0,h);
   
-  ofSetColor(black);
+  ofSetColor(yellow);
   ofNoFill();
   ofSetLineWidth(2);
+  ofLine(x+w-butArea.x, y, x+w-butArea.x, y+h);
   if(bDrawtest) drawBaseBlock(x, y, w, h,butArea.x,butArea.y);
   else drawBaseBlock(x, y, w, h,0,h);
   ofSetLineWidth(1);
@@ -78,9 +79,11 @@ void baseBlock::draw(int _x, int _y)
 		blocksIn[i].draw();
 	}
   
+  uploadBut.setTextSize(19);
+  
   if(bDrawtest){
-    testBut.draw(x+w-butArea.x+(butArea.x-testBut.w)/2, y+pad);
-    uploadBut.draw(x+w-butArea.x+(butArea.x-uploadBut.w)/2,testBut.y+testBut.h+pad);
+    testBut.draw(x+w-butArea.x+(butArea.x-testBut.w)/2, uploadBut.y+uploadBut.h+pad);
+    uploadBut.draw(x+w-butArea.x+(butArea.x-uploadBut.w)/2,y+pad);
   }
   else uploadBut.draw(x+w-butArea.x+(butArea.x-uploadBut.w)/2,y+(h-uploadBut.h)/2);
   
@@ -133,4 +136,12 @@ baseBlock & baseBlock::operator=(baseBlock & t)
   insertSpace=t.insertSpace;
   
   return *this;
+}
+
+int baseBlock::widthOn(){
+  double ret=0;
+  for (unsigned int i=0; i<blocksOn.size(); i++) {
+    ret=max(blocksOn[i].fullWidth(),ret);
+  }
+  return ret;
 }

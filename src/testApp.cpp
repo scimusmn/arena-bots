@@ -8,11 +8,20 @@ extern int pixPerInch;
 
 extern ofColor black,white,yellow,blue,orange, gray;
 
+bool bCopy=false;
+
+struct movie {
+  int num;
+  string name;
+  movie(string nm)
+  {
+    name=nm;
+    num=1;
+  }
+};
+
 //--------------------------------------------------------------
 void testApp::setup(){
-	
-	//--------- Initialize the valid working space for the blocks
-	blocks.setup(250, 0, ofGetWidth(), ofGetHeight());
   
 	//--------- Load font for drawing on screen
   
@@ -24,11 +33,14 @@ void testApp::setup(){
   mapps.loadImage("maps/map_2.jpg");
   
   controls.setup(&blocks, &sidebar);
+  
+  //--------- Initialize the valid working space for the blocks
+	blocks.setup(sidebar.area.width,controls.h+topTitle.h,ofGetWidth()-sidebar.area.width,ofGetHeight()-(controls.h+topTitle.h));
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-	
+	//blocks.update();
   controls.update();
 }
 
@@ -67,13 +79,13 @@ void testApp::draw(){
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-  
+  if(key=='c') bCopy=true;
 }
 
 
 //--------------------------------------------------------------
 void testApp::keyReleased(int key){
-
+  if(key=='c') bCopy=false;
 }
 
 //--------------------------------------------------------------
@@ -114,6 +126,6 @@ void testApp::mouseReleased(int x, int y, int button){
 
 //--------------------------------------------------------------
 void testApp::windowResized(int w, int h){
-	
+	blocks.resize(sidebar.area.width,controls.h+topTitle.h,ofGetWidth()-sidebar.area.width,ofGetHeight()-(controls.h+topTitle.h));
 }
 
