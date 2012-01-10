@@ -8,6 +8,7 @@
  */
 
 #include "serialCheck.h"
+#include "dallasEng.h"
 
 int CURRENT_ROBOT_NUMBER=0;
 
@@ -44,6 +45,7 @@ serialCheck::serialCheck()
   
   report.loadFont("fonts/DinC.ttf");
   report.setMode(OF_FONT_CENTER);
+  report.setMode(OF_FONT_MID);
   report.setSize(70);
   
   //start();
@@ -73,6 +75,9 @@ bool serialCheck::drawForeground()
     string printOut="Connect the robot to begin";
     if(bAvailable) printOut="Place robot on platform";
     if(bIdent) printOut="Identifying: Do not unplug";
+    
+    drawStyledBox((ofGetWidth()-report.stringWidth(printOut))/2-50, (ofGetHeight()-report.stringHeight(printOut))/2-50, report.stringWidth(printOut)+100, report.stringHeight(printOut)+100);
+    
     ofSetColor(255, 255, 255);
     report.drawString(printOut, ofGetWidth()/2, ofGetHeight()/2);
     ret=1;

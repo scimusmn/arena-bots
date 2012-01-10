@@ -57,7 +57,7 @@ block::block(ofTag & cur,ofColor col):ofInterObj(-200,-200,150,TITLE_HEIGHT) {
 	origTag=cur;
   
 	arialHeader.loadFont(defaultFont);
-  arialHeader.setMode(OF_FONT_TOP);
+  arialHeader.setMode(OF_FONT_MID);
 	arialHeader.setSize(14);
 	insertSpace=0;
   bGrabbed=false;
@@ -121,7 +121,7 @@ block::block(ofTag & cur,ofColor col):ofInterObj(-200,-200,150,TITLE_HEIGHT) {
           break;
         case 8: // dropdown
           //-- add a new dropdown menu to the block
-          ddGroup.push_back(ofDropDown(cur[i]));
+          ddGroup.push_back(dallasDrop(cur[i]));
           break;
         case 9:
           for (unsigned int j=0; j<cur[i].size(); j++) {
@@ -152,7 +152,7 @@ void block::parseTitle()
   
   orig.height=h;
   orig.width=w;
-  titlePos.y=(ttlSize.y-arialHeader.stringHeight("Kjhg"))/2;
+  titlePos.y=(ttlSize.y)/2;
   if(type==BLK_BRACKET){
     interior.x=20;
     interior.y=TITLE_HEIGHT;
@@ -397,7 +397,7 @@ int block::numInside(){
 }
 
 block & block::lastBlock(){
-	if (blocksOn.size()) return blocksOn[blocksOn.size()-1];
+	if (blocksOn.size()) return blocksOn.back();
 	else return *this;
 }
 

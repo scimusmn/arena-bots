@@ -36,7 +36,7 @@ void ofTurtle::setup(string filename)
   int ppi=pixPerInch=map.width/48;
   ofPoint wheel(.25*ppi,(2+3/8)*ppi);
   ofPoint rWheel(1.125*ppi,1.875*ppi);
-  setup(2*(map.width/12.),map.height-2.5*(map.height/12.), pixPerInch*5,7.25*pixPerInch);
+  setup(2*(map.width/12.),map.height-3*(map.height/12.), pixPerInch*5,7.25*pixPerInch);
   ofRectangle body(-3.25*ppi/2,-wheel.y/2,ppi*3.25,ppi*4.5);
   bdy.push_back(ofVector(body.x,body.y));
   bdy.push_back(ofVector(body.x+body.width,body.y));

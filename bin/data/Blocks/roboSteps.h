@@ -61,12 +61,12 @@ public:
   }
   void forward(float inches) {
     int steps=inches/inchesPerStep;
-    doubleStep(steps,BACKWARD,DOUBLE);
+    doubleStep(steps,BACKWARD,SINGLE);
     delay(100);
   }
   void backward(float inches) {
     int steps=inches/inchesPerStep;
-    doubleStep(steps,FORWARD,DOUBLE);
+    doubleStep(steps,FORWARD,SINGLE);
     delay(100);
   }
   void leftStep(int steps, int style) {
@@ -76,7 +76,7 @@ public:
     }
   }
   void leftTurn(float degrees) {
-    int steps=(rCirc*(degrees/360))/inchesPerStep;
+    int steps=(rCirc*(degrees/360.))/inchesPerStep;
     leftStep(steps,DOUBLE);
     delay(100);
   }
@@ -87,7 +87,7 @@ public:
     }
   }
   void rightTurn(float degrees) {
-    int steps=(rCirc*(degrees/360))/inchesPerStep;
+    int steps=(rCirc*(degrees/360.))/inchesPerStep;
     rightStep(steps,DOUBLE);
     delay(100);
   }

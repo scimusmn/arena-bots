@@ -93,10 +93,10 @@ void blockGroup::load(string dir)
   for(int i = 0; i < nDir; i++){
     vector<string> spl= ofSplitString(DIR.getPath(i), "/");
     //cout << spl[spl.size()-1] << endl;
-    if(spl[spl.size()-1]=="blocks.xml") blockXML.loadFile(DIR.getPath(i)), nLoaded++;
-    else if(spl[spl.size()-1]=="anim.xml") animXML.loadFile(DIR.getPath(i)), nLoaded++;
-    else if(spl[spl.size()-1]=="icon.png") choice.setup(72,72,DIR.getPath(i)), nLoaded++;
-    else if(spl[spl.size()-1]=="example.png") example.loadImage(DIR.getPath(i)), bImgLoaded=true;
+    if(spl.back()=="blocks.xml") blockXML.loadFile(DIR.getPath(i)), nLoaded++;
+    else if(spl.back()=="anim.xml") animXML.loadFile(DIR.getPath(i)), nLoaded++;
+    else if(spl.back()=="icon.png") choice.setup(72,72,DIR.getPath(i)), nLoaded++;
+    else if(spl.back()=="example.png") example.loadImage(DIR.getPath(i)), bImgLoaded=true;
   }
   blockXML.setCurrentTag(";blocks");
   title=blockXML.getAttribute("name");
@@ -127,7 +127,7 @@ void rootGroup::load(string dir)
   //you can now iterate through the files as you like
   for(int i = 0; i < nDir; i++){
     vector<string> spl= ofSplitString(DIR.getPath(i), "/");
-    vector<string> spl2= ofSplitString(spl[spl.size()-1], ".");
+    vector<string> spl2= ofSplitString(spl.back(), ".");
     if(spl2.size()==1){
       if(spl2[0]!="blocks")
         set.push_back(blockGroup(DIR.getPath(i)));

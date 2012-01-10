@@ -158,24 +158,41 @@ void robotTest::drawForeground()
   if(turtle.crashed()){
     ofSetColor(black.opacity(.75));
     ofRect(0, 0, ofGetWidth(), ofGetHeight());
+    
+    endBut.setTextSize(35);
+    resetBut.setTextSize(35);
+    int maxW = max(endBut.w,resetBut.w);
+    endBut.w=resetBut.w=maxW;
+    
+    int boxW=max(double(display.stringWidth("Robot has crashed.")),endBut.w);
+    
+    drawStyledBox((ofGetWidth()-boxW)/2-50,ofGetHeight()/2-200, boxW+100, ofGetHeight()/6+resetBut.h+250);
+    
     ofSetColor(white);
-    display.drawString("You screwed up.", ofGetWidth()/2, ofGetHeight()/2);
-    endBut.setTextSize(50);
-    resetBut.setTextSize(50);
-    endBut.draw((ofGetWidth()/2-endBut.w)/2, 3*ofGetHeight()/4);
-    resetBut.draw((3*ofGetWidth()/2-resetBut.w)/2, 3*ofGetHeight()/4);
+    display.drawString("Robot has crashed.", ofGetWidth()/2, ofGetHeight()/2-100);
+    
+    endBut.draw((ofGetWidth()-endBut.w)/2,ofGetHeight()/2);
+    resetBut.draw((ofGetWidth()-resetBut.w)/2, 2*ofGetHeight()/3);
   }
+  
   if (turtle.completedMaze()) {
     ofSetColor(black.opacity(.75));
     ofRect(0, 0, ofGetWidth(), ofGetHeight());
+    
+    endBut.setTextSize(35);
+    resetBut.setTextSize(35);
+    base->uploadBut.setTextSize(35);
+    int maxW = max(endBut.w,max(resetBut.w,base->uploadBut.w));
+    endBut.w=resetBut.w=base->uploadBut.w=maxW;
+    
+    drawStyledBox((ofGetWidth()-base->uploadBut.w)/2-50,ofGetHeight()/3-150, base->uploadBut.w+100, ofGetHeight()/2+resetBut.h+50);
+    
     ofSetColor(white);
-    display.drawString("You made it!", ofGetWidth()/2, ofGetHeight()/2);
-    endBut.setTextSize(50);
-    resetBut.setTextSize(50);
-    base->uploadBut.setTextSize(50);
-    endBut.draw((ofGetWidth()/2-endBut.w)/2, 5*ofGetHeight()/8);
-    resetBut.draw((3*ofGetWidth()/2-resetBut.w)/2, 5*ofGetHeight()/8);
-    base->uploadBut.draw((ofGetWidth()-base->uploadBut.w)/2,3*ofGetHeight()/4);
+    display.drawString("You made it!", ofGetWidth()/2, ofGetHeight()/3-50);
+    
+    base->uploadBut.draw((ofGetWidth()-base->uploadBut.w)/2,ofGetHeight()/3);
+    endBut.draw((ofGetWidth()-endBut.w)/2, ofGetHeight()/2);
+    resetBut.draw((ofGetWidth()-resetBut.w)/2, 2*ofGetHeight()/3);
   }
 }
 

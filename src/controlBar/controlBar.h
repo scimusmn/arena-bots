@@ -73,6 +73,10 @@ protected:
   
   ofButton skipBut;
   
+  dallasButton create;
+  dallasButton edit;
+  bool bPluginChoice;
+  
   serialCheck serChk;
   
   rootGroup sets;

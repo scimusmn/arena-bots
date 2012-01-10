@@ -80,7 +80,7 @@ public:
 	vector<block> blocksOn;
 	ofFont arialHeader;
 	vector<string> sibling;
-	vector<ofDropDown> ddGroup;
+	vector<dallasDrop> ddGroup;
   
   bGroup * group;
   

@@ -17,6 +17,8 @@ void uploadModule::setup(bGroup * blks)
   label.loadFont("fonts/DinC.ttf");
   label.setSize(70);
   label.setMode(OF_FONT_CENTER);
+  uploaded.set(3);
+  uploaded.pause();
 }
 
 void uploadModule::upload()

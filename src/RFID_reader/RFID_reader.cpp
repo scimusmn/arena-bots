@@ -9,7 +9,7 @@
 
 #include "RFID_reader.h"
 
-string tagVal="";
+string tagVal="default";
 bool tagAvailable=false;
 
 int CCONV AttachHandler(CPhidgetHandle RFID, void *userptr)
@@ -75,6 +75,7 @@ RFIDreader::RFIDreader()
 {
   int result;
 	const char *err;
+  tagAvailable=false;
   CPhidgetRFID_create(&rfid);
   //Set the handlers to be run when the device is plugged in or opened from software, unplugged or closed from software, or generates an error.
 	CPhidget_set_OnAttach_Handler((CPhidgetHandle)rfid, AttachHandler, NULL);
@@ -99,7 +100,7 @@ RFIDreader::RFIDreader()
   
   //get the program to wait for an RFID device to be attached
 	printf("Waiting for RFID to be attached....");
-	if((result = CPhidget_waitForAttachment((CPhidgetHandle)rfid, 10000)))
+	if((result = CPhidget_waitForAttachment((CPhidgetHandle)rfid, 2000)))
 	{
 		CPhidget_getErrorDescription(result, &err);
 		printf("Problem waiting for attachment: %s\n", err);

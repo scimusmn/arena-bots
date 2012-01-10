@@ -73,7 +73,7 @@ void buttonHolder::draw(int _x, int _y)
   area.y=y=_y;
   int xPos=pad/2;
   for (unsigned int i=0; i<objs.size(); i++) {
-    objs[i]->draw(x+xPos-((objs.size()==1)?objs[i]->w/2:0),y+(area.height-objs[i]->h)/2);
+    objs[i]->draw(x+xPos,y+(area.height-objs[i]->h)/2);
     xPos+=objs[i]->w+space;
   }
 }
@@ -107,19 +107,19 @@ buttonHolder & barOfButtons::lastSection()
 void controlBar::barSpacing()
 {
   //_-_-_-_-_//_-_-_-_-_ spacing setup //_-_-_-_-_//_-_-_-_-_
-  for(int i=0; i<4;i++)
+  for(int i=0; i<3;i++)
     bHldr.push_back(buttonHolder());
   
   bHldr[0].addObj(demo);
+  bHldr[0].addObj(clearBut);
+  bHldr[0].internalSpace(30);
   
-  for (unsigned int i=0; i<sets.size(); i++) bHldr[1].addObj(sets(i));
+  bHldr[1].addObj(undoBut);
+  bHldr[1].addObj(redoBut);
   bHldr[1].internalSpace(20);
   
-  bHldr[2].addObj(undoBut);
-  bHldr[2].addObj(redoBut);
+  for (unsigned int i=0; i<sets.size(); i++) bHldr[2].addObj(sets(i));
   bHldr[2].internalSpace(20);
-  
-  bHldr[3].addObj(clearBut);
   
   double maxH=0;
   int pad=ofGetWidth();
@@ -144,9 +144,11 @@ void controlBar::setup(bGroup * bG, sbGroup * sbG)
   blocks=bG;
   sideBar=sbG;
   
+  changed.pause();
+  
   clearBut.setup("Clear blocks", 19);
-  redoBut.setup(64, 64, "images/redo.png");
-	undoBut.setup(64, 64, "images/undo.png");
+  redoBut.setup(64, 64, "images/redo.png","images/redo_active.png");
+	undoBut.setup(64, 64, "images/undo.png","images/undo_active.png");
   demo.setup("View Demo", 19);
   skipBut.setup(300, 100, "images/skipBut.png");
   
@@ -174,6 +176,18 @@ void controlBar::setup(bGroup * bG, sbGroup * sbG)
   
   loadBlocks(sets[0]);
   setAvailableButtons();
+  
+  create.setup("Create new program", 35);
+  edit.setup("Edit existing program",35);
+  
+  int maxW=max(create.w,edit.w);
+  
+  create.w=edit.w=maxW;
+  
+  changed.set(3);
+  changed.pause();
+  
+  bPluginChoice=false;
 }
 
 void controlBar::loadBlocks(blockGroup & bg){
@@ -256,8 +270,7 @@ void controlBar::draw(int _x, int _y)
 void controlBar::drawForeground(){
   
   if(anim.isPlaying()){
-    ofSetColor(0, 0, 0,128);
-    ofRect(skipBut.x-10, skipBut.y-10, skipBut.w+20, skipBut.h+20);
+    drawStyledBox(skipBut.x-50, skipBut.y-50, skipBut.w+100, skipBut.h+100);
     skipBut.draw((ofGetWidth()-skipBut.w)/2, ofGetHeight()*3./4);
   }
   
@@ -266,12 +279,21 @@ void controlBar::drawForeground(){
     ofRect(0, 0, ofGetWidth(), ofGetHeight());
     subtitle.setSize(70);
     subtitle.setMode(OF_FONT_CENTER);
+    int wid=subtitle.stringWidth("Program changes not uploaded");
+    drawStyledBox((ofGetWidth()-wid)/2-50, ofGetHeight()/3-50, wid+100, ofGetHeight()/2-ofGetHeight()/3+150);
     ofSetColor(white);
     subtitle.drawString("Program changes not uploaded", ofGetWidth()/2, ofGetHeight()/3);
-    subtitle.drawString("Reconnect robot to upload.", ofGetWidth()/2, ofGetHeight()*2/3.);
+    subtitle.drawString("Reconnect robot to upload.", ofGetWidth()/2, ofGetHeight()/2.);
   }
   else if(serChk.drawForeground());
   else if(upload.drawForeground());
+  else if(bPluginChoice){
+    ofSetColor(0, 0, 0,192);
+    ofRect(0, 0, ofGetWidth(), ofGetHeight());
+    drawStyledBox(create.x-100, create.y-100, edit.w+200, ofGetHeight()/3+200);
+    create.draw((ofGetWidth()-create.w)/2, ofGetHeight()/3);
+    edit.draw((ofGetWidth()-edit.w)/2, 2*ofGetHeight()/3-edit.h);
+  }
   else testbed.drawForeground();
   
   anim.drawCursor();
@@ -284,23 +306,26 @@ void controlBar::update()
   
   if(serChk.justLostDevice()){
     cout << "lost it\n";
-    if(blocks->changedSinceSave()) changed.set(3),changed.run();
-    blocks->saveXML("programs/"+serChk.deviceNumber()+".xml");
-    blocks->clear();
-    if (testbed.isTesting()) {
-      testbed.stopTesting();
-      testbed.resetTurtle();
+    if(!bPluginChoice){
+      if(blocks->changedSinceSave()) changed.set(3),changed.run();
+      blocks->saveXML("programs/"+serChk.deviceNumber()+".xml");
+      blocks->clear();
+      if (testbed.isTesting()) {
+        testbed.stopTesting();
+        testbed.resetTurtle();
+      }
     }
   }
   if(serChk.justFoundDevice()){
-    ofxDirList dir;
+    bPluginChoice=true;
+    /*ofxDirList dir;
     int nDir=0;
     nDir = dir.listDir("programs");
     //you can now iterate through the files as you like
     for(int i = 0; i < nDir; i++){
       if(serChk.deviceNumber()+".xml"==ofGetFilename(dir.getPath(i)))
         blocks->loadFile(dir.getPath(i));
-    }
+    }*/
   }
   
   if(testbed.turtleIsRunning()){
@@ -313,7 +338,7 @@ void controlBar::update()
 
 bool controlBar::clickDown(int _x, int _y, int button)
 {
-  if(!testbed.mouseLockout()){
+  if(!testbed.mouseLockout()&&!bPluginChoice){
     if(sets.clickDown(_x,_y)&&!anim.isPlaying()){
       if(sets.getSelected())
         loadBlocks((*sets.getSelected()));
@@ -343,6 +368,25 @@ bool controlBar::clickDown(int _x, int _y, int button)
     }
   }
   
+  if(bPluginChoice){
+    if(edit.clickDown(_x, _y)){
+      bPluginChoice=false;
+      ofxDirList dir;
+      int nDir=0;
+      nDir = dir.listDir("programs");
+      //you can now iterate through the files as you like
+      for(int i = 0; i < nDir; i++){
+        if(serChk.deviceNumber()+".xml"==ofGetFilename(dir.getPath(i)))
+          blocks->loadFile(dir.getPath(i));
+      }
+      blocks->recordState();
+    }
+    if(create.clickDown(_x, _y)){
+      bPluginChoice=false;
+      blocks->recordState();
+    }
+  }
+  
   testbed.clickDown(_x, _y);
 
   if(upload.clickDown(_x, _y)){
@@ -361,6 +405,8 @@ bool controlBar::clickUp()
   redoBut.clickUp();
   skipBut.clickUp();
   testbed.clickUp();
+  edit.clickUp();
+  create.clickUp();
 }
 
 bool controlBar::mouseLockout(int button)

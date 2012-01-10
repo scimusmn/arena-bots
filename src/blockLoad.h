@@ -42,6 +42,7 @@ struct blockGroup {
   ofXML animXML;
   ofButton choice;
   ofImage example;
+  ofButton choice2;
   string title;
   string subtitle;
   blockGroup(string dir);

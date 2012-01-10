@@ -8,6 +8,8 @@ extern int pixPerInch;
 
 extern ofColor black,white,yellow,blue,orange, gray;
 
+extern bool tagAvailable;
+
 bool bCopy=false;
 
 struct movie {
@@ -80,6 +82,7 @@ void testApp::draw(){
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
   if(key=='c') bCopy=true;
+  if(key=='t') tagAvailable=!tagAvailable;
 }
 
 

@@ -435,7 +435,7 @@ void sbGroup::draw(){
 		pos+=bars[i].h;
 		if(bars[i].bOpen) pos+=sideBarSpace;
 	}
-	bars[bars.size()-1].y=y+h;
+	bars.back().y=y+h;
 }
 
 /*****************************************************************

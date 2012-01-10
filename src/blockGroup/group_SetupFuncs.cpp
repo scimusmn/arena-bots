@@ -55,7 +55,7 @@ void bGroup::setup(double _x, double _y,double wid,double hgt){
 	used[""]=false;
   base.setup(this);
 	base.blocksOn.reserve(100);
-	states.recordState(storageState(blocks,base));
+	//states.recordState(storageState(blocks,base));
   held.setup(0,0);
   
   bar.setup(40, h, OF_VERT);
