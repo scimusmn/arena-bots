@@ -1,4 +1,4 @@
-<blocks font="ArialNarrow.ttf" name="Arena Robot" subtitle="Make a path for the robot thru the maze" xmlns:blck="http://www.smm.org/">
+<blocks font="ArialNarrow.ttf" title="PROGRAM THE ROBOT TO NAVIGATE THE MAZE" subtitle="Basic: Instruct the robot how far to move and where to turn." xmlns:blck="http://www.smm.org/">
 	<bar name="Manual blocks" color="0xde8c3a">
 		<block name="go forward %d inches" color="0xde8c3a">
       <dropdown>

@@ -21,6 +21,8 @@ void drawBlock(double x, double y, double w, double h);
 
 void drawBaseBlock(double x, double y, double w, double h, double butX, double butY);
 
+void drawButtonSpace(double x, double y, double w, double h, double off);
+
 void drawBlockShadow(double x, double y, double w, double h);
 
 void shadeCircleSlice(double x, double y, double ir, double oR,int beg,int end, double strt, double r,double g, double b,double shBot,double shTop);

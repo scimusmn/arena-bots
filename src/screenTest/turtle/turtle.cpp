@@ -148,10 +148,12 @@ void ofTurtle::draw(int _x, int _y)
   ofRectangle body(-3.25*ppi/2,-wheel.y/2,ppi*3.25,ppi*4.5);
   //int body=w-whlWid*2;
   //int leng=h;
+  ofEnableSmoothing();
   for (unsigned int i=0; i<lines.size()-1&&lines.size()>1; i++) {
     ofSetLineWidth(2);
     ofLine(lines[i].x, lines[i].y, lines[i+1].x, lines[i+1].y);
   }
+  ofDisableSmoothing();
   ofPushMatrix();
   ofTranslate(pos.x, pos.y, 0);
   ofRotate(360-bearing.absoluteAngle());

@@ -58,12 +58,15 @@ void bGroup::setup(double _x, double _y,double wid,double hgt){
 	//states.recordState(storageState(blocks,base));
   held.setup(0,0);
   
-  bar.setup(40, h, OF_VERT);
+  bar.setup(60, h, OF_VERT);
   bar.registerArea(h,base.newHeightOn()+base.h);
   bar.changePadding();
   bar.setScrollPosition(0);
   
   current=0;
+  
+  label.loadFont("fonts/Din.ttf");
+  label.setSize(19);
 }
 
 int bGroup::size(){
@@ -119,10 +122,25 @@ bool bGroup::redoAvailable()
 
 //----------------------- Add block Functions -------------------
 
+int bGroup::totalBlocks()
+{
+  int ret=0;
+  for (unsigned int i=0; i<base.blocksOn.size(); i++) {
+    ret+=1+base.blocksOn[i].totalInside();
+  }
+  for (unsigned int i=0; i<blocks.size(); i++) {
+    ret++;
+    for (unsigned int j=0; j<blocks[i].blocksOn.size(); j++) {
+      ret+=1+base.blocksOn[j].totalInside();
+    }
+  }
+  return ret;
+}
+
 void bGroup::addFromSB(block t,int _x,int _y){
 	if(t.over(_x,_y)||t.onBlockOn(_x, _y)&&!inHand){
 		int numBlocks=size();
-		if(numBlocks<99){
+		if(totalBlocks()<50){
 			used[t.title]=false;
       held=t;
       held.bGrabbed=bGrabbed=inHand=true;
@@ -141,8 +159,8 @@ void bGroup::update()
 }
 
 void bGroup::resize(int _x, int _y, int _w ,int _h){
-  bar.setup(40, h, OF_VERT);
-  bar.registerArea(h,base.newHeightOn()+base.h);
+  bar.setup(60, h, OF_VERT);
+  bar.registerArea(h,base.newHeightOn()+base.h+200);
   bar.changePadding();
 }
 

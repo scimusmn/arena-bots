@@ -168,7 +168,7 @@ ofInterObj * demoAnim::searchForObject(ofTag & tag, int & _x, int & _y)
   }
   else if(whSplit[0]=="base"){
     if(whSplit.size()==1) ret=&(blocks->base);
-    else if(whSplit.size()>=2&&whSplit[1]=="last") ret=searchBlock(whSplit,blocks->base.blocksOn[blocks->base.blocksOn.size()-1],2);
+    else if(whSplit.size()>=2&&whSplit[1]=="last") ret=searchBlock(whSplit,blocks->base.blocksOn.back(),2);
     else if(whSplit.size()>=2) ret=searchBlock(whSplit,blocks->base.blocksOn[ofToInt(whSplit[1])],2);
   }
   else if(whSplit[0]=="upload"){

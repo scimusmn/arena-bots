@@ -59,6 +59,7 @@ public:
   action_word guard;
   double nGoal,nCurrent;
   turtleAction(block * prnt, ofTurtle * bdy);
+  turtleAction(string action,block * prnt, ofTurtle * bdy);
   
   bool execute();
   

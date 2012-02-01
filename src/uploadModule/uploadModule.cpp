@@ -17,7 +17,6 @@ void uploadModule::setup(bGroup * blks)
   label.loadFont("fonts/DinC.ttf");
   label.setSize(70);
   label.setMode(OF_FONT_CENTER);
-  uploaded.set(3);
   uploaded.pause();
 }
 
@@ -61,6 +60,8 @@ bool uploadModule::drawForeground()
     ret=true;
     ofSetColor(0, 0, 0,192);
     ofRect(0, 0, ofGetWidth(), ofGetHeight());
+    ofRectangle k=label.getBoundingBox("You may now unplug the robot.", ofGetWidth()/2, ofGetHeight()/2);
+    drawStyledBox(k.x-50, k.y-50, k.width+100, k.height+100);
     ofSetColor(white);
 		label.drawString("You may now unplug the robot.", ofGetWidth()/2, ofGetHeight()/2);
   }

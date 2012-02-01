@@ -36,9 +36,20 @@ turtleAction::turtleAction(block * prnt, ofTurtle * bdy)
   }
 }
 
+turtleAction::turtleAction(string act, block * prnt, ofTurtle * bdy)
+{
+  parentBlock=prnt;
+  turtle=bdy;
+  bParsed=bExecuted=false;
+  bNegate=bData=false;
+  guard=ACT_NORMAL;
+  nCurrent=0;
+  parse(act);
+}
+
 int turtleAction::direction()
 {
-  return nGoal/abs(nGoal);
+  return 2*nGoal/abs(nGoal);
 }
 
 bool checkd=false;
@@ -162,14 +173,18 @@ void turtleAction::parse(string str)
 
 void turtleAction::registerAction(string str)
 {
-  vector<string> splt=ofSplitString(str, ":");
-  if(splt.size()>1){
-    if(splt[0]=="move") type=TURTLE_MOVE;
-    else if(splt[0]=="turn") type=TURTLE_TURN;
-    else if(splt[0]=="while") type=TURTLE_WHILE;
-    else if(splt[0]=="if") type=TURTLE_IF;
-    else if(splt[0]=="repeat") type=TURTLE_REPEAT;
-    dataStr=splt[1];
+  vector<string> insd=ofSplitString(str, "{}");
+  if(insd.size()){
+    vector<string> splt=ofSplitString(insd[0], ":");
+    if(splt.size()>1){
+      if(splt[0]=="move") type=TURTLE_MOVE;
+      else if(splt[0]=="turn") type=TURTLE_TURN;
+      else if(splt[0]=="while") type=TURTLE_WHILE;
+      else if(splt[0]=="if") type=TURTLE_IF;
+      else if(splt[0]=="repeat") type=TURTLE_REPEAT;
+      dataStr=splt[1];
+    }
+    if(insd.size()>1) inside.push_back(turtleAction(insd[1],parentBlock,turtle));
   }
 }
 

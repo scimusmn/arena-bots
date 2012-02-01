@@ -2,15 +2,15 @@
   <step type="move" time="0">
     <pos type="mouse" />
   </step>
-#click open the third sidebar
+#click open the 2nd sidebar
   <step type="move" speed="2000">
-    <pos type="obj" where="sidebar[2]" x="20" y="20" />
+    <pos type="obj" where="sidebar[1]" x="20" y="20" />
   </step>
   <step type="clickDown" time=".25" />
   <step type="clickUp" time=".25" />
 #pickup the second block in the second sidebar
   <step type="move" speed="2000">
-    <pos type="obj" where="sidebar[2][1]" x="20" y="20"/>
+    <pos type="obj" where="sidebar[1][3]" x="20" y="20"/>
   </step>
   <step type="clickDown" time=".25" />
 #drop it below the base
@@ -18,31 +18,44 @@
     <pos type="obj" where="base" x="20" y="h+30" />
   </step>
   <step type="clickUp" time=".25" />
-#move to the conditions sidebar
+#pickup the fourth block in the second sidebar
   <step type="move" speed="2000">
-    <pos type="obj" where="sidebar[1]" x="20" y="20" />
+    <pos type="obj" where="sidebar[1][3]" x="20" y="20"/>
   </step>
-#click the bar
   <step type="clickDown" time=".25" />
-  <step type="clickUp" time=".25" />
-#move to the first block
+#drop it below the base
   <step type="move" speed="2000">
-    <pos type="obj" where="sidebar[1][2]" x="20" y="20"/>
-  </step>
-#click and drag to the inside of the forever block
-  <step type="clickDown" time=".25" />
-  <step type="move" speed="2000">
-    <pos type="obj" where="base[0]" x="20" y="h-30" />
+    <pos type="obj" where="base[last]" x="20" y="h+20" />
   </step>
   <step type="clickUp" time=".25" />
-#move to the second block
+#pickup the fourth block in the second sidebar
   <step type="move" speed="2000">
-    <pos type="obj" where="sidebar[1][1]" x="20" y="20"/>
+    <pos type="obj" where="sidebar[1][3]" x="20" y="20"/>
   </step>
-#click and drag to the inside of the forever block
   <step type="clickDown" time=".25" />
+#drop it below the base
   <step type="move" speed="2000">
-    <pos type="obj" where="base[0][i0]" x="20" y="h-30" />
+    <pos type="obj" where="base[last]" x="20" y="h+20" />
+  </step>
+  <step type="clickUp" time=".25" />
+#pickup the fourth block in the second sidebar
+  <step type="move" speed="2000">
+    <pos type="obj" where="sidebar[1][3]" x="20" y="20"/>
+  </step>
+  <step type="clickDown" time=".25" />
+#drop it below the base
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last]" x="20" y="h+20" />
+  </step>
+  <step type="clickUp" time=".25" />
+#pickup the fourth block in the second sidebar
+  <step type="move" speed="2000">
+    <pos type="obj" where="sidebar[1][3]" x="20" y="20"/>
+  </step>
+  <step type="clickDown" time=".25" />
+#drop it below the base
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[last]" x="20" y="h+20" />
   </step>
   <step type="clickUp" time=".25" />
 #click open the first sidebar
@@ -51,48 +64,47 @@
   </step>
   <step type="clickDown" time=".25" />
   <step type="clickUp" time=".25" />
-#grab a step forward block
-  <step type="move" speed="2000">
-    <pos type="obj" where="sidebar[0][1]" x="20" y="20"/>
-  </step>
-  <step type="clickDown" time=".25" />
-#drop it below the first block on the base
-  <step type="move" speed="2000">
-    <pos type="obj" where="base[0][i0]" x="20" y="20" />
-  </step>
-  <step type="clickUp" time=".25" />
-#grab a left turn block
+#pickup the fifth block in the second sidebar
   <step type="move" speed="2000">
     <pos type="obj" where="sidebar[0][4]" x="20" y="20"/>
   </step>
   <step type="clickDown" time=".25" />
-#drop it inside the "if left path is clear" on the base
+#drop it below the base
   <step type="move" speed="2000">
-    <pos type="obj" where="base[0][i1][i0]" x="20" y="h-20" />
+    <pos type="obj" where="base[3]" x="20" y="h+20" />
   </step>
   <step type="clickUp" time=".25" />
-#click the dropdown of the left turn block
+#pickup the fifth block in the second sidebar
   <step type="move" speed="2000">
-    <pos type="obj" where="base[0][i1][i0][i0][d0]" x="w/2" y="h/2"/>
+    <pos type="obj" where="sidebar[0][4]" x="20" y="20"/>
   </step>
   <step type="clickDown" time=".25" />
-  <step type="clickUp" time=".25" />
-  <step type="move" speed="500">
-    <pos type="obj" where="base[0][i1][i0][i0][d0]" x="w/2" y="h*4.5"/>
+#drop it below the base
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[2]" x="20" y="h+20" />
   </step>
-  <step type="clickDown" time=".25" />
   <step type="clickUp" time=".25" />
-#grab a right turn block
+#pickup the fourth block in the second sidebar
   <step type="move" speed="2000">
     <pos type="obj" where="sidebar[0][3]" x="20" y="20"/>
   </step>
   <step type="clickDown" time=".25" />
-#drop it inside the third block on the base
+#drop it below the base
   <step type="move" speed="2000">
-    <pos type="obj" where="base[0][i1]" x="20" y="h-0" />
+    <pos type="obj" where="base[1]" x="20" y="h+20" />
   </step>
   <step type="clickUp" time=".25" />
-#move to the upload button and click it.
+#pickup the fifth block in the second sidebar
+  <step type="move" speed="2000">
+    <pos type="obj" where="sidebar[0][3]" x="20" y="20"/>
+  </step>
+  <step type="clickDown" time=".25" />
+#drop it below the base
+  <step type="move" speed="2000">
+    <pos type="obj" where="base[0]" x="20" y="h+20" />
+  </step>
+  <step type="clickUp" time=".25" />
+#move to the test button and click it.
   <step type="move" speed="2000">
     <pos type="obj" where="test" x="w/2" y="h/2" />
   </step>

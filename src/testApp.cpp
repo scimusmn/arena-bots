@@ -1,7 +1,7 @@
 #include "testApp.h"
 
 string curDir="basic";
-extern string ROOT_NAME;
+extern string ROOT_TITLE;
 extern string ROOT_DIR;
 
 extern int pixPerInch;
@@ -65,7 +65,7 @@ void testApp::draw(){
   
   controls.draw(0, topTitle.h);
 
-  topTitle.draw("Program the "+ROOT_NAME+" behaviors",0,0);
+  topTitle.draw(ROOT_TITLE,0,0);
   
   //********************** Draw the blocks which are being held by the mouse ********
   
@@ -101,26 +101,28 @@ void testApp::mouseMoved(int x, int y ){
 void testApp::mouseDragged(int x, int y, int button){
 	
 	//--------- if we are dragging the mouse, tell blocks so it can update the positions of any of the held blocks
-  if(controls.mouseLockout(button))
+  if(!controls.mouseLockout(button))
      blocks.drag(x, y);
 }
 
 //***************** Mouse Click down function ***************
 void testApp::mousePressed(int x, int y, int button){
   
-  controls.clickDown(x, y);
+  controls.clickDown(x, y,button);
   
   //--------- Check the blocks in the sidebar, to see if they have been clicked
-  sidebar.clickDown(x, y);
+  if(!controls.mouseLockout(button))
+    sidebar.clickDown(x, y);
   
   //--------- Check the blocks in the comp area
-  blocks.clickDown(x, y);
+  if(!controls.mouseLockout(button))
+    blocks.clickDown(x, y);
 }
 
 //--------------------------------------------------------------
 void testApp::mouseReleased(int x, int y, int button){
   controls.clickUp();
-	if(controls.mouseLockout(button)){
+	if(!controls.mouseLockout(button)){
     //--------- do a bunch of clickups
     blocks.newClickUp(x, y);
   }

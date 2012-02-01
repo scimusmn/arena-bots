@@ -1,4 +1,4 @@
-<blocks font="ArialNarrow.ttf" name="Rockin Crustacean" xmlns:blck="http://www.smm.org/">
+<blocks font="ArialNarrow.ttf" title="Rockin Crustacean" xmlns:blck="http://www.smm.org/">
 	<bar name="Action blocks" color="0x993399">
 		<block name="right claw %d">
 			<type>p</type>

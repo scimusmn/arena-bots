@@ -56,6 +56,7 @@ void drawBlock(double x, double y, double w, double h){
     ofVertex(x+4*unit, y+h);
     ofVertex(x+3*unit, y+h+unit);
     ofVertex(x+2*unit, y+h);
+    //ofVertex(x+unit, y+h);
     ofVertex(x, y+h);
     ofVertex(x, y+unit);
     ofVertex(x+unit, y);
@@ -80,6 +81,16 @@ void drawBaseBlock(double x, double y, double w, double h, double butX, double b
     ofVertex(x+w, y);
   }
   ofEndShape();
+}
+
+void drawButtonSpace(double x, double y, double w, double h,double off)
+{
+  ofVertex(x, y);
+  ofVertex(x, y+h-off);
+  ofVertex(x+off, y+h);
+  ofVertex(x+w-off, y+h);
+  ofVertex(x+w, y+h-off);
+  ofVertex(x+w, y);
 }
 
 

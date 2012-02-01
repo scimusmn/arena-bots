@@ -123,10 +123,12 @@ bool bGroup::newClickUp(int _x, int _y)
     recordState();
   }
   bGrabbed=inHand=false;
-  if(base.newHeightOn()+base.h+50!=bar.getFullSize()){
-    bar.setup(40, h, OF_VERT);
-    bar.registerArea(h,base.newHeightOn()+base.h+50);
+  if(base.newHeightOn()+base.h+200!=bar.getFullSize()){
+    float perc=bar.getScrollPercent();
+    bar.setup(60, h, OF_VERT);
+    bar.registerArea(h,base.newHeightOn()+base.h+200);
     bar.changePadding();
+    bar.setScrollPercent(perc);
   }
   if(base.widthOn()+base.butArea.x!=base.w){
     //base.w=base.widthOn()+base.butArea.x;

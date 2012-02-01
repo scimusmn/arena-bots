@@ -55,7 +55,7 @@ bool block::newClickInside(int _x, int _y)
 bool block::clickDown(int _x, int _y)
 {
   bool ret=false;
-  if(over(_x,_y)&&!newClickInside(_x, _y)&&ddPassingClick(_x, _y)&&!ddSelected){
+  if(over(_x,_y)&&!newClickInside(_x, _y)&&ddPassingClick(_x, _y)){
     ret=bGrabbed=true;
   }
   return ret;
@@ -152,7 +152,7 @@ bool block::newClickUp(int _x, int _y)
   for (unsigned int i=0; i<blocksOn.size(); i++) {
     blocksOn[i].newClickUp(_x,_y);
   }
-  
+  ddSelected=false;
   return false;
 }
 

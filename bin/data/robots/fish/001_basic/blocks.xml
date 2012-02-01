@@ -1,4 +1,4 @@
-<blocks font="ArialNarrow.ttf" name="FishBot" subtitle="Basic: Connect example instruction blocks" xmlns:blck="http://www.smm.org/">
+<blocks font="ArialNarrow.ttf" title="FishBot" subtitle="Basic: Connect example instruction blocks" xmlns:blck="http://www.smm.org/">
 	<bar name="Examples" color="883710">
     <block name="move flipper %d" color="0x993399">
       <dropdown>

@@ -129,6 +129,8 @@ public:
 	int size(int j=0);
 	
 	int numInside();
+  
+  int totalInside();
 	
 	block * topBlock();
 	

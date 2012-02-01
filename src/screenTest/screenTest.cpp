@@ -172,6 +172,10 @@ void robotTest::drawForeground()
     display.drawString("Robot has crashed.", ofGetWidth()/2, ofGetHeight()/2-100);
     
     endBut.draw((ofGetWidth()-endBut.w)/2,ofGetHeight()/2);
+    ofSetColor(yellow);
+    if((ofGetElapsedTimeMillis()/250)%2) 
+      trimmedRect(endBut.x-5, endBut.y-5, endBut.w+10, endBut.h+10);
+    endBut.draw((ofGetWidth()-endBut.w)/2,ofGetHeight()/2);
     resetBut.draw((ofGetWidth()-resetBut.w)/2, 2*ofGetHeight()/3);
   }
   
@@ -190,6 +194,10 @@ void robotTest::drawForeground()
     ofSetColor(white);
     display.drawString("You made it!", ofGetWidth()/2, ofGetHeight()/3-50);
     
+    base->uploadBut.draw((ofGetWidth()-base->uploadBut.w)/2,ofGetHeight()/3);
+    ofSetColor(yellow);
+    if((ofGetElapsedTimeMillis()/250)%2) 
+      trimmedRect(base->uploadBut.x-5, base->uploadBut.y-5, base->uploadBut.w+10, base->uploadBut.h+10);
     base->uploadBut.draw((ofGetWidth()-base->uploadBut.w)/2,ofGetHeight()/3);
     endBut.draw((ofGetWidth()-endBut.w)/2, ofGetHeight()/2);
     resetBut.draw((ofGetWidth()-resetBut.w)/2, 2*ofGetHeight()/3);
@@ -214,7 +222,7 @@ void robotTest::drawControlBar(int x, int y)
   endBut.setTextSize(19);
   resetBut.setTextSize(19);
   if(!turtleIsRunning()&&!turtle.completedMaze()&&!turtleCrashed()&&(ofGetElapsedTimeMillis()/250)%2) 
-    trimmedRect(resetBut.x-5, resetBut.y-5, resetBut.w+10, resetBut.h+10, .33);
+    trimmedRect(resetBut.x-5, resetBut.y-5, resetBut.w+10, resetBut.h+10);
   endBut.draw(cBar.x+(cBar.width/2-endBut.w)/2, cBar.y+(cBar.height-endBut.h)/2);
   resetBut.draw(cBar.x+(3*cBar.width/2-resetBut.w)/2, cBar.y+(cBar.height-resetBut.h)/2);
 }
@@ -234,6 +242,7 @@ bool robotTest::clickDown(int _x, int _y)
       if(turtleCrashed()||turtle.completedMaze()||turtleIsRunning()||finishedActions()){
         resetTurtle();
         resetBut.setTitle("Start virtual robot");
+        pauseTurtle();
       }
       else {
         startTurtle();

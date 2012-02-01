@@ -95,11 +95,11 @@ void blockGroup::load(string dir)
     //cout << spl[spl.size()-1] << endl;
     if(spl.back()=="blocks.xml") blockXML.loadFile(DIR.getPath(i)), nLoaded++;
     else if(spl.back()=="anim.xml") animXML.loadFile(DIR.getPath(i)), nLoaded++;
-    else if(spl.back()=="icon.png") choice.setup(72,72,DIR.getPath(i)), nLoaded++;
+    else if(spl.back()=="icon_big.png") choice.setup(200,OF_HOR,DIR.getPath(i)), nLoaded++;
     else if(spl.back()=="example.png") example.loadImage(DIR.getPath(i)), bImgLoaded=true;
   }
   blockXML.setCurrentTag(";blocks");
-  title=blockXML.getAttribute("name");
+  title=blockXML.getAttribute("title");
   subtitle=blockXML.getAttribute("subtitle");
   //cout << blockXML.filename << endl;
 }

@@ -4,53 +4,91 @@
 
   #include "AFMotor.h"
 #include "arenaRobot.h"
-  #include "AFMotor.h"
-#include "arenaRobot.h"
-  #include "AFMotor.h"
-#include "arenaRobot.h"
   #include <AFMotor.h>
 #include "arenaRobot.h"
+  
+
+  
+
+  
+
   #include <AFMotor.h>
 #include "arenaRobot.h"
+  
+
+  
+
+  
+
 
 
 bool thru=false;
 bool running=false;
 bool bInit=false;
+unsigned long lastChange=0;
 
 bool change=false;
 
 void changeRun(){
-  robot.toggleRun();
-  running=robot.isRunning();
-  if(!running) robot.end();
-  thru=false;
+  if(millis()>lastChange+250){
+    lastChange=millis();
+    robot.toggleRun();
+    running=robot.isRunning();
+    if(!running) robot.end();
+    thru=false;
+    change=true;
+  }
 }
 
 void setup(){
+  running=false;
   attachInterrupt(0, changeRun, RISING);
 	robot.setup();
 	robot.setup();
+	
+	
+	
 	robot.setup();
-	robot.setup();
-	robot.setup();
+	
+	
+	
 
 }
 
 void loop(){
-  
-  delay(500);
-  if(running&&!thru){
-    while(robot.isRunning()){ 	robot.doubleStep(2,BACKWARD,SINGLE);
-	if(robot.frontSensor(500)){
-	  		if(!robot.leftSensor(300)){
-		  			robot.leftTurn(180 );
-		  }
-		robot.rightTurn(90 );
-	  }
-}
-
+  if(change){
+    
+    if(running&&!thru){
+      while(!robot.frontSensor(400)){
+    robot.doubleStep(2,BACKWARD,SINGLE);
   }
+robot.rightTurn(90 );
+while(!robot.frontSensor(400)){
+    robot.doubleStep(2,BACKWARD,SINGLE);
+  }
+robot.rightTurn(90 );
+while(!robot.frontSensor(400)){
+    robot.doubleStep(2,BACKWARD,SINGLE);
+  }
+robot.leftTurn(90 );
+while(!robot.frontSensor(400)){
+    robot.doubleStep(2,BACKWARD,SINGLE);
+  }
+robot.leftTurn(90 );
+while(!robot.frontSensor(400)){
+    robot.doubleStep(2,BACKWARD,SINGLE);
+  }
+
+      running=false;
+      robot.end();
+    }
+      robot.end();
   
-  thru=true;
+  
+  
+  
+
+    if(!running) thru=true;
+    change=false;
+  }
 }

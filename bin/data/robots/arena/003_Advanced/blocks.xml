@@ -1,4 +1,4 @@
-<blocks font="ArialNarrow.ttf" name="Arena Robot" subtitle="Make the robot complete the maze." xmlns:blck="http://www.smm.org/">
+<blocks font="ArialNarrow.ttf" title="PROGRAM THE ROBOT TO NAVIGATE THE MAZE" subtitle="Advanced: Use front and side sensors to navigate the maze." xmlns:blck="http://www.smm.org/">
 	<bar name="Manual blocks" color="0xde8c3a">
 		<block name="go forward %d inches" color="0xde8c3a">
       <dropdown>
@@ -69,10 +69,9 @@
       <file>pathBlocked.blk</file>
       <action>if:!$front(5)</action>
     </block>
-    <block name="if path on left is blocked" color="0x65c270">
-      <bracket>1</bracket>
-      <file>leftPathClear.blk</file>
-      <action>if:!$leftPath(5)</action>
+    <block name="while able, step forward" color="0x65c270">
+      <file>whileAble.blk</file>
+      <action>while:$front(5){move:2}</action>
     </block>
 	</bar>
   <bar name="Timing blocks" color="0x13b5ea">

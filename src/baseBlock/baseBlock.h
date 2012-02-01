@@ -25,6 +25,7 @@ public:
   baseBlock();
   baseBlock & operator=(baseBlock &t);
   void draw(int _x, int _y);
+  void drawButtonArea(int _x, int _y);
   bool clickDown(int _x, int _y);
   bool newClickUp( int _x, int _y);
   void setup(bGroup * grp);

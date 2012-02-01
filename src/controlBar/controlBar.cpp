@@ -14,7 +14,7 @@ extern ofColor black, white, gray,blue,yellow,orange, red;
 
 extern int CURRENT_ROBOT_NUMBER;
 
-string ROOT_NAME="";
+string ROOT_TITLE="";
 string ROOT_DIR="";
 
 //_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_//_-_-_-_-_
@@ -118,6 +118,8 @@ void controlBar::barSpacing()
   bHldr[1].addObj(redoBut);
   bHldr[1].internalSpace(20);
   
+  for (unsigned int i=0; i<sets.size(); i++) sets(i).w=sets(i).h=72;
+  
   for (unsigned int i=0; i<sets.size(); i++) bHldr[2].addObj(sets(i));
   bHldr[2].internalSpace(20);
   
@@ -187,7 +189,7 @@ void controlBar::setup(bGroup * bG, sbGroup * sbG)
   changed.set(3);
   changed.pause();
   
-  bPluginChoice=false;
+  bChooseLevel=bPluginChoice=false;
 }
 
 void controlBar::loadBlocks(blockGroup & bg){
@@ -195,7 +197,7 @@ void controlBar::loadBlocks(blockGroup & bg){
   if(bg.nLoaded>=3){
     
     //--------- load the new blocks with the blockGroup data
-    ROOT_NAME=bg.title;
+    ROOT_TITLE=bg.title;
     sideBar->clear();
     sideBar->setup(bg.blockXML,blocks);
     
@@ -220,6 +222,7 @@ void controlBar::draw(int _x, int _y)
   ofSetColor(gray);
   drawHatching(buttonBar.x, buttonBar.y, buttonBar.width, buttonBar.height, 85,80);
   
+  for (unsigned int i=0; i<sets.size(); i++) sets(i).w=sets(i).h=72;
   bHldr[0].draw(buttonBar.x,buttonBar.y);
   for (unsigned int i=1; i<bHldr.size(); i++) {
     bHldr[i].draw(bHldr[i-1].area.x+bHldr[i-1].area.width,buttonBar.y);
@@ -294,6 +297,14 @@ void controlBar::drawForeground(){
     create.draw((ofGetWidth()-create.w)/2, ofGetHeight()/3);
     edit.draw((ofGetWidth()-edit.w)/2, 2*ofGetHeight()/3-edit.h);
   }
+  else if(bChooseLevel){
+    ofSetColor(0, 0, 0,192);
+    ofRect(0, 0, ofGetWidth(), ofGetHeight());
+    for (unsigned int i=0; i<sets.size(); i++) sets(i).w=sets(i).h=200,sets(i).setAvailable(true);
+    
+    drawStyledBox(.5*ofGetWidth()/(sets.size())-(sets(0).w)/2-50, (ofGetHeight()-sets(0).h)/2-100, (sets.size()-1)*ofGetWidth()/(sets.size())+(sets(0).w)+100, sets(0).h+200);
+    for (unsigned int i=0; i<sets.size(); i++) sets(i).draw((i+.5)*ofGetWidth()/(sets.size())-(sets(i).w)/2,(ofGetHeight()-sets(i).h)/2);
+  }
   else testbed.drawForeground();
   
   anim.drawCursor();
@@ -305,7 +316,6 @@ void controlBar::update()
   anim.update();
   
   if(serChk.justLostDevice()){
-    cout << "lost it\n";
     if(!bPluginChoice){
       if(blocks->changedSinceSave()) changed.set(3),changed.run();
       blocks->saveXML("programs/"+serChk.deviceNumber()+".xml");
@@ -318,14 +328,6 @@ void controlBar::update()
   }
   if(serChk.justFoundDevice()){
     bPluginChoice=true;
-    /*ofxDirList dir;
-    int nDir=0;
-    nDir = dir.listDir("programs");
-    //you can now iterate through the files as you like
-    for(int i = 0; i < nDir; i++){
-      if(serChk.deviceNumber()+".xml"==ofGetFilename(dir.getPath(i)))
-        blocks->loadFile(dir.getPath(i));
-    }*/
   }
   
   if(testbed.turtleIsRunning()){
@@ -338,12 +340,7 @@ void controlBar::update()
 
 bool controlBar::clickDown(int _x, int _y, int button)
 {
-  if(!testbed.mouseLockout()&&!bPluginChoice){
-    if(sets.clickDown(_x,_y)&&!anim.isPlaying()){
-      if(sets.getSelected())
-        loadBlocks((*sets.getSelected()));
-    }
-    
+  if(!mouseLockout(button)){
     if (clearBut.clickDown(_x, _y)) {
       blocks->clear();
     }
@@ -362,9 +359,26 @@ bool controlBar::clickDown(int _x, int _y, int button)
       blocks->redoState();
     }
     
-    //--------- if we press the skip button while the anim is running, stop anim
-    if(anim.isPlaying()&&skipBut.clickDown(_x, _y)){
-      anim.stop();
+    testbed.clickDown(_x, _y);
+  }
+  
+  //--------- if we press the skip button while the anim is running, stop anim
+  if(anim.isPlaying()&&skipBut.clickDown(_x, _y)&&button!=VMOUSE_BUTTON){
+    anim.stop();
+  }
+  
+  if ((!mouseLockout(button)||testbed.mouseLockout())||(anim.isPlaying()&&button==VMOUSE_BUTTON)) {
+    testbed.clickDown(_x, _y);
+  }
+  
+  if(bChooseLevel||!mouseLockout(button)){
+    if(sets.clickDown(_x,_y)&&!anim.isPlaying()){
+      if(bChooseLevel){
+        bChooseLevel=false;
+        anim.play();
+      }
+      if(sets.getSelected())
+        loadBlocks((*sets.getSelected()));
     }
   }
   
@@ -383,13 +397,12 @@ bool controlBar::clickDown(int _x, int _y, int button)
     }
     if(create.clickDown(_x, _y)){
       bPluginChoice=false;
+      bChooseLevel=true;
       blocks->recordState();
     }
   }
-  
-  testbed.clickDown(_x, _y);
 
-  if(upload.clickDown(_x, _y)){
+  if((!mouseLockout(button)||testbed.mouseLockout())&&upload.clickDown(_x, _y)){
     blocks->saveXML("programs/"+serChk.deviceNumber()+".xml");
     testbed.resetTurtle();
     testbed.stopTesting();
@@ -411,7 +424,15 @@ bool controlBar::clickUp()
 
 bool controlBar::mouseLockout(int button)
 {
-  return (!anim.isPlaying()||(anim.isPlaying()&&button==VMOUSE_BUTTON));
+  bool ret=false;
+  ret|=(anim.isPlaying()&&button!=VMOUSE_BUTTON);
+  ret|=changed.running();
+  ret|=bPluginChoice;
+  ret|=!serChk.isAvailable();
+  ret|=bChooseLevel;
+  ret|=upload.isUploading();
+  ret|=testbed.mouseLockout();
+  return ret;
 }
 
 void controlBar::setAvailableButtons()

@@ -120,6 +120,7 @@
 		AA02168113C63D5D008E0DDE /* newSizeAndPositionFunctions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = newSizeAndPositionFunctions.cpp; sourceTree = "<group>"; };
 		AA16D59D13B9292F009A0843 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.txt; path = bin/data/README.txt; sourceTree = "<group>"; };
 		AA16D5B013B92DB1009A0843 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		AA2701A514C4DB29001E6BA6 /* whileAble.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = whileAble.blk; sourceTree = "<group>"; };
 		AA4B11FC12F70C3200C962B4 /* blockDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blockDraw.h; sourceTree = "<group>"; };
 		AA4B11FD12F70C3200C962B4 /* blockDraw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = blockDraw.cpp; sourceTree = "<group>"; };
 		AA4B132512F7546700C962B4 /* blocks.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = blocks.cpp; sourceTree = "<group>"; };
@@ -356,23 +357,17 @@
 		AAE228D413CDDCCD0068AA76 /* pathBlocked.blk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pathBlocked.blk; sourceTree = "<group>"; };
 		AAEFB3961360DBFF0096BC26 /* repeatWrapper.wrp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = repeatWrapper.wrp; path = bin/data/arduino_make/repeatWrapper.wrp; sourceTree = "<group>"; };
 		AAF37526148D5A1E00E5B730 /* anim.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = anim.xml; sourceTree = "<group>"; };
-		AAF37527148D5A1E00E5B730 /* basic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = basic.png; sourceTree = "<group>"; };
 		AAF37528148D5A1E00E5B730 /* blocks.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = blocks.xml; sourceTree = "<group>"; };
 		AAF37529148D5A1E00E5B730 /* example.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = example.png; sourceTree = "<group>"; };
 		AAF3752A148D5A1E00E5B730 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		AAF3752B148D5A1E00E5B730 /* icon_old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_old.png; sourceTree = "<group>"; };
 		AAF3752D148D5A1E00E5B730 /* anim.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = anim.xml; sourceTree = "<group>"; };
 		AAF3752E148D5A1E00E5B730 /* blocks.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = blocks.xml; sourceTree = "<group>"; };
 		AAF3752F148D5A1E00E5B730 /* example.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = example.png; sourceTree = "<group>"; };
 		AAF37530148D5A1E00E5B730 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		AAF37531148D5A1E00E5B730 /* icon_old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_old.png; sourceTree = "<group>"; };
-		AAF37532148D5A1E00E5B730 /* intermediate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intermediate.png; sourceTree = "<group>"; };
-		AAF37534148D5A1E00E5B730 /* advanced.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = advanced.png; sourceTree = "<group>"; };
 		AAF37535148D5A1E00E5B730 /* anim.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = anim.xml; sourceTree = "<group>"; };
 		AAF37536148D5A1E00E5B730 /* blocks.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = blocks.xml; sourceTree = "<group>"; };
 		AAF37537148D5A1E00E5B730 /* example.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = example.png; sourceTree = "<group>"; };
 		AAF37538148D5A1E00E5B730 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		AAF37539148D5A1E00E5B730 /* icon_old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_old.png; sourceTree = "<group>"; };
 		AAF37CCC1496579900E5B730 /* RFID_reader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RFID_reader.cpp; sourceTree = "<group>"; };
 		AAF37CCD1496579900E5B730 /* RFID_reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFID_reader.h; sourceTree = "<group>"; };
 		AAF37CCF149657AC00E5B730 /* Phidget21.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Phidget21.framework; path = /Library/Frameworks/Phidget21.framework; sourceTree = "<absolute>"; };
@@ -1177,6 +1172,7 @@
 				AAE228D413CDDCCD0068AA76 /* pathBlocked.blk */,
 				AA98F2A713E314E8000409EB /* leftPathClear.blk */,
 				AA98F2B413E316F9000409EB /* leftStep.blk */,
+				AA2701A514C4DB29001E6BA6 /* whileAble.blk */,
 			);
 			name = blocks;
 			path = arena/blocks;
@@ -1186,11 +1182,9 @@
 			isa = PBXGroup;
 			children = (
 				AAF37526148D5A1E00E5B730 /* anim.xml */,
-				AAF37527148D5A1E00E5B730 /* basic.png */,
 				AAF37528148D5A1E00E5B730 /* blocks.xml */,
 				AAF37529148D5A1E00E5B730 /* example.png */,
 				AAF3752A148D5A1E00E5B730 /* icon.png */,
-				AAF3752B148D5A1E00E5B730 /* icon_old.png */,
 			);
 			name = 001_Basic;
 			path = arena/001_Basic;
@@ -1203,8 +1197,6 @@
 				AAF3752E148D5A1E00E5B730 /* blocks.xml */,
 				AAF3752F148D5A1E00E5B730 /* example.png */,
 				AAF37530148D5A1E00E5B730 /* icon.png */,
-				AAF37531148D5A1E00E5B730 /* icon_old.png */,
-				AAF37532148D5A1E00E5B730 /* intermediate.png */,
 			);
 			name = 002_Intermediate;
 			path = arena/002_Intermediate;
@@ -1213,12 +1205,10 @@
 		AAF37533148D5A1E00E5B730 /* 003_Advanced */ = {
 			isa = PBXGroup;
 			children = (
-				AAF37534148D5A1E00E5B730 /* advanced.png */,
 				AAF37535148D5A1E00E5B730 /* anim.xml */,
 				AAF37536148D5A1E00E5B730 /* blocks.xml */,
 				AAF37537148D5A1E00E5B730 /* example.png */,
 				AAF37538148D5A1E00E5B730 /* icon.png */,
-				AAF37539148D5A1E00E5B730 /* icon_old.png */,
 			);
 			name = 003_Advanced;
 			path = arena/003_Advanced;

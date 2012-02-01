@@ -75,7 +75,9 @@ protected:
   
   dallasButton create;
   dallasButton edit;
+  
   bool bPluginChoice;
+  bool bChooseLevel;
   
   serialCheck serChk;
   

@@ -396,6 +396,15 @@ int block::numInside(){
 	return blocksIn.size();
 }
 
+int block::totalInside()
+{
+  int ret=0;
+  for (unsigned int i=0; i<blocksIn.size(); i++) {
+    ret+=1+blocksIn[i].totalInside();
+  }
+  return ret;
+}
+
 block & block::lastBlock(){
 	if (blocksOn.size()) return blocksOn.back();
 	else return *this;

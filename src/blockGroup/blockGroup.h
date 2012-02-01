@@ -73,6 +73,8 @@ class bGroup: public ofInterObj {
   bool bTesting;
   bool bChanged;
   dallasScroll bar;
+  
+  ofFont label;
 public:
   
   vector<block> blocks;
@@ -103,6 +105,8 @@ public:
 	int size();
 	
 	block operator[](int i);
+  
+  int totalBlocks();
   
   
   void saveXML(string filename);
