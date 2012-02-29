@@ -1,10 +1,10 @@
 <base robot_number="0">
-	<block name="while able, step forward" color="0x65c270">    
+	<block name="while able, step forward" color="0x65c270">
 		<file>whileAble.blk</file>
 		<action>while:$front(5){move:2}</action>
 	</block>
-	<block name="turn right %d degrees" color="0xde8c3a">    
-		<dropdown>      
+	<block name="turn right %d degrees" color="0xde8c3a">
+		<dropdown>
 			<ddlow>0</ddlow>
 			<ddhigh>180</ddhigh>
 			<ddsteps>5</ddsteps>
@@ -13,12 +13,12 @@
 		<action>turn:$dd[0].num()</action>
 		<file>rightTurn.blk</file>
 	</block>
-	<block name="while able, step forward" color="0x65c270">    
+	<block name="while able, step forward" color="0x65c270">
 		<file>whileAble.blk</file>
 		<action>while:$front(5){move:2}</action>
 	</block>
-	<block name="turn right %d degrees" color="0xde8c3a">    
-		<dropdown>      
+	<block name="turn right %d degrees" color="0xde8c3a">
+		<dropdown>
 			<ddlow>0</ddlow>
 			<ddhigh>180</ddhigh>
 			<ddsteps>5</ddsteps>
@@ -27,12 +27,12 @@
 		<action>turn:$dd[0].num()</action>
 		<file>rightTurn.blk</file>
 	</block>
-	<block name="while able, step forward" color="0x65c270">    
+	<block name="while able, step forward" color="0x65c270">
 		<file>whileAble.blk</file>
 		<action>while:$front(5){move:2}</action>
 	</block>
-	<block name="turn left %d degrees" color="0xde8c3a">    
-		<dropdown>      
+	<block name="turn left %d degrees" color="0xde8c3a">
+		<dropdown>
 			<ddlow>0</ddlow>
 			<ddhigh>180</ddhigh>
 			<selected>90</selected>
@@ -41,12 +41,12 @@
 		<action>turn:-$dd[0].num()</action>
 		<file>leftTurn.blk</file>
 	</block>
-	<block name="while able, step forward" color="0x65c270">    
+	<block name="while able, step forward" color="0x65c270">
 		<file>whileAble.blk</file>
 		<action>while:$front(5){move:2}</action>
 	</block>
-	<block name="turn left %d degrees" color="0xde8c3a">    
-		<dropdown>      
+	<block name="turn left %d degrees" color="0xde8c3a">
+		<dropdown>
 			<ddlow>0</ddlow>
 			<ddhigh>180</ddhigh>
 			<selected>90</selected>
@@ -55,7 +55,7 @@
 		<action>turn:-$dd[0].num()</action>
 		<file>leftTurn.blk</file>
 	</block>
-	<block name="while able, step forward" color="0x65c270">    
+	<block name="while able, step forward" color="0x65c270">
 		<file>whileAble.blk</file>
 		<action>while:$front(5){move:2}</action>
 	</block>

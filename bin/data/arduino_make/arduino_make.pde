@@ -4,22 +4,6 @@
 
   #include "AFMotor.h"
 #include "arenaRobot.h"
-  #include <AFMotor.h>
-#include "arenaRobot.h"
-  
-
-  
-
-  
-
-  #include <AFMotor.h>
-#include "arenaRobot.h"
-  
-
-  
-
-  
-
 
 
 bool thru=false;
@@ -44,14 +28,6 @@ void setup(){
   running=false;
   attachInterrupt(0, changeRun, RISING);
 	robot.setup();
-	robot.setup();
-	
-	
-	
-	robot.setup();
-	
-	
-	
 
 }
 
@@ -59,35 +35,13 @@ void loop(){
   if(change){
     
     if(running&&!thru){
-      while(!robot.frontSensor(400)){
-    robot.doubleStep(2,BACKWARD,SINGLE);
-  }
-robot.rightTurn(90 );
-while(!robot.frontSensor(400)){
-    robot.doubleStep(2,BACKWARD,SINGLE);
-  }
-robot.rightTurn(90 );
-while(!robot.frontSensor(400)){
-    robot.doubleStep(2,BACKWARD,SINGLE);
-  }
-robot.leftTurn(90 );
-while(!robot.frontSensor(400)){
-    robot.doubleStep(2,BACKWARD,SINGLE);
-  }
-robot.leftTurn(90 );
-while(!robot.frontSensor(400)){
-    robot.doubleStep(2,BACKWARD,SINGLE);
-  }
+      while(robot.isRunning()){ 	robot.doubleStep(2,BACKWARD,SINGLE);
+}
 
       running=false;
       robot.end();
     }
-      robot.end();
-  
-  
-  
-  
-
+    
     if(!running) thru=true;
     change=false;
   }

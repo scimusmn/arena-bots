@@ -1,1 +1,6 @@
-<base robot_number="0"/>
+<base robot_number="0">
+	<block name="while able, step forward" color="0x65c270">    
+		<file>whileAble.blk</file>
+		<action>while:$front(5){move:2}</action>
+	</block>
+</base>

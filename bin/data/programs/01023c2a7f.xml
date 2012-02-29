@@ -1,0 +1,13 @@
+<base robot_number="0">
+	<block name="forever" color="1291754.0000000">      
+		<bracket>1</bracket>
+		<file>forever.blk</file>
+		<action>repeat:$forever</action>
+		<blocksIn>
+			<block name="step forward" color="0xde8c3a">    
+				<file>stepForward.blk</file>
+				<action>move:2</action>
+			</block>
+		</blocksIn>
+	</block>
+</base>
